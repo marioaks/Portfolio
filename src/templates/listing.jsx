@@ -1,11 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { graphql, Link } from "gatsby";
-import Layout from "../layout";
 import PostListing from "../components/PostListing/PostListing";
 import SEO from "../components/SEO/SEO";
-import config from "../../data/SiteConfig";
-import "./listing.css";
+import config from "../../config/constants";
 
 class Listing extends React.Component {
   renderPaging() {
@@ -38,7 +36,6 @@ class Listing extends React.Component {
     const postEdges = this.props.data.allMarkdownRemark.edges;
 
     return (
-      <Layout>
         <div className="listing-container">
           <div className="posts-container">
             <Helmet title={config.siteTitle} />
@@ -47,7 +44,6 @@ class Listing extends React.Component {
           </div>
           {this.renderPaging()}
         </div>
-      </Layout>
     );
   }
 }

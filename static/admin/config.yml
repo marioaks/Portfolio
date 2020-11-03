@@ -1,22 +1,27 @@
 backend:
   name: github # Refer to https://www.netlifycms.org/docs/authentication-backends/ for auth backend list and instructions
-  branch: master # Branch to update
-  repo: vagr9k/gatsby-advanced-starter # Repo for pushing new commits. Make sure to replace with your repo!
+  branch: main # Branch to update
+  repo: marioaks/portfolio # Repo for pushing new commits. Make sure to replace with your repo!
 
 media_folder: static/assets
 public_folder: assets
 
 collections:
-  - name: blog
+  - name: posts
     label: "Post"
-    folder: "content"
+    folder: "content/posts"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}.md"
+    slug: "{{slug}}.md"
+    media_folder: 'assets'
+    public_folder: 'assets'
+    path: '{{slug}}/index'
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Long Title", name: "title", widget: "string" }
+      - { label: "Short Title", name: "short title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Cover Image", name: "cover", widget: "image" }
+      - { label: "Year", name: "year", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Category", name: "category", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Roles", name: "roles", widget: "list" }
+      - { label: "Company", name: "company", widget: "company" }
       - { label: "Body", name: "body", widget: "markdown" }
