@@ -1,4 +1,4 @@
-const Constants = require("../Constants");
+const Constants = require("../constants");
 
 module.exports = {
   future: {
@@ -20,23 +20,24 @@ module.exports = {
     },
     fontFamily: {
       'header': {
-        'serif': ['Tiempos Headline', 'serif'],
-        'sans': ['Sohne', 'sans-serif']
+        'serif': 'Tiempos Headline',
+        'sans': 'Sohne'
       },
       'body': {
-        'serif': ['Tiempos Text', 'serif'],
-        'sans': ['Sohne', 'sans-serif']
+        'serif': 'Tiempos Text',
+        'sans': 'Sohne'
       }
     },
     spacing: {
       '0': '0rem',
-      xs: '0.5rem',
-      sm: '1rem',
-      md: '2rem',
-      lg: '3rem',
+      xs: '1rem',
+      sm: '2rem',
+      md: '3rem',
+      lg: '4rem',
       xl: '5rem'
     },
     fontSize: {
+
       'baseScale': {
         xs: `70%`,
         sm: `70%`,
@@ -45,11 +46,13 @@ module.exports = {
       },
       header: {
         1: `${100 / 16}rem`, //sm: 70px, md: 85px, lg: 100px
-        2: `${52 / 16}rem`, 
-        3: `${34 / 16}rem`, 
+        2: `${42 / 16}rem`, 
+        3: `${22 / 16}rem`, 
         4: `${28 / 16}rem`, 
         5: `${22 / 16}rem`, 
         6: `${16 / 16}rem`, 
+        '1xs': `${64 / 16}rem`,
+        '2xs': `${42 / 16}rem`
       },
       body: {
         1: `${20 / 16}rem`,
@@ -65,10 +68,10 @@ module.exports = {
       header: {
         1: '300',
         2: '300',
-        3: '700',
+        3: '400',
         4: '400',
-        5: '700',
-        6: '400'
+        5: '300',
+        6: '300',
       },
       body: {
         1: '400',
@@ -80,11 +83,13 @@ module.exports = {
     letterSpacing: {
       header: {
         1: `${-0.3 / 16}rem`,
-        2: `${0.3 / 16}rem`,
+        2: `${0 / 16}rem`,
         3: `${0 / 16}rem`,
         4: `${-0.4 / 16}rem`,
         5: `${0.24 / 16}rem`,
-        6: `${0.5 / 16}rem`
+        6: `${0 / 16}rem`,
+        '1xs': `${-0.2 / 16}rem`,
+        '2xs': `${0.24 / 16}rem`
       },
       body: {
         1: `${0.25 / 16}rem`,
@@ -96,11 +101,13 @@ module.exports = {
     lineHeight: {
       header: {
         1: `${110 / 16}rem`,
-        2: `${56 / 16}rem`,
-        3: `${38 / 16}rem`,
+        2: `${50 / 16}rem`,
+        3: `${28 / 16}rem`,
         4: `${37 / 16}rem`,
-        5: `${34 / 16}rem`,
-        6: `${24 / 16}rem`
+        5: `${28 / 16}rem`,
+        6: `${21 / 16}rem`,
+        '1xs': `${70 / 16}rem`,
+        '2xs': `${53 / 16}rem`
       },
       body: {
         1: `${31 / 16}rem`,
@@ -122,6 +129,7 @@ module.exports = {
       },
       'gray': {
         'dark': 'rgba(34,34,34,1)',
+        'midDark': 'rgba(34,34,34,.8)',
         'mid': 'rgba(34,34,34,.6)',
         'light': 'rgba(34,34,34,.3)',
         'xlight': 'rgba(34,34,34,.05)'
@@ -135,14 +143,16 @@ module.exports = {
       '4': '4px'
     },
     extend: {
-      paragraphSpacing: {
+      margin: {
         header: {
           1: `${22 / 16}rem`,
           2: `${60 / 16}rem`,
           3: `${22 / 16}rem`,
           4: `${22 / 16}rem`,
           5: `${28 / 16}rem`,
-          6: `${0 / 16}rem`
+          6: `${18 / 16}rem`,
+          '1xs': `${14 / 16}rem`,
+          '2xs': `${48 / 16}rem`,
         },
         body: {
           1: `${22 / 16}rem`,
@@ -150,27 +160,9 @@ module.exports = {
           quote: `${40 / 16}rem`,
           imageCaption: `${28 / 16}rem`
         }
-      },
-      fontStyle: {
-        header: {
-          1: "normal",
-          2: "normal",
-          3: "normal",
-          4: "normal",
-          5: "normal",
-          6: "normal"
-        },
-        body: {
-          1: "normal",
-          2: "normal",
-          quote: "italic",
-          imageCaption: "normal"
-        }
-      },
-    },
+      }
+    }
   },
-  plugins: [],
-  variants: {
-    // margin: ({ after }) => after(['last']),
-  }
+  plugins: [require('tailwindcss-multi-column')()],
+  variants: {}
 }

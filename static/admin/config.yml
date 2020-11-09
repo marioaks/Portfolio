@@ -9,7 +9,7 @@ public_folder: assets
 collections:
   - name: posts
     label: "Post"
-    folder: "content/posts"
+    folder: "posts"
     create: true
     slug: "{{slug}}.md"
     media_folder: 'assets'
@@ -22,6 +22,7 @@ collections:
       - { label: "Year", name: "year", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Embedded Images", name: "embeddedImages", widget: "list" }
       - { label: "Roles", name: "roles", widget: "list" }
       - { label: "Company", name: "company", widget: "company" }
       - { label: "Body", name: "body", widget: "markdown" }

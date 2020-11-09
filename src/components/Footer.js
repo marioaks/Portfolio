@@ -1,45 +1,39 @@
 import React from 'react';
 import { Link } from "gatsby";
+import { Caption, H2 } from "Components";
 import tw, { styled, css, theme } from "twin.macro";
+import Constants from "Config"
 
-const StyledFooterGrid = styled.div([
-	tw`grid grid-rows-4 mt-xl`
-])
 const StyledFooterLink = styled(Link)([
-	tw`pl-sm md:pl-md lg:pl-lg xl:pl-xl py-md text-gray-dark no-underline`,
+	tw`pl-sm md:pl-md lg:pl-lg xl:pl-xl py-md 
+	   text-gray-dark no-underline
+	   border-solid border-0 border-t-1 border-gray-light
+	   hover:bg-gray-xlight
+	`,
 	css`
-		& {
-			border-top: 1px solid ${theme('colors.gray.light')};
-        	background-color: transparent;
-          
-	        &:hover {
-	          background-color: ${theme('colors.gray.xlight')}
-			}
-
-			&.active {
-				text-decoration: line-through;
-				&:hover {
-					background-color: transparent;
-				}
-			}
-
-			& .caption { 
-				text-align: left;
-				color: ${theme('colors.gray.mid')}
-			}
+		& > * { width: fit-content; }
+		&.active {
+		  text-decoration: line-through;
+		  &:hover {
+		  	background-color: transparent;
+		  }
 		}
 	`
 ])
 
 const Footer = () => {
 	return (
-		<StyledFooterGrid>
-			<StyledFooterLink className="shake-little" activeClassName="active" to="/"><h2 tw="ml-md sm:ml-lg md:ml-xl">Home</h2></StyledFooterLink>
-			<StyledFooterLink className="shake-little" activeClassName="active" to="/about"><h2 tw="ml-md sm:ml-lg md:ml-xl">About</h2></StyledFooterLink>
-			<StyledFooterLink className="shake-little" activeClassName="active" to="/work"><h2 tw="ml-md sm:ml-lg md:ml-xl">Work</h2></StyledFooterLink>
-			<StyledFooterLink className="shake-little" activeClassName="active"><h2 tw="ml-md sm:ml-lg md:ml-xl">Contact</h2></StyledFooterLink>
-			<StyledFooterLink disabled><div tw="ml-md sm:ml-lg md:ml-xl"><p className="caption">Copyright 2020 - Mario Aksiyote</p></div></StyledFooterLink>
-		</StyledFooterGrid>
+		<div tw="grid grid-rows-4 mt-xl">
+			<StyledFooterLink className="blob-target" activeClassName="active" to="/"><H2 id="target" tw="ml-md sm:ml-lg md:ml-xl">Home</H2></StyledFooterLink>
+			<StyledFooterLink className="blob-target" activeClassName="active" to="/about/"><H2 id="target" tw="ml-md sm:ml-lg md:ml-xl">About</H2></StyledFooterLink>
+			<StyledFooterLink className="blob-target" activeClassName="active" to="/work/"><H2 id="target" tw="ml-md sm:ml-lg md:ml-xl">Work</H2></StyledFooterLink>
+			<StyledFooterLink className="blob-target" activeClassName="active"><H2 id="target" tw="ml-md sm:ml-lg md:ml-xl">Contact</H2></StyledFooterLink>
+			<StyledFooterLink disabled>
+				<div tw="flex ml-md sm:ml-lg md:ml-xl">
+					<Caption tw="text-gray-mid">{Constants.copyright}</Caption>
+				</div>
+			</StyledFooterLink>
+		</div>
 	)
 }
 

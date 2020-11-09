@@ -1,29 +1,29 @@
 import React from 'react';
 import { Link } from "gatsby";
+import { P2, P1, H4, H5, H2,  H6, Caption } from "Components"
 import tw, { styled, css, theme } from "twin.macro";
+
 
 const StyledNavbarContainer = styled.div([
     tw`flex items-center justify-between
-    px-sm md:px-md lg:px-lg xl:px-xl py-sm md:py-md mb-sm`,
-    /*css`*/
-    	/*background: transparent;
-    	position: sticky;
-    	top: 0;
-    	z-index: 1;*/
-    // `
+    `,
+    css`
+    	margin: 2vw 2vw 6vw;
+    	/*width: 85%;*/
+    	width: 96%;
+    	/*position: sticky;*/
+    	/*max-width: 2000px;*/
+    	/*top: 5vw;*/
+    	/*z-index: 1;*/
+    `
 ])
-// background: ${theme('colors.background')};
-
-const StyledLinksContainer = styled.div`
-    ${tw`flex`}
-`;
 
 const StyledLink = styled(Link)([
-    tw`flex items-center justify-between text-primary-default 
-    mr-sm md:mr-md
-    hover:text-gray-dark cursor-pointer`,
+    tw`flex items-center justify-between text-gray-dark hover:text-primary-default
+    mr-md
+    cursor-pointer no-underline`,
     css`
-      /*text-decoration: none;*/
+
 	  /*background-image: linear-gradient(currentColor, currentColor);
 	  background-position: 0% 100%;
 	  background-repeat: no-repeat;
@@ -32,21 +32,23 @@ const StyledLink = styled(Link)([
       & * { white-space: nowrap };
       &:last-child { margin: 0 };
 
-	  /*&:hover, &:focus, &.active {
-	      background-size: 100% 2px;
-	  }*/
+	  &:hover, &:focus, &.active {
+	  	color: theme('color-primary-default') !important;
+	      /*background-size: 100% 2px;*/
+	  }
     `
-])
+]) 
 
 const Navbar = () => {
 	return (
-		<StyledNavbarContainer>
-			<StyledLink activeClassName="active" className="shake-slow" to="/"><h6 className="info">Mario Aksiyote</h6></StyledLink>
-			<StyledLinksContainer>
-				<StyledLink activeClassName="active" to="/about/"><h6 className="info">About</h6></StyledLink>
-				<StyledLink activeClassName="active" to="/work/" className="shake-slow"><h6 className="info">Work</h6></StyledLink>
-				<StyledLink activeClassName="active" className="shake-slow" onClick={() => alert("open contact modal")} className="shake-slow"><h6 className="info">Contact</h6></StyledLink>
-			</StyledLinksContainer>
+		<StyledNavbarContainer id='main-nav'>
+			<StyledLink id="nav-title" activeClassName="active" className="blob-target" to="/"><H5>Mario Aksiyote</H5></StyledLink>
+			<div tw="flex">
+				<StyledLink activeClassName="active" className="blob-target" to="/about/"><H6>About</H6></StyledLink>
+				<StyledLink activeClassName="active" className="blob-target" to="/work/"><H6>Work</H6></StyledLink>
+				<StyledLink activeClassName="active" className="blob-target" onClick={() => alert("open contact modal")}><H6>Contact</H6></StyledLink>
+			</div>
+
 		</StyledNavbarContainer>
 	)
 }
