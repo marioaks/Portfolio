@@ -26,7 +26,7 @@ const GrainyBackground = styled.div`
   &:after {
     content:"";
     position: absolute;
-    opacity: 1;
+    opacity: .5;
     width:200vw;
     height: 200vh;
     left: -50%;

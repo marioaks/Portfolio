@@ -1,154 +1,162 @@
-import React from "react"
-import { Link } from "gatsby"
-import tw, { css, styled, theme } from "twin.macro"
-import { H1, H2, H5, P2, H4, H3, PaddedContainer } from "Components"
+import React, { Fragment } from "react";
+import { Link, graphql } from "gatsby";
+import { useDarkMode } from "Context";
+import tw, { css, styled, theme } from "twin.macro";
+import { H1, H5, H6, H4, InnerPaddedContainer, PaddedContainer, MultiColumnLayout, Divider } from "Components";
+import isPropValid from '@emotion/is-prop-valid'
 
-const PageContainer = styled.div([
-  tw`px-sm md:px-md lg:px-lg xl:px-xl`
-])
-
-const PageTitle = styled.div([
-  tw`mb-xl`,
+const StyledDivider = styled(Divider)([
   css`
-    cursor: pointer;
-    // color: ${theme`colors.primary.default`};
-    @media only screen and (min-width: ${theme('screens.md.min')}) {
-      & h2 {
-        
-        font-size: 4vw;
-        line-height: 4.5vw;
-        /*font-size: 3.5em;
-        letter-spacing: 0;
-        line-height: 1.15em;*/
-      }
-    }
-    
-
-  `
-])
-
-const InfoGrid = styled.div([
-  tw`grid gap-xl m-md sm:m-lg md:m-xl`,
-  css`
-    & { 
-      /*max-width: 700px;*/
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-    /*& a {
-      background-image: linear-gradient(
-        transparent 0%,
-        ${theme`colors.primary.default`} 0px
-      );
-      background-size: 0%;
-      background-repeat: no-repeat;
-      display: inline;
-      transition: 0.5s ease;
-    }
-    & a:hover {
-      color: white;
-      background-size: 100%;
-    }*/
-    ul {
-      margin-left: 1.4ch;
-      & > h5 {
-        
-        padding-inline-start: 1ch;
-        list-style-type: "⟶";
-        display: list-item;
-        margin-bottom: 10px;
-
-        &.no-bullet {
-          cursor: text;
-          padding-inline-start: 0ch;
-          display: block;
-          margin-left: -1.2ch;
-        }
-
-        & > a {
-          /*margin-left: 1ch;*/
-          cursor: pointer;
-          text-decoration: underline;
-          text-transform: uppercase;
-          background-position: 100% 100%;
-          background-repeat: no-repeat;
-          background-size: 100% 0rem;
-          background-image: linear-gradient(#ffd17d, #ffd17d);
-          transition: background-size .3s;
-          &:hover {
-            background-size: 100% 100%;
-            /*background-image: linear-gradient(#ffd17d, #ffd17d);*/
-            text-decoration: none;
-          }
-          
-        }
-        
-      }
+    margin: 6vw 0;
+    @media only screen and (max-width: ${theme('screens.sm.min')}) {
+      margin: 10vw 0;
     }
   `
 ])
+const colorOnHover = props => !props.isDarkMode ? 
+    css`&:hover { color: ${theme('colors.primary')};};` 
+    : css`&:hover { color: ${theme('colors.secondary')};} `
 
-const InfoGridList = ({ title, list, ...props }) => (
-  <div key={title ?? list[0]?.text ?? list[0]} {...props}>
-    {title && 
-      <div tw="mb-xs">
-        <H5 tw="uppercase font-bold">{title}</H5>
-      </div>
-    }
-    <ul tw="p-0">
-      {list.map((item, i) => item?.linkTo ? 
-        <H5>
-          <Link 
-            style={{filter: `hue-rotate(${(360 / list.length) + ((360 / list.length) * i)}deg)`}} 
-            tw="text-gray-dark" to={item.linkTo}>
-            {item.text}
-          </Link> 
-        </H5> : 
-        <H5 className="no-bullet">{item}</H5> 
-      )}
-    </ul>
-  </div>
+const StyledIntroText = styled(H5)([
+  // tw`cursor-pointer`, 
+  css`max-width: 600px; & em { text-decoration: underline; }`,
+  // colorOnHover
+])
+
+const IntroSection = ({ isDarkMode }) => (
+  <>
+    <StyledIntroText isDarkMode={isDarkMode}>
+      Hey there. I'm Mario Aksiyote. I'm a collaborative, experienced, and creative UX/UI developer from Mexico City. I'm someone who can take a product idea from end to end — from a napkin sketch to a real shipped product. I'm frequently <em>coding</em>, occasionally <em>designing</em>, and always <em>creating</em>. Have a look around, and don't miss out clicking on the blob above!
+    </StyledIntroText>
+    <StyledDivider/>
+  </>
 )
 
-// ⟶ 
-export default function HomePage(
-  {data: { allMdx: { edges: posts }}}
-) {
+
+const PostsLinkStyle = [
+  tw`font-header-sans font-bold xs:mt-lg`,
+  css`
+    word-break: break-all;
+    max-width: 1200px;
+    letter-spacing: -0.1rem;
+  `
+]
+const PostsSlash = styled.span([ tw`font-light italic font-header-serif`, (props => !props.isDarkMode ? tw`text-primary` : tw`text-secondary`)])
+
+
+const StyledLink = styled(Link, { shouldForwardProp: isPropValid })([
+  tw`no-underline cursor-pointer`,
+  colorOnHover
+])
+
+const PostsSection = ({ posts, isDarkMode }) => (
+  <>
+    <H5 paragraph>Some Recent Work</H5>
+    <H1 css={PostsLinkStyle}>{
+      posts.map(({node: {id, frontmatter: { name }, fields: { slug }}}, i) => (
+        <Fragment key={id}>
+            <StyledLink isDarkMode={isDarkMode} to={slug}>
+              {name}
+            </StyledLink>
+          <PostsSlash isDarkMode={isDarkMode}>&nbsp;/</PostsSlash>
+          {" "}
+        </Fragment>
+      ))}
+        <StyledLink isDarkMode={isDarkMode} to="/work">
+          See all projects
+        </StyledLink>
+    </H1>
+    <StyledDivider/>
+  </>
+)
+
+const StyledGrid = styled(MultiColumnLayout)([
+  tw`lg:col-count-3 md:col-count-3 sm:col-count-2 col-gap-xl`,
+  css`
+
+  &>div {
+    margin-bottom: 5rem;
+  }
+    /*margin-left: auto;*/
+    /*max-width: 1000px;*/
+/*    & h6 {
+      max-width: 200px;
+    }*/
+    & h4 {
+      margin-bottom: 0.8rem;
+    }
+
+/*    & > div > h5:first-of-type {
+      margin-bottom: 1rem;
+    }*/
+
+    & ul {
+      padding-left: 1.5rem;
+      margin: 0;
+      & li {
+        list-style-type: "⟶";
+        padding-inline-start: 1.5ch;
+        transition: transform 100ms;
+        &:hover {
+          transform: translateX(1.5ch)
+        }
+      }
+    }
+  `
+])
+
+const InfoGrid = () => (
+  <InnerPaddedContainer>
+  <StyledGrid>
+    <div css={css`max-width: 200px`}>
+      <H6 paragraph>—</H6>
+    <H6>I'm currently hearing out new opportunities. I'd love to hear from you if you think we'd be a good match!</H6>
+    </div>
+    {/* <StyledGrid> */}
+    
+    <div>
+      <H6 paragraph>What I do</H6>
+      <ul>
+        <li><H4><Link to="/work">UX UI Development</Link></H4></li>
+        <li><H4><Link to="/work">Product Design</Link></H4></li>
+        <li><H4><Link to="/work">Data Visualization</Link></H4></li>
+        <li><H4><Link to="/work">Algorithm innovation</Link></H4></li>
+        <li><H4><Link to="/work">Data Science</Link></H4></li>
+        <li><H4><Link to="/work">Graphic Design</Link></H4></li>
+      </ul>
+    </div> 
+
+    <div>
+      <H6 paragraph>Contact Me</H6>
+      <ul>
+        <li><H4><a href="http://google.com">Email</a></H4></li>
+        <li><H4><a href="http://google.com">LinkedIn</a></H4></li>
+        <li><H4><a href="http://google.com">Github</a></H4></li>
+        <li><H4><a href="http://google.com">Dribbble</a></H4></li>
+        <li><H4><a href="http://google.com">Twitter</a></H4></li>
+        <li><H4><a href="http://google.com">Instagram</a></H4></li>
+      </ul>
+    </div>
+    {/* </StyledGrid> */}
+  </StyledGrid>
+  </InnerPaddedContainer>
+)
+
+export default function HomePage({data: { allMdx: { edges: posts }}}) {
+  const [isDarkMode] = useDarkMode()
+
   return (
     <PaddedContainer>
-      <PageTitle><H2>{"Hey, my name is Mario Aksiyote and I’m a creative technologist. On one hand, I’m an accomplished UX/UI developer who can both design and build complex front-end applications from scratch. On the other hand, I’m an innovator consistently finding ways to incorprate the cutting edge — game theory, data science, data visualization — into my work.".split(' ').map(word => <><span tw="hover:text-primary-default" className="blob-target">{word}</span>{" "}</>)}</H2></PageTitle>
-      <InfoGrid>
-        <InfoGridList title="What I do" list={[
-          "UX UI Development", 
-          "Product Design", 
-          "Data Visualization", 
-          "Algorithm innovation", 
-          "Data Science", 
-          "Graphic Design"
-        ]}/>
-        <InfoGridList title="Connect" list={[
-          {text: "Email", linkTo: 'http://google.com/'},
-          {text: "LinkedIn", linkTo: 'http://google.com/'},
-          {text: "Github", linkTo: 'http://google.com/'},
-          {text: "Dribbble", linkTo: 'http://google.com/'},
-          {text: "Twitter", linkTo: 'http://google.com/'},
-          {text: "Instagram", linkTo: 'http://google.com/'}
-        ]}/>
-        <InfoGridList tw='col-span-2' title="Recent Work" list={
-          [...posts.map(({node: {frontmatter: { title }, fields: { slug }}}) => (
-            {text: title, linkTo: slug}
-          )), {text: "MORE", linkTo: '/work'}]
-         }/>
-         <InfoGridList tw='col-span-full' list={[{text: "DOWNLOAD MY RESUME", linkTo: 'http://google.com/'}]}/>
-      </InfoGrid>
-
+      <IntroSection isDarkMode={isDarkMode}/>
+      <PostsSection isDarkMode={isDarkMode} posts={posts}/>
+      <InfoGrid/>
     </PaddedContainer>
   )
 }
 
-
-export const post = graphql`
-  query PostQUery {
-    allMdx(filter: {fileAbsolutePath: {regex: "/posts/"}}, limit: 5, sort: {order: DESC, fields: fields___date}) {
+export const HomeQuery = graphql`
+  query get5RecentPosts {
+    allMdx(filter: {fileAbsolutePath: {regex: "/posts/"}}, limit: 6, sort: {order: ASC, fields: frontmatter___order}) {
       edges {
         node {
           id
@@ -156,7 +164,7 @@ export const post = graphql`
             slug
           }
           frontmatter {
-            title
+            name
           }
         }
       }

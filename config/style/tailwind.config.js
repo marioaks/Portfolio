@@ -47,7 +47,7 @@ module.exports = {
       header: {
         1: `${100 / 16}rem`, //sm: 70px, md: 85px, lg: 100px
         2: `${42 / 16}rem`, 
-        3: `${22 / 16}rem`, 
+        3: `${28 / 16}rem`, 
         4: `${28 / 16}rem`, 
         5: `${22 / 16}rem`, 
         6: `${16 / 16}rem`, 
@@ -107,7 +107,7 @@ module.exports = {
         5: `${28 / 16}rem`,
         6: `${21 / 16}rem`,
         '1xs': `${70 / 16}rem`,
-        '2xs': `${53 / 16}rem`
+        '2xs': `${50 / 16}rem`
       },
       body: {
         1: `${31 / 16}rem`,
@@ -122,16 +122,14 @@ module.exports = {
       'white': 'white',
       'transparent': 'transparent',
       'background': Constants.backgroundColor,
-      'primary': {
-        lighter: '#64A1FB',
-        default: '#0051F2',
-        darker: '#002EAE'
-      },
+      'darkBackground': Constants.darkBackgroundColor,
+      'primary': '#0051F2',
+      'secondary': '#ffa410',
       'gray': {
         'dark': 'rgba(34,34,34,1)',
         'midDark': 'rgba(34,34,34,.8)',
         'mid': 'rgba(34,34,34,.6)',
-        'light': 'rgba(34,34,34,.3)',
+        'light': 'rgba(34,34,34,.15)',
         'xlight': 'rgba(34,34,34,.05)'
       }
     },
@@ -163,6 +161,7 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-multi-column')()],
-  variants: {}
+  plugins: [
+    require('tailwindcss-multi-column')(),
+  ]
 }

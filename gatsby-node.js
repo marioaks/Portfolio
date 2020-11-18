@@ -13,11 +13,16 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
 
   let slug;
+
   if (node.internal.type === 'Mdx') {
 	  	//generate url slug
 	  	const fileNode = getNode(node.parent);
+
 	  	const parsedFilePath = path.parse(fileNode.relativePath);
-	  	if (Object.prototype.hasOwnProperty.call(node, 'frontmatter') && Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')) {
+
+	  	if (Object.prototype.hasOwnProperty.call(node, 'frontmatter') && Object.prototype.hasOwnProperty.call(node.frontmatter, 'name') && !!node.frontmatter.name) {
+	  		slug = `/${_.kebabCase(node.frontmatter.name)}`;
+	  	} else if (Object.prototype.hasOwnProperty.call(node, 'frontmatter') && Object.prototype.hasOwnProperty.call(node.frontmatter, 'title') && !!node.frontmatter.title) {
 	  		slug = `/${_.kebabCase(node.frontmatter.title)}`;
 	  	} else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
 	  		slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`;
@@ -40,7 +45,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 		  	}
 		}
 	}
-
 	createNodeField({ 
 		node, 
 		name: 'slug', 
@@ -48,22 +52,28 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 	});
 }
 
-exports.createPages = async function ({ actions, graphql }) {
-  const { createPage } = actions;
-  const postPage = path.resolve('src/layouts/post.js');
+exports.createPages = async function ({ actions, graphql, reporter }) {
+  const { createPage, deletePage } = actions;
+
   const homePage = path.resolve('src/pages/home.js');
-  
   createPage({ path: `/`, component: homePage });
 
-  const { data } = await graphql(`
-    query {
-      allMdx {
+  const postMdxLayout = path.resolve('src/layouts/postMdx.js');
+
+  const { data: postsData } = await graphql(`
+    query getAllMdxPosts {
+      allMdx(filter: {fileAbsolutePath: {regex: "/posts/"}}, sort: {fields: [frontmatter___order], order: ASC}) {
         edges {
           node {
             id
             fields {
               slug
-              date
+            }
+            frontmatter {
+              name
+              order
+              description
+              categories
             }
           }
         }
@@ -71,37 +81,44 @@ exports.createPages = async function ({ actions, graphql }) {
     }
   `);
 
-  if (data.errors) {
-    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query');
+  if (postsData.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "getAllMdxPosts" query');
   }
 
-  const posts = data.allMdx.edges
+  const posts = postsData.allMdx.edges
 
-  posts.sort((postA, postB) => {
-  	const dateA = moment(postA.node.fields.date, Constants.dateFromFormat);  
-  	const dateB = moment(postB.node.fields.date, Constants.dateFromFormat);  
-  	if (dateA.isBefore(dateB)) return 1;
-  	if (dateB.isBefore(dateA)) return -1;  
-  	return 0;
-  });
+  function commonCategories(a, b) {
+	  var setB = new Set(b);
+	  return [...new Set(a)].filter(x => setB.has(x)).length;
+	}
 
-  // Post page creating
+console.log(posts)
+
   posts.forEach(({ node }, index) => {
   	const { id, fields: { slug } } = node;
 
-  	// Create post pages
-  	const nextID = index + 1 < posts.length ? index + 1 : 0;
-  	const prevID = index - 1 >= 0 ? index - 1 : posts.length - 1;
-  	const nextPost = posts[nextID];
-  	const prevPost = posts[prevID];  
+  	const sortedByRelevance = [...posts].sort((a, b) => (
+  		(commonCategories(b.node.frontmatter.categories, node.frontmatter.categories) / b.node.frontmatter.categories.length)
+  		- (commonCategories(a.node.frontmatter.categories, node.frontmatter.categories) / a.node.frontmatter.categories.length)
+  	)).filter(p => p.node.id !== id)
+
+  	const relevantPosts = sortedByRelevance.slice(0, 4).sort((a, b) => a.node.frontmatter.order - b.node.frontmatter.order)
+  	// const nextIndex = index + 1 < posts.length ? index + 1 : 0;
+  	// const prevIndex = index - 1 >= 0 ? index - 1 : posts.length - 1;
+  	// const nextPost = posts[nextIndex];
+  	// const prevPost = posts[prevIndex];  
   	createPage({
   	  path: slug,
-  	  component: postPage,
+  	  component: postMdxLayout,
   	  context: {
   	  	id: id,
   	  	slug: slug,
-  	  	next: nextPost,
-  	  	prev: prevPost
+  	  	relevant1: relevantPosts[0].node.id,
+  	  	relevant2: relevantPosts[1].node.id,
+  	  	relevant3: relevantPosts[2].node.id,
+  	  	relevant4: relevantPosts[3].node.id,
+  	  	// next: nextPost,
+  	  	// prev: prevPost
   	  }
   	});
   });
@@ -109,21 +126,21 @@ exports.createPages = async function ({ actions, graphql }) {
 
 exports.onCreateWebpackConfig = ({ actions, loaders, stage }) => {
 	actions.setWebpackConfig({
-    module: { 
-      rules: [
-        stage === "develop-html" || stage === "build-html" ? { test: /node_modules\/paper/, use: loaders.null() } : {}
-      ]
-    },
-    resolve: {
+	    module: { 
+	      rules: [
+	        stage === "develop-html" || stage === "build-html" ? { test: /node_modules\/paper/, use: loaders.null() } : {}
+	      ]
+	    },
+	    resolve: {
 			alias: {
-        Assets: path.resolve(__dirname, 'static/assets'),
-        Config: path.resolve(__dirname, 'config'),
+		        Assets: path.resolve(__dirname, 'static/assets'),
+		        Config: path.resolve(__dirname, 'config'),
 				Posts: path.resolve(__dirname, 'src/posts'),
 				Components: path.resolve(__dirname, 'src/components'),
 				Pages: path.resolve(__dirname, 'src/pages'),
-        Layouts: path.resolve(__dirname, 'src/layouts'),
-				Templates: path.resolve(__dirname, 'src/templates'),
-        Utils: path.resolve(__dirname, 'src/utils')
+		        Layouts: path.resolve(__dirname, 'src/layouts'),
+		        Utils: path.resolve(__dirname, 'src/utils'),
+		        Context: path.resolve(__dirname, 'src/context')
 			}
 		}
 	});

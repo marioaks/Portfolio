@@ -14,7 +14,7 @@ export const H1 = styled.h1(({paragraph, primary}) => [
 		xs:leading-header-1xs
 	`,
 	paragraph && tw`mb-header-1xs xs:mb-header-1xs`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
 export const H2 = styled.h2(({paragraph, primary}) => [
@@ -31,7 +31,7 @@ export const H2 = styled.h2(({paragraph, primary}) => [
 		xs:leading-header-2xs
 	`,
 	paragraph && tw`mb-header-2 xs:mb-header-2xs`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
 export const H3 = styled.h3(({paragraph, primary}) => [
@@ -45,12 +45,12 @@ export const H3 = styled.h3(({paragraph, primary}) => [
 		m-0
 	`,
 	paragraph && tw`mb-header-3`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
 export const H4 = styled.h4(({paragraph, primary}) => [
 	tw`
-		font-header-serif 
+		font-body-serif 
 		text-header-4
 		font-header-4
 		tracking-header-4
@@ -59,10 +59,10 @@ export const H4 = styled.h4(({paragraph, primary}) => [
 		m-0
 	`,
 	paragraph && tw`mb-header-4`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
-export const H5 = styled.h5(({paragraph, primary}) => [
+export const H5 = styled.h4(({paragraph, primary}) => [
 	tw`
 		font-header-sans 
 		text-header-5
@@ -73,10 +73,10 @@ export const H5 = styled.h5(({paragraph, primary}) => [
 		m-0
 	`,
 	paragraph && tw`mb-header-5`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
-export const H6 = styled.h6(({paragraph, primary}) => [
+export const H6 = styled.h4(({paragraph, primary}) => [
 	tw`
 		font-header-sans 
 		text-header-6
@@ -87,7 +87,7 @@ export const H6 = styled.h6(({paragraph, primary}) => [
 		m-0
 	`,
 	paragraph && tw`mb-header-6`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
 export const P1 = styled.p(({paragraph, primary}) => [
@@ -101,7 +101,7 @@ export const P1 = styled.p(({paragraph, primary}) => [
 		m-0
 	`,
 	paragraph && tw`mb-body-1`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
 export const P2 = styled.p(({paragraph, primary}) => [
@@ -115,7 +115,7 @@ export const P2 = styled.p(({paragraph, primary}) => [
 		m-0
 	`,
 	paragraph && tw`mb-body-2`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
 export const Quote = styled.p(({paragraph, primary}) => [
@@ -131,7 +131,7 @@ export const Quote = styled.p(({paragraph, primary}) => [
 		text-gray-midDark
 	`,
 	paragraph && tw`mb-body-quote`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])
 
 export const Caption = styled.p(({paragraph, primary}) => [
@@ -145,5 +145,5 @@ export const Caption = styled.p(({paragraph, primary}) => [
 		m-0
 	`,
 	paragraph && tw`mb-body-imageCaption`,
-	primary && tw`text-primary-default`
+	primary && tw`text-primary`
 ])

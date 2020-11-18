@@ -16,13 +16,16 @@ collections:
     public_folder: 'assets'
     path: '{{slug}}/index'
     fields:
-      - { label: "Long Title", name: "title", widget: "string" }
-      - { label: "Short Title", name: "short title", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Year", name: "year", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Embedded Images", name: "embeddedImages", widget: "list" }
-      - { label: "Roles", name: "roles", widget: "list" }
-      - { label: "Company", name: "company", widget: "company" }
+      - { label: "Categories", name: "categories", widget: "list" }
+      - { label: "Company", name: "company", widget: "string" }
+      - { label: "Collaborators", name: "collaborators", widget: "list" }
+      - { label: "Embedded Images", name: "embeddedImages", widget: "list", field: {label: Image, name: image, widget: image}}
+      - { label: "Order", name: "order", widget: "number" }
+      - { label: "Thumbnail", name: "thumbnail", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }

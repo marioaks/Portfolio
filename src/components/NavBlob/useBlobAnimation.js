@@ -2,19 +2,33 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { theme } from "twin.macro"
 import { mapRange, getNumericStyleProp } from "Utils";
+import { useDarkMode } from "Context";
 import paper from 'paper';
 import SimplexNoise from 'simplex-noise';
 
 const useBlobAnimation = () => {
+	const [, setIsDarkMode] = useDarkMode();
+
 	useEffect(() => {
 		const canvas = document.getElementById("blob-canvas");
 		const navbar = document.getElementById("main-nav");
+		let isDarkMode = document.documentElement.classList.contains('dark-mode');
 
-		const strokeColor = theme('colors.primary.default');
-		const fillColor = theme('colors.primary.default');	
+		const darkModeFillColor = theme('colors.background');
+        const darkModeStrokeColor = theme('colors.background');
+        const darkModeLinkFillColor = 'transparent'
+
+		const lightModeFillColor = theme('colors.primary');
+	    const lightModeStrokeColor = theme('colors.primary');
+	    const lightModeLinkFillColor = theme('colors.background');
+
+		let strokeColor = isDarkMode ? darkModeStrokeColor : lightModeStrokeColor
+		let fillColor = isDarkMode ? darkModeFillColor : lightModeFillColor
+		let linkFillColor = isDarkMode ? darkModeLinkFillColor : lightModeLinkFillColor
+
 		const strokeWidth = 3, segments = 7;
 		const stuckPaddingY = 5, stuckPaddingX = 10, radiusPadding = 6
-		let navPaddingTop = getNumericStyleProp(navbar, 'paddingTop')
+		let navMarginTop = getNumericStyleProp(navbar, 'marginTop')
 		let radius = getNumericStyleProp(navbar, 'height') / 2 + radiusPadding;
 		
 		let blobPosition = {x: window.innerWidth / 2, y: -100};
@@ -47,10 +61,44 @@ const useBlobAnimation = () => {
 
 	    	const noiseObjects = blob.segments.map(() => new SimplexNoise());
 	    	
+
+	    	blob.onMouseEnter = function(event) {
+	    		if (!isBlobStuck) {
+		    		navMarginTop = getNumericStyleProp(navbar, 'marginTop')
+					const newRadius = getNumericStyleProp(navbar, 'height') / 2 + radiusPadding + 3
+					circle.scale(newRadius / radius)
+					radius = newRadius
+					needsRescale = true
+					canvas.style.pointerEvents = 'all'
+					document.body.style.cursor = 'pointer'
+
+				}
+	    	}
+
+	    	blob.onMouseLeave = function(event) {
+	    		navMarginTop = getNumericStyleProp(navbar, 'marginTop')
+				const newRadius = getNumericStyleProp(navbar, 'height') / 2 + radiusPadding
+				circle.scale(newRadius / radius)
+				radius = newRadius
+				needsRescale = true
+				canvas.style.pointerEvents = 'none'
+				document.body.style.cursor = 'auto'
+	    	}
+
+	    	blob.onClick = function(event) {
+	    		// document.documentElement.classList.add(!isDarkMode ? 'dark-mode' : 'light-mode');
+			    // document.documentElement.classList.remove(!isDarkMode ? 'light-mode' : 'dark-mode');
+				strokeColor = !isDarkMode ? darkModeStrokeColor : lightModeStrokeColor
+				fillColor = !isDarkMode ? darkModeFillColor : lightModeFillColor
+				linkFillColor = !isDarkMode ? darkModeLinkFillColor : lightModeLinkFillColor
+	    		setIsDarkMode(!isDarkMode)
+	    		isDarkMode = !isDarkMode
+	    	}
+
 			//animationLoop
 			let debouncedTime = -1
 			paper.view.onResize = function(event) {
-				navPaddingTop = getNumericStyleProp(navbar, 'paddingTop')
+				navMarginTop = getNumericStyleProp(navbar, 'marginTop')
 				const newRadius = getNumericStyleProp(navbar, 'height') / 2 + radiusPadding
 				circle.scale(newRadius / radius)
 				radius = newRadius
@@ -68,18 +116,19 @@ const useBlobAnimation = () => {
 
 				if (!isBlobStuck) needsRescale = false
 		      }
-		    	
+
 		      if (!isBlobStuck && backToNavbar) {
 		      	//either reset blob position to navbar or follow mouse position on a delay
 		      	noiseRange = 4
 
 		      	blobPosition = gsap.utils.interpolate(
 		      		{x: blobPosition.x, y: blobPosition.y},
-		      		{x: window.innerWidth / 2, y: navPaddingTop + radius - radiusPadding},
+		      		{x: window.innerWidth / 2, y: radius + navMarginTop - radiusPadding},
 		      		resetSpeed
 		      	)
 
 		      	blob.fillColor = fillColor
+		      	blob.strokeColor = strokeColor
 		      	canvas.style['mix-blend-mode'] = 'multiply'
 
 		      	group.position = new paper.Point(blobPosition.x, blobPosition.y);
@@ -96,7 +145,7 @@ const useBlobAnimation = () => {
 		        	hoverSpeed
 		        )
 
-		        blob.fillColor = theme('colors.background');
+		        blob.fillColor = linkFillColor
 		      	group.position = new paper.Point(blobPosition.x, blobPosition.y);
 		      	debouncedTime = event.time + .2
 
@@ -105,7 +154,7 @@ const useBlobAnimation = () => {
 		      	  blob.scale([(stuckSize.width + stuckPaddingX) / (radius * 2), (stuckSize.height + stuckPaddingY) / (radius * 2)])
 		      	  needsRescale = false
 		      	}
-		      }
+		    }
 
 		      // save array of scaled circle segments
 	          if (noiselessSegments.length === 0) {
@@ -141,10 +190,10 @@ const useBlobAnimation = () => {
 
 		const initListeners = () => {
 	    	const handleMouseEnter = e => {
-	        	const navItem = e.currentTarget.querySelector("#target") ?? e.currentTarget
-	        	canvas.style['mix-blend-mode'] = navItem.getAttribute('blob-overlay') ?? 'multiply'
-	        	const { left, top, width, height } = navItem.getBoundingClientRect();
-	        	stuckPosition = { x: Math.round(left + width / 2), y: Math.round(top + height / 2)}
+	        	const linkItem = e.currentTarget.querySelector("#target") ?? e.currentTarget
+	        	canvas.style['mix-blend-mode'] = linkItem.getAttribute('blob-overlay') ?? 'multiply'
+	        	const { left, top, width, height } = linkItem.getBoundingClientRect();
+	        	stuckPosition = { x: Math.round(left + width / 2), y: Math.round(top + (height) / 2)}
 	        	stuckSize = {width, height}
 	        	isBlobStuck = true;
 	        	needsRescale = true;

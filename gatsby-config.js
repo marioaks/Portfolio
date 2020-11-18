@@ -18,57 +18,69 @@ module.exports = {
 	plugins: [
 		'gatsby-plugin-lodash',
 		'gatsby-plugin-react-helmet',
-    'gatsby-plugin-emotion',
-    {
-      resolve: `gatsby-plugin-postcss`,
-      options: {
-        postCssPlugins: [
-          require('postcss-import')({
-              plugins: [
-                require('stylelint')({
-                  configFile: './config/lint/.stylelintrc'
-                })
-              ]
-          }),
-          require('tailwindcss')('./config/style/tailwind.config.js'),
-          require('postcss-preset-env')({
-              autoprefixer: { grid: false },
-              features: {
-                  'nesting-rules': true
-              },
-              browsers: [
-                  '> 1%',
-                  'last 2 versions',
-                  'Firefox ESR',
-              ]
-          })
-        ]
-      }
-    },
-    {
-      resolve: 'gatsby-plugin-mdx',
-      options: {
-        extensions: [".mdx", ".md"],
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-relative-images`
-          },
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 1035,
-              sizeByPixelDensity: true,
-              linkImagesToOriginal: false
-            }          
-          },
-          'gatsby-remark-copy-linked-files',
-          // 'gatsby-remark-autolink-headers',
-          'gatsby-remark-prismjs',
-          'gatsby-remark-lazy-load'
-        ]
-      }
-    },	
-    {
+	    'gatsby-plugin-emotion',
+	    'gatsby-plugin-sharp',
+		'gatsby-remark-images',
+		'gatsby-transformer-sharp',
+		'gatsby-plugin-catch-links',
+		'gatsby-plugin-twitter',
+		'gatsby-plugin-advanced-sitemap',
+	    {
+	      resolve: `gatsby-plugin-postcss`,
+	      options: {
+	        postCssPlugins: [
+	          require('postcss-import')({
+	              plugins: [
+	                require('stylelint')({
+	                  configFile: './config/lint/.stylelintrc'
+	                })
+	              ]
+	          }),
+	          require('tailwindcss')('./config/style/tailwind.config.js'),
+	          require('postcss-preset-env')({
+	              autoprefixer: { grid: false },
+	              features: {
+	                  'nesting-rules': true
+	              },
+	              browsers: [
+	                  '> 1%',
+	                  'last 2 versions',
+	                  'Firefox ESR',
+	              ]
+	          })
+	        ]
+	      }
+	    },
+	    {
+	      resolve: 'gatsby-plugin-mdx',
+	      options: {
+	        extensions: [".mdx", ".md"],
+	        gatsbyRemarkPlugins: [
+	          `gatsby-remark-relative-images`,
+	          {
+	            resolve: 'gatsby-remark-images',
+	            options: {
+	              maxWidth: 1600,
+	              sizeByPixelDensity: true,
+	              linkImagesToOriginal: false
+	            }          
+	          },
+	          'gatsby-remark-copy-linked-files',
+	          'gatsby-remark-prismjs',
+	          'gatsby-remark-lazy-load'
+	        ],
+	        plugins: [`gatsby-remark-relative-images`, `gatsby-remark-images`]
+	      }
+	    },
+	    {
+	      resolve: 'gatsby-plugin-react-svg',
+		  options: {
+		    rule: {
+		      include: /static/
+		    }
+		  }
+	    },
+	    {
 			resolve: 'gatsby-source-filesystem',
 			options: {
 				name: 'assets',
@@ -82,26 +94,13 @@ module.exports = {
 				path: `${__dirname}/src/posts/`
 			}
 		},
-		// {
-		// 	resolve: 'gatsby-transformer-remark',
-		// 	options: {
-		// 		plugins: [
-		// 			{
-		// 				resolve: `gatsby-remark-relative-images`
-		// 			},
-		// 			{
-		// 				resolve: 'gatsby-remark-images',
-		// 				options: {
-		// 					maxWidth: 690
-		// 				}
-		// 			},
-		// 			'gatsby-remark-copy-linked-files',
-		// 			'gatsby-remark-autolink-headers',
-		// 			'gatsby-remark-prismjs',
-		// 			'gatsby-remark-lazy-load'
-		// 		]
-		// 	}
-		// },
+		{
+			resolve: 'gatsby-source-filesystem',
+			options: {
+				name: 'pages',
+				path: `${__dirname}/src/pages/`
+			}
+		},
 		{
 			resolve: 'gatsby-plugin-google-analytics',
 			options: {
@@ -114,11 +113,6 @@ module.exports = {
 				color: Constants.themeColor
 			}
 		},
-		'gatsby-plugin-sharp',
-		'gatsby-transformer-sharp',
-		'gatsby-plugin-catch-links',
-		'gatsby-plugin-twitter',
-		'gatsby-plugin-advanced-sitemap',
 		{
 			resolve: 'gatsby-plugin-manifest',
 			options: {
@@ -153,7 +147,7 @@ module.exports = {
 				htmlTitle: 'Content Manager',
 				includeRobots: false
 			}
-		},
+		}
 		// {
 		// 	resolve: 'gatsby-plugin-feed',
 		// 	options: {

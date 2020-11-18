@@ -34,6 +34,7 @@ const config = {
 	copyright: 'Copyright © 2020. Mario Aksiyote', // Copyright string for the footer of the website and RSS feed.
 	themeColor: '#0051F2', // Used for setting manifest and progress theme colors.
 	backgroundColor: '#EFEFEF', // Used for setting manifest background color.
+	darkBackgroundColor: '#0D0D0D'
 };
 
 // Validate

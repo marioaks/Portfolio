@@ -1,5 +1,4 @@
 import React from 'react';
-import tw, { styled, css } from "twin.macro";
 import useBlobAnimation from "./useBlobAnimation";
 
 const NavBlob = () => {

@@ -1,5 +1,19 @@
 export ragAdjust from "./ragAdjust"
 
+export const makeSentence = (arr) => {
+  if (arr.length === 1) return arr[0];
+  const firsts = arr.slice(0, arr.length - 1);
+  const last = arr[arr.length - 1];
+  return firsts.join(', ') + ' and, ' + last;
+}
+
+export const arrayToObject = (array, keyField) => (
+  array.reduce((obj, item) => {
+    obj[item[keyField]] = item
+    return obj
+  }, {})
+)
+
 // function to map a value from one range to another range
 export const mapRange = (value, in_min, in_max, out_min, out_max) => {
 	return (

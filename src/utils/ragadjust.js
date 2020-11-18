@@ -1,4 +1,4 @@
-const ragadjust = function (s, method) {
+const ragAdjust = function (s, method) {
 	
 	if (document.querySelectorAll) {
 	
@@ -54,4 +54,4 @@ const ragadjust = function (s, method) {
 	
 };
 
-export default ragadjust
+export default ragAdjust

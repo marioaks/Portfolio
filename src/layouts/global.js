@@ -1,19 +1,14 @@
-import React, { useEffect } from "react"
-import Constants, { fontFaces, styles } from "Config"
-import { Navbar, Footer, NavBlob, SEO, GrainyBackground } from "Components";
-import { Global } from "@emotion/core"
+import React from "react"
+import { Navbar, Footer, NavBlob } from "Components";
 
-export default function GlobalLayout({ children }) {
-  return (
-    <>
-      {/* <SEO />  */}
-      {fontFaces.map(fontFace => <Global styles={{"@font-face": fontFace}}/>)}
-      <Global styles={styles}/>
-      {/* <GrainyBackground/> */}
-      <NavBlob/>
-      <Navbar/>
-      {children}
-      <Footer/>
-    </>
-  )
-}
+const GlobalLayout = ({ element }) => 
+  <>
+    {/* <SEO />  */}
+    {/* <GrainyBackground/> */}
+    <NavBlob/>
+    <Navbar/>
+    {element}
+    <Footer/>
+  </>
+
+export default GlobalLayout
