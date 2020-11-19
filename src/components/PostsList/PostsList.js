@@ -70,7 +70,7 @@ const PostsList = ({ posts, maxImgWidth=900, minImgWidth=400 }) => {
 						<Img fluid={fluid} alt=""/>
 						<ProjectTitleWrapper>
 							<ProjectTitle>{name}</ProjectTitle>
-							<H5 tw="md:col-start-3 md:col-span-2 px-0 md:px-sm xl:hidden xl:px-0 mb-xs" css={css`max-width: 400px;`}>{description}</H5>
+							<H5 tw="md:col-start-3 md:col-span-2 px-0 md:px-sm xl:px-0 mb-xs xl:opacity-75" css={css`max-width: 650px;`}>{description}</H5>
 							{/* <H6 tw="md:col-start-6 px-0 md:px-sm md:m-0 xl:hidden" css={css`max-width: 400px; text-transform: capitalize;`}>{categories.map(c=>c.replaceAll('-',' ')).join(", ")}</H6> */}
 						</ProjectTitleWrapper>
 					</StyledProject>

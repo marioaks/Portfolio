@@ -3,24 +3,198 @@ name: "FIT"
 description: A platform made to help commercial real-estate brokers fill retail leases with companies that will be both successful and good for the neighborhood. 
 
 title: FIT – An AI driven platform to modernize commercial real estate brokerage
-subtitle: Commercial real estate brokerage is an old-fashion industry that is starting to experience a wave of innovation. AI tools able to process massive amounts of data are introducing efficiencies that weren’t previously possible. Commercial brokerages are beginning to realize that if they don’t become data, tech, and AI leaders, they will be left behind.  For the most part however, these brokerages are made up of data-illiterate brokers whose instincts often lead to decisions that are neither good for their clients nor the neighborhoods they do their work in. In this case study, I will talk about how I helped build FIT, an AI-driven platform meant to both provide unique efficiencies into brokers’ workloads and nudge them into better decision-making. 
+subtitle: Commercial real estate brokerage is an old-fashion industry that is starting to experience a wave of innovation. AI tools able to process massive amounts of data are introducing efficiencies that weren't previously possible. Commercial brokerages are beginning to realize that if they don’t become data, tech, and AI leaders, they will be left behind. For the most part however, these brokerages are made up of data-illiterate brokers whose instincts often lead to decisions that are neither good for their clients nor the neighborhoods they do their work in. In this case study, I will talk about how I helped build FIT, an AI-driven platform meant to both provide unique efficiencies into brokers’ workloads and nudge them into better decision-making. 
 
-date: "01-01-2020"
+date: "03-14-2020"
 order: 3
 thumbnail: media/thumbnail.png
 
 company: "Topos"
 collaborators: 
-- Sam Coxon
-- Ria McIlwraith
-- Eric Buth
-- Ellery Royston
-- Sam Burns
-- Carlo Bailey
-- Mahir Yavuz
+  - Sam Coxon
+  - Ria McIlwraith
+  - Eric Buth
+  - Ellery Royston
+  - Sam Burns
+  - Carlo Bailey
+  - Mahir Yavuz
+  - Bo Han
 
 categories:
   - algorithm-creation
   - front-end-development
+
 embeddedImages:
+  - media/aerial-map-1.png
+  - media/aerial-map-2.png
+  - media/best-fit-brands-2.png
+  - media/best-fit-brands.png
+  - media/best-fit-brand-filters.gif
+  - media/brand-page.png
+  - media/d3-contours.png
+  - media/landing-page.png
+  - media/landlord-draw-trade-area.gif
+  - media/lululemon-brand-peers.png
+  - media/main-grid.png
+  - media/nbhd-info.png
+  - media/occlusion-layer.gif
+  - media/tenant-flow.gif
+  - media/thumbnail.png
+  - media/zone-1.png
+  - media/zone-2.png
 ---
+
+	<Img xxl {...props.embeddedImages.thumbnail}/>
+
+	### Tenant and Landlord Reps: Two sides of the same coin
+
+	There are two types of commercial brokers – **tenant reps** and** landlord reps**. Tenant reps are those who work for retailers and restauranteurs/franchisors who want to rent a space. Landlord reps are those who work for a landlord who wants to a lease a space. While these two types of brokers are ultimately fulfilling different roles in the marketplace, both jobs require much of the same time-consuming and monotonous work — pitching to clients, keeping up with multiple sources, prospecting new business opportunities, and maintaining a deep knowledge of an ever-changing commercial landscape. Being a good commercial broker necessitates a laborious boots-on-the-ground approach; deals simply can’t happen without it. That is, until FIT. 
+
+	***
+
+	### What is FIT?
+
+	At its heart, FIT is an intelligent lead generation tool that empowers brokers to make more and better deals, without having to do the heavy lifting on analytics. It provides landlord reps instant access to qualified tenants and their site selection preferences and it provides tenant reps with instant identification of ideal growth strategies and retail corridors. 
+
+	Rather than offering the same repackaged data as the current tools available – Placer.ai, Skyline.ai, Reonomy, Site Zeus – FIT stands out for its powerful intelligence (AI), its cleaner and larger brand database, its fast and actionable leads, and its ease of use. We attempted to take the most time-consuming aspects of a brokers workload and reimagined them using simple UX and intelligent AI. In other words, FIT is essentially a broker’s secret weapon. 
+
+	<Img xxl {...props.embeddedImages.mainGrid}/>
+
+	### What was my role?
+
+	My role in this project was as the lead front-end developer, as a member on the product research and design teams, and as a back-end and data science collaborator. Topos is a very small company, which allowed me to wear many different hats while working on this project. 
+
+	In order to get everything up and running, our back-end and data-engineering teams built a series of amazing databases and GRPC endpoints that we could easily query. These included endpoints to query points of interest, brands, census data, and our very own AI powered recommendation engine. 
+
+	I played a significant role in getting these APIs up and running. As someone who understands the technical concerns of the back-end along with the technical and user requirements of the front-end, I was the link between all the teams. I used my versatility to communicate with the product design team the exciting technologies available to us along with the technical limitations we had to be aware of. I also was able to share designs with my techie team-members in a way that translated the visuals into technical requirements. 
+
+	Piggybacking off of all their great work, on the front-end side of things, I decided to build a client using React and a server using Apollo GraphQL. My team was really excited about the tech stack for this project since it was our first real attempt at using GraphQL in a production-ready application. GraphQL seemed almost too good to be true and I wanted to see if it lived up to the hype. It did not disappoint. Other technologies that we ended up using were Deck.gl for big-data visualizations and d3-contour for the zones algorithm I created — both of which will be discussed in a moment.
+
+	<Divider/>
+
+
+	### Landlord Flow: Starting with an address
+
+	<Img {...props.embeddedImages.landlordDrawTradeArea} caption="The landlord flow starts off with a single address and a customizable trade area around that address"/>
+
+	We designed FIT with two entry-points — The Landlord Rep Flow and The Tenant Rep Flow. The _Landlord Rep Flow_ in FIT is meant for landlord reps who are starting off with a single address. Since these brokers tend to be overburdened by menial manual tasks and happen to be non-tech-savvy, we needed everything to be _quick_ and _easy_ to understand and use. Therefore, we designed and built this flow with three goals in mind:
+
+	1. Help brokers quickly and holistically understand the neighborhood and market around a site.
+
+	2. Curate a “hit list” of prospective tenants from local to multinational brands.
+
+	3. Quickly, and without the need for an analyst, generate reports to persuade prospective tenants.
+
+	
+
+	***
+
+	##### **1. Understanding The Neighborhood: The Occlusion Layer**
+
+	Before FIT, brokers would need to spend hours driving around a neighborhood just to get a sense of what it is like — and they might painstakingly make aerial maps to understand it’s commercial landscape.
+
+	<FlexImages>
+		<Img {...props.embeddedImages.aerialMap1} />
+		<Img {...props.embeddedImages.aerialMap2} />
+	</FlexImages>
+
+	Aerial maps are widely used in the CRE industry. Using these as a baseline for what brokers need to understand a place, I decided to build a scaleable aerial map overlay called the Occlusion Layer. 
+
+	<Img lg {...props.embeddedImages.occlusionLayer}/>
+
+	At a high-level, brokers want to get a general sense of whether an area is made up of local businesses or multinational corporations. At the same time, they want to dive deep and see every single establishment in the area to be able to recognize category voids, identify brand peers, and to be granularly informed. 
+
+	What I came up with is an map layer populated with brand logos that prioritizes brands based on their number of nationwide locations and by the amount of metadata we have for that establishment. In other words, when zoomed out, the map shows the more well-known brands and hides the others. Once you zoom in, the hidden logos will begin to show. 
+
+	The advantages of the Occlusion Layer over an aerial map are that (1) you can dynamically use the map to zoom in our out as far or as close as you’d like, (2) the map will automatically update whenever a store opens or closes, and (3) you can instantly generate a map like this for any location in the United States. 
+
+	This map layer was built using Deck.GL and Flatbush (an efficient implementation of the packed Hilbert R-tree algorithm for specially indexing points). 
+
+	In addition to the Occlusion Layer, the page also provides brokers with simple statements about the area — statements like “there is high foot traffic”, “there is an increasing amount of residential development”, and “there is a high concentration of quick service restaurants” help frame the neighborhood in an easy-to-understand way. I had to pour over census and POI data to translate a trade-area’s data points into a form everyone can comprehend. 
+
+	<Img {...props.embeddedImages.nbhdInfo} />
+
+	***
+
+	##### **2. Tenant Recommendations**
+
+	The crux of the landlord rep flow are the “best-fit” brand recommendations for an address. The idea was to provide brokers with a quick and extensive hit-list of brands that they wouldn’t be able to compile themselves. My coworker, Carlo Bailey, built a rigorous recommendation engine — based on co-location — to generate a list of both hyper-local and multinational brands that would _fit_ at the provided address. Though there were ongoing talks on how to incorporate adaptive [S2 cell normalization](/adaptive-s-2-cells) and AI image analysis on the images of brand location maps, this algorithm was able to use data from hundreds of sources and a brand’s previous location patterns to identify hundreds of brands that should consider the provided address. This recommendation engine was primed to replace a broker’s intuition with some honest data-driven choices. 
+
+	The task of displaying those recommendations however, turned out to be a real challenge. There were two main issues we faced. The first issue was that, despite a brand being a quality _fit_ at an address, there may be hundreds of reasons for why either the landlord or the brand might not be interested — for example, the property is too small or doesn’t have a kitchen, the address isn’t on the street corner, a landlord is only interested in leasing to clothing stores, and the broker already represents another coffee shop a block away. In other words, way too many things to add to a recommendation engine. The second issue was that, if a brand was in the list that defied our user’s intuition, broker’s proved to be very skeptical rather than intrigued. 
+
+	Our first attempt to solve these problems was the lengthening of the hit-list. We originally assumed that brokers wouldn’t want to be overwhelmed with hundreds of brands and that one of the top 5 or 10 brands recommended would _surely_ work. This was clearly a mistake so we went from showing a condensed list of brands to being a lot more liberal with it.
+
+	<Img {...props.embeddedImages.bestFitBrands} /> 
+
+	Our second attempt was the addition of a series of filters — square footage preferences, retail category, brand characteristics (ex. stylish, trendy, digitally-native), and preferred standalone or inline tenancy preferences — giving our users the ability to further curate the list to their liking. While the filters were a success with our testers, there still were plenty of reasons for why a broker wouldn’t want a brand to show up in his or her hit-list. 
+
+	<Img {...props.embeddedImages.bestFitBrandFilters} />
+
+	Our third attempt was using Netflix’s “because you watched …” and Spotify’s “because you listened to …” form of recommendations as inspirations for splitting up our long list into interesting groupings. Groupings such as “Because CrossFit and Juice Press are nearby, here are more Health and Wellness Brands” and “Because Bluestone Lane is nearby, here are more Trendy Brands” accomplished a two things: (1) It added a quick justification for why a brand appeared in the list, and (2) it gave brokers the ability to skip entire groupings of brands that they weren’t interested in. In other words, it seemed to make broker’s less skeptical of the algorithm and more efficient in finding brands they’d like to reach out to. 
+
+	<Img {...props.embeddedImages.bestFitBrands2} />
+
+	***
+
+	##### **3. Brand Justifications**
+
+	The final piece of the landlord rep flow was to provide a way to generate a report to persuade prospective tenants — without the need of an analyst. We were able to create a nicely designed printable report that contained information about the selected brand, a group of easy-to-understand sentences for why the brand _fits_ well at the address, and a side-by-side comparison of the brand’s typical site-selection metrics as compared with the neighborhoods metrics. 
+
+	<Img {...props.embeddedImages.brandPage} />
+
+	***
+
+	### Tenant Flow: Starting with a brand
+
+	<Img {...props.embeddedImages.tenantFlow} />
+
+	The tenant _flow_ in FIT is meant for tenant reps who are starting off with a single brand. Since these brokers need to both hatch entire national marketing strategies as well as granularly understand the micro-neighborhoods of a city, this flow provides a hierarchy of location recommendations — city-level recommendations, neighborhood-level recommendations, and street-level recommendations. 
+
+	Using the reverse form of the recommendation engine from above, rather than getting a list of brands that _fit_ in a neighborhood, I was also able to get a list of neighborhoods that would _fit_ for a brand. In order to provide all three levels of the site-selection process, the city-level and street-level recommendations were still missing. 
+
+	I was able to generate city-level recommendations pretty easily using a simple aggregate of the top neighborhood scores in each city. The street-level recommendations however, were way more complicated than that.
+
+	***
+
+	##### **Street-level recommendations and the fluid zones algorithm**
+
+	<Wrap>
+
+		<Img {...props.embeddedImages.lululemonBrandPeers} caption="Lululemon's brand peers in New York City sorted by  co-location similarity."/>
+
+		My task was to both generate, and somehow display, street-level recommendations for a given neighborhood. I had to answer the question, _what makes a certain street more attractive than another one?_ 
+		
+		Essentially, the algorithm I concocted used the number of existing businesses in an area as a proxy for commercial activity/foot-traffic and brand co-location patterns (brand-peers) as a proxy for the clustering of similar types of businesses, all while penalizing areas with structural elements — bridges, highways, bodies of water — that aren’t suitable for commerce or areas that already had an existing location of the brand in question. 
+
+	</Wrap>
+
+		
+	In order to find and display these granular sub-neighborhood zones, I decided to use d3-contour. The algorithm goes as follows: (1) fetch all the business points in the selected neighborhood; (2) weight each business point according to how often the selected brand has previously located with that business — or category of business; (3) supply the weighted points to d3-contour and generate a density contour plot; (4) for each disjointed group of contours, select the densest contour, and draw it on a map. 
+
+	<Img {...props.embeddedImages.d3Contours} />
+
+
+	After weighting the Occlusion Layer icons by the co-location similarity used in the algorithm, the generated zones looked like this: 
+
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.zone1} />
+		<Img {...props.embeddedImages.zone2} />
+	</FlexImages>
+
+	While the zone shapes look a little funky, they happen to be the most granular street-level recommendations out in the Commercial Real Estate market. The next step towards improving these is to actually highlight the street geometries and atomic polygons underneath the fluid contours rather than displaying the contours themselves. 
+
+	The final piece of the tenant rep flow was to provide a way to generate a report to persuade their client of a specific zone — without the need of an analyst. We were able to create a nicely designed printable report that contained information about the selected zone, a group of easy-to-understand sentences for why the broker’s client _fits_ well in the zone, and a side-by-side comparison of the client’s typical site-selection metrics as compared with the zone’s metrics. 
+
+	***
+
+	### The ethics of recommendations in Commercial Real Estate
+
+	Now that I’ve gone through the different parts of FIT and the role I played in building it, one important topic that I haven’t touched on is the ethics of providing a recommendation engine in the commercial real estate market. 
+
+	There are [far](https://afropunk.com/2018/04/starbucks-is-gentrification-it-wasnt-created-for-black-folks-it-was-made-to-push-us-out/)  [too](https://www.theroot.com/on-whole-foods-gentrification-and-the-erasure-of-black-1797444513)  [many](https://www.nytimes.com/2020/01/22/world/europe/france-paris-marais-gentrification.html)  [examples](https://www.theatlantic.com/business/archive/2017/07/decline-american-laundromat-gentrification/535257/)  of large multinational corporations leasing a new space and either triggering or speeding up gentrification. There are also [studies](https://www.propublica.org/article/how-dollar-stores-became-magnets-for-crime-and-killing) out there showing that Dollar Stores continuously locating in predominantly black neighborhoods is contributing towards the perpetual economic stagnation of those neighborhoods. A business may _fit_ a neighborhood based on it’s current and previous commercial makeup, but that doesn’t necessarily mean the people in the neighborhood want it around. 
+
+	A commercial broker’s incentive is money. For the most part, they don’t necessarily think about how the inclusion of a brand in a neighborhood will affect the people there. They either don’t think about, and sometimes actively avoid, any long-term ramifications of their choices. That’s why we were excited about the potential for FIT to actually make a difference. In an ideal world, the FIT platform is providing brokers with such great convenience and profitability that they would continue to use it even if it provided them with highly curated lists with high ethical standards. 
+
+	Figuring out what neighborhoods need calls for ongoing research on the effect of certain retail chains on gentrification, an awareness of the specific problems that are affecting different neighborhoods, and direct communication with the people who live in those neighborhoods. There are low-hanging fruit choices that we added to the algorithm (such as removing all dollar stores from the system and heavily promoting small businesses), but so much more can be done. 
+
+	FIT is still in its infancy, but if we can convince brokerages to adopt it, it can have a significant impact.

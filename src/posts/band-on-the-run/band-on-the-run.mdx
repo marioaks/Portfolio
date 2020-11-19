@@ -2,186 +2,237 @@
 name: "Band on the Run"
 description: Using machine learning to explore the ways that neighborhoods are connected by live music.
 
-title: "Band on the Run"
-subtitle: Using machine learning to explore the ways that neighborhoods are connected by live music.
+title: "Band on the Run: Connecting neighborhoods through live music"
+subtitle: In this article we use machine learning to explore the ways that neighborhoods are connected by live music. Using Scikit Learn, I was able to set up a collaborative filtering model to explore neighborhood, venue, and artist similarities based on touring patterns accross the US. I then used D3 to visualize the results for the following article. A special thanks to Will Shapiro for the writeup. 
 
-date: "01-01-2020"
+date: "02-26-2018"
 order: 4
 thumbnail: media/thumbnail.png
 
 company: "Topos"
 collaborators: 
 - Will Shapiro
-- Mahri Yavuz
+- Mahir Yavuz
 
 categories:
   - data-science
   - data-visualization
+
 embeddedImages:
+- media/bushwick-acid-baby-jesus.png
+- media/bushwick-acid-mothers-temple.png
+- media/bushwick-similarity-table.png
+- media/chicago-footwork.png
+- media/closest-connections-network.png
+- media/co-occurrence-table.png
+- media/downtown-la-similarity-table.png
+- media/downtown-la-trans-siberian-orchestra.png
+- media/greatful-dead.png
+- media/intro-animation.gif
+- media/maryvale-brad-paisley.png
+- media/maryvale-motley-crue.png
+- media/maryvale-similarity-table.png
+- media/maryvale-toby-keith.png
+- media/midieval-troubadours.png
+- media/recommendations-1.png
+- media/recommendations-2.png
+- media/similarities-3d.gif
+- media/similarity-index-comparisson-chart.png
+- media/thumbnail.png
+- media/tours-andy-coe-band.gif
+- media/tours-bob-schneider.gif
+- media/tours-just-another-folk-singer.gif
+- media/tours-katy-perry.gif
+- media/tours-kendrick-lamar.gif
+- media/tours-lady-gaga.gif
+- media/tours-radioactive-chicken-head.gif
+- media/tours-sam-evian.gif
+- media/tours-surprise-party.gif
+- media/vaporwave.png
 
 ---
 
+	<Img xxl {...props.embeddedImages.thumbnail} />
+		
+	
+	
+	*Every day’s an endless stream
+	Of cigarettes and magazines.
+	And each town looks the same to me, the movies and the factories…*
 
-# Band on the Run: Connecting neighborhoods through live music
+	*—Paul Simon*
 
-In this article we use machine learning to explore the ways that neighborhoods are connected by live music.
+	<Img sm {...props.embeddedImages.introAnimation} />
 
-![](https://cdn-images-1.medium.com/max/2000/1*Xt8iZO4uZ8iigTxQw_rYmg.gif)
+	### From Right Here to Everywhere
 
-*Every day’s an endless stream
-Of cigarettes and magazines.
-And each town looks the same to me, the movies and the factories…*
+	A musical scene can indelibly define a place. The specific culture of a neighborhood can give birth to a new sound. From New Orleans Jazz to DC Hardcore, Greenwich Village Folk to Queensbridge Hip Hop, musical scenes have been intertwined with the identity of geographic areas ranging from specific street intersections (Haight Ashbury) to entire metropolitan areas (Nashville).
 
-*—Paul Simon*
+	<FlexImages xl caption="Left: The Grateful Dead at the corner of Haight and Ashbury (credit: Herbie Greene) — Right: Medieval troubadours painted by Simone Martini c. 1315 A.D.">
+		<Img {...props.embeddedImages.greatfulDead} />
+		<Img {...props.embeddedImages.midievalTroubadours} />
+	</FlexImages>
 
-## **From Right Here to *Everywhere***
+	At the same time, since antiquity, music has travelled — from [medieval troubadours](http://www.medieval-life-and-times.info/medieval-music/troubadours.htm), to the traveling opera companies of the mid-nineteenth century, through to the decades long cross-country meanderings of the Grateful Dead.
 
-A musical scene can indelibly define a place. The specific culture of a neighborhood can give birth to a new sound. From New Orleans Jazz to DC Hardcore, Greenwich Village Folk to Queensbridge Hip Hop, musical scenes have been intertwined with the identity of geographic areas ranging from specific street intersections (Haight Ashbury) to entire metropolitan areas (Nashville).
+	With the rise of the internet and streaming services, new music can reach millions of geographically distributed fans at once, allowing highly specific genres like Chicago Footwork to develop a passionate following in London and even find new expression in cities as far away as [Hiroshima](https://thump.vice.com/en_us/article/ez8ebp/the-secret-world-of-japanese-footwork). Increasingly the internet itself is the metropolis where genres like Vaporwave and Seapunk are born.
 
-![](https://cdn-images-1.medium.com/max/3872/1*Sx3jtct9BU7YNmZzLXOldQ.png)
+	<FlexImages xl caption="Left: Chicago Footwork in Japan (credit: John Calvert), Right: Vaporwave-A genre born on the internet (credit: Reddit)">
+		<Img {...props.embeddedImages.chicagoFootwork} />
+		<Img {...props.embeddedImages.vaporwave} />
+	</FlexImages>
 
-![Left: The Grateful Dead at the corner of Haight and Ashbury (credit: Herbie Greene) — Right: Medieval troubadours painted by Simone Martini c. 1315 A.D.](https://cdn-images-1.medium.com/max/4048/1*8KKd1vPj7Sl5YTQOGfYahw.png)*Left: The Grateful Dead at the corner of Haight and Ashbury (credit: Herbie Greene) — Right: Medieval troubadours painted by Simone Martini c. 1315 A.D.*
+	Yet, despite the simultaneous, *everywhere* nature of the internet and music streaming — or perhaps because of it — touring remains a vital (if [troubled](https://www.nytimes.com/2016/01/25/magazine/touring-cant-save-musicians-in-the-age-of-spotify.html)) facet of the music industry. Musicians continue to connect with fans in neighborhoods across the globe through live shows. In this article we explore the links between these geographically distributed fanbases and ask: how do touring musicians connect neighborhoods?
 
-At the same time, since antiquity, music has travelled — from [medieval troubadours](http://www.medieval-life-and-times.info/medieval-music/troubadours.htm), to the traveling opera companies of the mid-nineteenth century, through to the decades long cross-country meanderings of the Grateful Dead.
+	Since forming [Topos](https://topos.ai/) last February, we’ve been fascinated by a simple question: *what does distance mean in the 21st century*? While in past articles we’ve explored holistic understandings of distance that leverage a wide range of heterogeneous data and technologies ([first in New York City](https://medium.com/topos-ai/rethinking-distance-in-new-york-city-d17212d24919), then more broadly [across the US](https://medium.com/topos-ai/introducing-the-topos-similarity-index-and-x-everywhere-82fcec1fb367)), in this article, we focus narrowly on a single dataset and technological approach. In particular, we take the tour dates of musicians traveling across the US from 2008 to the present as the basis for a machine learning model that allows us to develop a tour-based distance metric relating neighborhoods across the US. We then use this metric to algorithmically generate venue and neighborhood suggestions for touring musicians.
 
-With the rise of the internet and streaming services, new music can reach millions of geographically distributed fans at once, allowing highly specific genres like Chicago Footwork to develop a passionate following in London and even find new expression in cities as far away as [Hiroshima](https://thump.vice.com/en_us/article/ez8ebp/the-secret-world-of-japanese-footwork). Increasingly the internet itself is the metropolis where genres like Vaporwave and Seapunk are born.
+	*Below: A sampling of touring patterns across the U.S.*
 
-![](https://cdn-images-1.medium.com/max/2400/1*LCDAjKJS0BlMCJ9X6YYAew.png)
+	<FlexImages xl caption="The jet set: Lady Gaga, Kendrick Lamar, Katy Perry">
+		<Img {...props.embeddedImages.toursLadyGaga} />
+		<Img {...props.embeddedImages.toursKendrickLamar} />
+		<Img {...props.embeddedImages.toursKatyPerry} />
+	</FlexImages>
 
-![Left: Chicago Footwork in Japan (credit: John Calvert), Right: Vaporwave-A genre born on the internet (credit: Reddit)](https://cdn-images-1.medium.com/max/2000/1*Fx2tbFL0TzVpMivRFvO3gw.png)*Left: Chicago Footwork in Japan (credit: John Calvert), Right: Vaporwave-A genre born on the internet (credit: Reddit)*
+	<FlexImages xl caption="Home/away or on the tour bus: The Radioactive Chicken Head, Bob Schneider, Sam Evian">
+		<Img {...props.embeddedImages.toursRadioactiveChickenHead} />
+		<Img {...props.embeddedImages.toursBobSchneider} />
+		<Img {...props.embeddedImages.toursSamEvian} />
+	</FlexImages>
 
-Yet, despite the simultaneous, *everywhere* nature of the internet and music streaming — or perhaps because of it — touring remains a vital (if [troubled](https://www.nytimes.com/2016/01/25/magazine/touring-cant-save-musicians-in-the-age-of-spotify.html)) facet of the music industry. Musicians continue to connect with fans in neighborhoods across the globe through live shows. In this article we explore the links between these geographically distributed fanbases and ask: how do touring musicians connect neighborhoods?
+	<FlexImages xl caption="Hyper local: Andy Coe Band, Surprise Party, Just Another Folk Singer">
+		<Img {...props.embeddedImages.toursAndyCoeBand} />
+		<Img {...props.embeddedImages.toursSurpriseParty} />
+		<Img {...props.embeddedImages.toursJustAnotherFolkSinger} />
+	</FlexImages>
 
-Since forming [Topos](https://topos.ai/) last February, we’ve been fascinated by a simple question: *what does distance mean in the 21st century*? While in past articles we’ve explored holistic understandings of distance that leverage a wide range of heterogeneous data and technologies ([first in New York City](https://medium.com/topos-ai/rethinking-distance-in-new-york-city-d17212d24919), then more broadly [across the US](https://medium.com/topos-ai/introducing-the-topos-similarity-index-and-x-everywhere-82fcec1fb367)), in this article, we focus narrowly on a single dataset and technological approach. In particular, we take the tour dates of musicians traveling across the US from 2008 to the present as the basis for a machine learning model that allows us to develop a tour-based distance metric relating neighborhoods across the US. We then use this metric to algorithmically generate venue and neighborhood suggestions for touring musicians.
+	***
 
-*Below: A sampling of touring patterns across the U.S.*
+	##### **A Model Built on Co-occurrence**
 
-![](https://cdn-images-1.medium.com/max/2000/1*zZ5NolFxRauZ4cG742ifGA.gif)
+	[Collaborative Filtering](https://en.wikipedia.org/wiki/Collaborative_filtering) (CF) is one of the most widely used machine learning approaches for determining distance between entities. Once calculated, these distances are often used to power recommendations. From Spotify’s Discover Weekly to Amazon’s product recommendations, CF algorithms form an important part of many well known recommendation engines.
 
-![](https://cdn-images-1.medium.com/max/2000/1*wtiKG1MgInuZcuMppLsPLw.gif)
+	<Img xl {...props.embeddedImages.coOccurrenceTable} caption="Neighborhoods that co-occur frequently on tour schedules become closely connected"/>
 
-![The jet set: Lady Gaga, Kendrick Lamar, Katy Perry](https://cdn-images-1.medium.com/max/2000/1*lfCBPuoWoLqWbkmQJo2Seg.gif)*The jet set: Lady Gaga, Kendrick Lamar, Katy Perry*
+	The fuel for CF recommendations are datasets where candidate recommendable items c*o-occur*. Amazon’s recommendations are fueled by the co-occurrence of items in users’ shopping carts; [Spotify’s Discover Weekly is fueled by the co-occurrence](https://hackernoon.com/spotifys-discover-weekly-how-machine-learning-finds-your-new-music-19a41ab76efe) of songs in user generated playlists and listening histories. In our case, the co-occurrence of venues and neighborhoods on the schedules of touring musicians provided the input for our CF-based similarity metric. We were able to construct these schedules by hooking into the [setlist.fm API](https://api.setlist.fm/docs/1.0/index.html), an incredible resource that has data on concerts in the US dating back to 1850.
 
-![](https://cdn-images-1.medium.com/max/2000/1*shSUK16LJtZwA2yqYekJTA.gif)
+	### Exploration: Neighborhood Similarity
 
-![](https://cdn-images-1.medium.com/max/2000/1*s7z6Ho5lvXzkpj9vocVJhQ.gif)
+	We start exploring our tour-based similarity metric by looking at three very different neighborhoods: Bushwick NYC, Downtown LA, and Maryvale, Phoenix.
 
-![Home/away or on the tour bus: The Radioactive Chicken Head, Bob Schneider, Sam Evian](https://cdn-images-1.medium.com/max/2000/1*Oeyn434USDJcBShsn-03bQ.gif)*Home/away or on the tour bus: The Radioactive Chicken Head, Bob Schneider, Sam Evian*
+	<Img {...props.embeddedImages.similarities3D} caption="Neighborhood similarities visualized in three dimensional space"/>
 
-![](https://cdn-images-1.medium.com/max/2000/1*lJYlB9uDWdq72wEwOQrgZQ.gif)
+	***
 
-![](https://cdn-images-1.medium.com/max/2000/1*RZ4rzBazFVpg3KXY8_x4dw.gif)
+	**Bushwick, NYC**
 
-![Hyper local: Andy Coe Band, Surprise Party, Just Another Folk Singer](https://cdn-images-1.medium.com/max/2000/1*ukN8GTNkO0YsKI2EegdNAg.gif)*Hyper local: Andy Coe Band, Surprise Party, Just Another Folk Singer*
+	<FlexImages xl caption="Left: Acid Mothers Temple; Right: Acid Baby Jesus">
+		<Img {...props.embeddedImages.bushwickAcidMothersTemple} />
+		<Img {...props.embeddedImages.bushwickAcidBabyJesus} />
+	</FlexImages>
 
-### **A Model Built on Co-occurrence**
+	Bushwick is most similar to other well known hipster neighborhoods across the US. It is perhaps telling that there is *not one but two bands whose names start with the word “Acid” *amongst the most popular acts in the list of similar neighborhoods.
 
-[Collaborative Filtering](https://en.wikipedia.org/wiki/Collaborative_filtering) (CF) is one of the most widely used machine learning approaches for determining distance between entities. Once calculated, these distances are often used to power recommendations. From Spotify’s Discover Weekly to Amazon’s product recommendations, CF algorithms form an important part of many well known recommendation engines.
+	<Img {...props.embeddedImages.bushwickSimilarityTable} />
 
-![Neighborhoods that co-occur frequently on tour schedules become closely connected](https://cdn-images-1.medium.com/max/8056/1*shPRATimv-duvPwxE3tZJw.png)*Neighborhoods that co-occur frequently on tour schedules become closely connected*
+	    **Popular Musical Acts: **Acid Mothers Temple, John Maus, Ty Segall, Widowspeak, Acid Baby Jesus
 
-The fuel for CF recommendations are datasets where candidate recommendable items c*o-occur*. Amazon’s recommendations are fueled by the co-occurrence of items in users’ shopping carts; [Spotify’s Discover Weekly is fueled by the co-occurrence](https://hackernoon.com/spotifys-discover-weekly-how-machine-learning-finds-your-new-music-19a41ab76efe) of songs in user generated playlists and listening histories. In our case, the co-occurrence of venues and neighborhoods on the schedules of touring musicians provided the input for our CF-based similarity metric. We were able to construct these schedules by hooking into the [setlist.fm API](https://api.setlist.fm/docs/1.0/index.html), an incredible resource that has data on concerts in the US dating back to 1850.
+	***
 
-## **Exploration: **Neighborhood Similarity
+	**Downtown LA**
 
-We start exploring our tour-based similarity metric by looking at three very different neighborhoods: Bushwick NYC, Downtown LA, and Maryvale, Phoenix
+	<Img {...props.embeddedImages.downtownLaTransSiberianOrchestra} caption="The Trans Siberian Orchestra — a band that has only ever played arenas"/>
 
-![Neighborhood similarities visualized in three dimensional space](https://cdn-images-1.medium.com/max/2000/1*1Wq-xk-6LzEDpN4Eamu8FA.gif)*Neighborhood similarities visualized in three dimensional space*
+	Home to the 21,000-seat Staples Center, Downtown LA’s most similar neighborhoods are other centrally located neighborhoods surrounding big arenas like the Boston Garden and Philadelphia’s Wells Fargo Center. Popular acts in these neighborhoods tend to be top-of-the-charts musicians and — across the board — the *Trans-Siberian Orchestra*, a band famous for going directly to arenas without ever having played smaller clubs or opening for other bands.
 
-**Bushwick, NYC**
+	<Img {...props.embeddedImages.downtownLaSimilarityTable} />
 
-![](https://cdn-images-1.medium.com/max/3544/1*Pv4XjHap9PKkIbLMkbFR4g.png)
+	    **Popular Musical Acts: **Lady Gaga, Rihanna, Katy Perry,Justin Bieber, Trans-Siberian Orchestra
 
-![Acid Mothers Temple <<<->>> Acid Baby Jesus](https://cdn-images-1.medium.com/max/2000/1*pKnoi3lJCKi2tUfpLp3s_g.png)*Acid Mothers Temple <<<->>> Acid Baby Jesus*
+	***
 
-Bushwick is most similar to other well known hipster neighborhoods across the US. It is perhaps telling that there is *not one but two bands whose names start with the word “Acid” *amongst the most popular acts in the list of similar neighborhoods.
+	**Maryvale, Phoenix**
 
-![](https://cdn-images-1.medium.com/max/2000/1*mEU2m5GBEVJa22AyTlqvng.png)
+	<FlexImages xl caption="Brad Paisley, Toby Keith, Mötley Crüe">
+		<Img {...props.embeddedImages.maryvaleBradPaisley} />
+		<Img {...props.embeddedImages.maryvaleTobyKeith} />
+		<Img {...props.embeddedImages.maryvaleMotleyCrue} />
+	</FlexImages>
 
-    **Popular Musical Acts: **Acid Mothers Temple, John Maus, Ty Segall, Widowspeak, Acid Baby Jesus
+	[Maryvale](https://en.wikipedia.org/wiki/Maryvale,_Phoenix) — famously one of first planned communities in the United States — is located on the edge of the city of Phoenix; its most similar neighborhoods tend be outside of major metropolitan city centers (Fair Park Dallas), or to form small municipalities in their own rights (Tinley Park IL, Englewood CO). Mainstream Country and Metal are generally the most popular genres, with a solid showing from 70s Classic Rock Bands (Journey, Boston, Styx).
 
-**Downtown LA**
+	<Img {...props.embeddedImages.maryvaleSimilarityTable} />
 
-![The Trans Siberian Orchestra — a band that has only ever played arenas](https://cdn-images-1.medium.com/max/4852/1*LvvalnKvfKjMBRNVQzUUrA.png)*The Trans Siberian Orchestra — a band that has only ever played arenas*
+	    **Popular Musical Acts: **Brad Paisley, Toby Keith, Mötley Crüe, Slipknot, Journey
 
-Home to the 21,000-seat Staples Center, Downtown LA’s most similar neighborhoods are other centrally located neighborhoods surrounding big arenas like the Boston Garden and Philadelphia’s Wells Fargo Center. Popular acts in these neighborhoods tend to be top-of-the-charts musicians and — across the board — the *Trans-Siberian Orchestra*, a band famous for going directly to arenas without ever having played smaller clubs or opening for other bands.
+	***
 
-![](https://cdn-images-1.medium.com/max/2000/1*hZ7UBgi6XSNrZGw7Furdng.png)
+	### The Closest Connections
 
-    **Popular Musical Acts: **Lady Gaga, Rihanna, Katy Perry,Justin Bieber, Trans-Siberian Orchestra
+	By allowing only the strongest links (>top .1 percentile) between neighborhoods to remain, we can observe some interesting neighborhood groupings. One striking aspect of these groups is their diversity: some are tightly connected geographically (Group 2) while others span the breadth of the country (Group 5); some have narrow genre preferences (Group 4) while others exhibit more eclectic tastes (Group 1).
 
-**Maryvale, Phoenix**
+	<Img xxl {...props.embeddedImages.closestConnectionsNetwork} caption="Network diagram of neighborhood clusters"/>
 
-![](https://cdn-images-1.medium.com/max/2000/1*3D2T6VbyzefY7m29dK7IRg.png)
+	***
 
-![](https://cdn-images-1.medium.com/max/3200/1*3r0XoQWN426TrBWXaB53PA.png)
+	##### **Group 1: Pacific Northwest**
 
-![Brad Paisley, Toby Keith, Mötley Crüe](https://cdn-images-1.medium.com/max/2000/1*I3aU1FSY0e4aMILBEGaU3Q.png)*Brad Paisley, Toby Keith, Mötley Crüe*
+	Separated by 182 Miles, this small cluster of two neighborhoods spans a wide range of genres. Within this stylistic diversity, the most frequent acts tend to be older, established medium-popularity performers
 
-[Maryvale](https://en.wikipedia.org/wiki/Maryvale,_Phoenix) — famously one of first planned communities in the United States — is located on the edge of the city of Phoenix; its most similar neighborhoods tend be outside of major metropolitan city centers (Fair Park Dallas), or to form small municipalities in their own rights (Tinley Park IL, Englewood CO). Mainstream Country and Metal are generally the most popular genres, with a solid showing from 70s Classic Rock Bands (Journey, Boston, Styx).
+	**Top acts: **Indigo Girls, The B‐52s, Brandi Carlile, Ziggy Marley, Aimee Mann
 
-![](https://cdn-images-1.medium.com/max/2000/1*TVS25hIVJlMm-vq7GDgOkw.png)
+	***
 
-    **Popular Musical Acts: **Brad Paisley, Toby Keith, Mötley Crüe, Slipknot, Journey
+	##### **Group 2: Insider NYC**
 
-## The Closest Connections
+	Separated by just 4 Miles, this small cluster is the tightest geographically. Group 2 is also the most ‘local’, with 16 of the top 20 (mainly alt/indie) performers based in NYC.
 
-By allowing only the strongest links (>top .1 percentile) between neighborhoods to remain, we can observe some interesting neighborhood groupings. One striking aspect of these groups is their diversity: some are tightly connected geographically (Group 2) while others span the breadth of the country (Group 5); some have narrow genre preferences (Group 4) while others exhibit more eclectic tastes (Group 1).
+	**Top Acts: **Widowspeak, Moon Hooch, Men and Whales, The Bottom Dollars, Sharon Van Etten
 
-![Network diagram of neighborhood clusters](https://cdn-images-1.medium.com/max/3054/1*QXLdyx2JpEKlMcSwFLpB5Q.png)*Network diagram of neighborhood clusters*
+	***
 
-### **Group 1: Pacific Northwest**
+	##### **Group 3: Almost Country**
 
-Separated by 182 Miles, this small cluster of two neighborhoods spans a wide range of genres. Within this stylistic diversity, the most frequent acts tend to be older, established medium-popularity performers
+	Largely comprised of western neighborhoods (with Tinley Park IL as the sole exception), group 3 has a corresponding passion for country music; half of the top ten acts are mainstream country musicians (Brad Paisley, Luke Bryan, Toby Keith, Zac Brown Band, Rascal Flatts). As in the earlier exploration of Maryvale, Mainstream metal and 70’s classic rock are also favorites.
 
-**Top acts: **Indigo Girls, The B‐52s, Brandi Carlile, Ziggy Marley, Aimee Mann
+	**Top Acts: **Brad Paisley, Slipknot, Luke Bryan, Mötley Crüe, Journey
 
-### **Group 2: Insider NYC**
+	***
 
-Separated by just 4 Miles, this small cluster is the tightest geographically. Group 2 is also the most ‘local’, with 16 of the top 20 (mainly alt/indie) performers based in NYC.
+	##### **Group 4: Central Downtown Areas**
 
-**Top Acts: **Widowspeak, Moon Hooch, Men and Whales, The Bottom Dollars, Sharon Van Etten
+	Connecting centrally located downtown areas, Group 4 is the most geographically dispersed. In contrast to this geographic diversity, Group 4 is tightly focused on a particular spectrum of sound — the pop-punk/emo/post-punk continuum (with some Comedic Metal — Steel Panther, Gwar — sprinkled in).
 
-### **Group 3: Almost Country**
+	**Top Acts: **Steel Panther, Say Anything, All Time Low, The Used, Mayday Parade
 
-Largely comprised of western neighborhoods (with Tinley Park IL as the sole exception), group 3 has a corresponding passion for country music; half of the top ten acts are mainstream country musicians (Brad Paisley, Luke Bryan, Toby Keith, Zac Brown Band, Rascal Flatts). As in the earlier exploration of Maryvale, Mainstream metal and 70’s classic rock are also favorites.
+	***
 
-**Top Acts: **Brad Paisley, Slipknot, Luke Bryan, Mötley Crüe, Journey
+	##### **Group 5: Arena Haloes**
 
-### **Group 4: Central Downtown Areas**
+	Centered around huge stadiums (NYC’s Madison Square Garden, The Boston Garden, Chicago’s United Center) the neighborhoods in Group 5 are visited by arena-filling superstars like Bon Jovi, Kanye West, and of course, Billy Joel whose monthly MSG residency (and [accompanying helicopter commute](https://www.newyorker.com/magazine/2014/10/27/thirty-three-hit-wonder)) has become legendary.
 
-Connecting centrally located downtown areas, Group 4 is the most geographically dispersed. In contrast to this geographic diversity, Group 4 is tightly focused on a particular spectrum of sound — the pop-punk/emo/post-punk continuum (with some Comedic Metal — Steel Panther, Gwar — sprinkled in).
+	**Top Acts: **Trans‐Siberian Orchestra, Bon Jovi, Roger Waters, Rihanna, Katy Perry
 
-**Top Acts: **Steel Panther, Say Anything, All Time Low, The Used, Mayday Parade
+	***
+	***
 
-### **Group 5: Arena Haloes**
+	### Recommendations
 
-Centered around huge stadiums (NYC’s Madison Square Garden, The Boston Garden, Chicago’s United Center) the neighborhoods in Group 5 are visited by arena-filling superstars like Bon Jovi, Kanye West, and of course, Billy Joel whose monthly MSG residency (and [accompanying helicopter commute](https://www.newyorker.com/magazine/2014/10/27/thirty-three-hit-wonder)) has become legendary.
+	Similarity metrics are often constructed in order to power recommendation engines. And where Spotify might recommend an album or Netflix might suggest a movie, here we give examples of using our similarity metric to recommend venues and neighborhoods for touring musicians, focusing on locations where the musician rarely, if ever, performs. For each act, we also produce a list of similar musicians based on their touring schedules.
 
-**Top Acts: **Trans‐Siberian Orchestra, Bon Jovi, Roger Waters, Rihanna, Katy Perry
+	We then flip directions and focus on location, recommending musicians who have yet to perform but would be most likely to find an audience for a sampling of venues.
 
-## **Recommendations**
+	<Img xxl {...props.embeddedImages.recommendations1}/>
+	<Img xxl {...props.embeddedImages.recommendations2}/>
 
-Similarity metrics are often constructed in order to power recommendation engines. And where Spotify might recommend an album or Netflix might suggest a movie, here we give examples of using our similarity metric to recommend venues and neighborhoods for touring musicians, focusing on locations where the musician rarely, if ever, performs. For each act, we also produce a list of similar musicians based on their touring schedules.
+	***
 
-We then flip directions and focus on location, recommending musicians who have yet to perform but would be most likely to find an audience for a sampling of venues.
+	### **From Nodes to Edges**
 
-![](https://cdn-images-1.medium.com/max/3130/1*ppnTizzcJZb5VEKmy527QA.png)
+	In this article, we’ve constructed a narrow, highly specific view of place, ignoring myriad factors that shape neighborhoods. While there is a small but statistically significant correlation between the similarity metric constructed here and the [Topos Similarity Index](https://medium.com/topos-ai/introducing-the-topos-similarity-index-and-x-everywhere-82fcec1fb367) (which increases for certain cities), these measures are largely orthogonal. The TSI is a holistic measure of similarity, encompassing everything from the form of the built environment to the ratio of big box stores to local retailers, while here we have worked with a single data source pertaining to one facet of culture.
 
-![](https://cdn-images-1.medium.com/max/3772/1*gLfp01v9Ib1q1fczNxJHaQ.png)
+	<Img {...props.embeddedImages.similarityIndexComparissonChart} caption="Tour Based Similarity vs the Topos Similarity Index for Boston <> US. Pearson Correlation of .249, p <<.05"/>
 
-## **From Nodes to Edges**
+	Yet even this narrow view reveals much about neighborhoods, from their form (the connected downtown neighborhoods surrounding large arenas) to their milieu (the hipster neighborhoods connected to Bushwick).
 
-In this article, we’ve constructed a narrow, highly specific view of place, ignoring myriad factors that shape neighborhoods. While there is a small but statistically significant correlation between the similarity metric constructed here and the [Topos Similarity Index](https://medium.com/topos-ai/introducing-the-topos-similarity-index-and-x-everywhere-82fcec1fb367) (which increases for certain cities), these measures are largely orthogonal. The TSI is a holistic measure of similarity, encompassing everything from the form of the built environment to the ratio of big box stores to local retailers, while here we have worked with a single data source pertaining to one facet of culture.
-
-![Tour Based Similarity vs the Topos Similarity Index for Boston <> US. Pearson Correlation of .249, p <<.05](https://cdn-images-1.medium.com/max/2162/1*L5fIFlDBcSJKnSgDZ56CRw.png)*Tour Based Similarity vs the Topos Similarity Index for Boston <> US. Pearson Correlation of .249, p <<.05*
-
-Yet even this narrow view reveals much about neighborhoods, from their form (the connected downtown neighborhoods surrounding large arenas) to their milieu (the hipster neighborhoods connected to Bushwick).
-
-We believe this approach starts to demonstrate the potential of *understanding location as a set of relationships* rather than solely as a set of isolated points or regions to which metrics are ascribed. Many applications of Location Intelligence — from opening a new store to planning a trip, launching a political campaign to arranging a tour — are ultimately about relationships: Brand and customer, traveller and a foreign culture, politician and constituent, touring musician and fan. Understanding the manifold ways one place is similar to another provides rich context for expanding these relationships into new territories.
-
-This post is part of an [ongoing series](https://medium.com/topos-ai) capturing different insights we generate while developing our platform. We would love to hear your feedback. If you enjoyed this article please share and 👏 a few times so other people can see it too.
-
-—
-
-To learn more about how we are transforming location intelligence, please contact us: [info@topos.ai](mailto:info@topos.ai)
+	We believe this approach starts to demonstrate the potential of *understanding location as a set of relationships* rather than solely as a set of isolated points or regions to which metrics are ascribed. Many applications of Location Intelligence — from opening a new store to planning a trip, launching a political campaign to arranging a tour — are ultimately about relationships: Brand and customer, traveller and a foreign culture, politician and constituent, touring musician and fan. Understanding the manifold ways one place is similar to another provides rich context for expanding these relationships into new territories.
