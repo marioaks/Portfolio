@@ -95,13 +95,6 @@ module.exports = {
 			}
 		},
 		{
-			resolve: 'gatsby-source-filesystem',
-			options: {
-				name: 'pages',
-				path: `${__dirname}/src/pages/`
-			}
-		},
-		{
 			resolve: 'gatsby-plugin-google-analytics',
 			options: {
 				trackingId: Constants.googleAnalyticsID
@@ -137,88 +130,6 @@ module.exports = {
 				]
 			}
 		},
-		'gatsby-plugin-offline',
-		{
-			resolve: 'gatsby-plugin-netlify-cms',
-			options: {
-				modulePath: path.resolve('config/deploy/netlifyConfig.js'), // default: undefined
-				enableIdentityWidget: true,
-				publicPath: 'admin',
-				htmlTitle: 'Content Manager',
-				includeRobots: false
-			}
-		}
-		// {
-		// 	resolve: 'gatsby-plugin-feed',
-		// 	options: {
-		// 		setup(ref) {
-		// 			const ret = ref.query.site.siteMetadata.rssMetadata;
-		// 			ret.allMarkdownRemark = ref.query.allMarkdownRemark;
-		// 			ret.generator = Constants.siteTitle;
-		// 			return ret;
-		// 		},
-		// 		query: `
-  //       {
-  //         site {
-  //           siteMetadata {
-  //             rssMetadata {
-  //               site_url
-  //               feed_url
-  //               title
-  //               description
-  //               image_url
-  //               copyright
-  //             }
-  //           }
-  //         }
-  //       }
-  //     `,
-		// 		feeds: [
-		// 			{
-		// 				serialize(ctx) {
-		// 					const { rssMetadata } = ctx.query.site.siteMetadata;
-		// 					return ctx.query.allMarkdownRemark.edges.map(edge => ({
-		// 						categories: edge.node.frontmatter.tags,
-		// 						date: edge.node.fields.date,
-		// 						title: edge.node.frontmatter.title,
-		// 						description: edge.node.excerpt,
-		// 						url: rssMetadata.site_url + edge.node.fields.slug,
-		// 						guid: rssMetadata.site_url + edge.node.fields.slug,
-		// 						custom_elements: [{ 'content:encoded': edge.node.html }, { author: Constants.userEmail }]
-		// 					}));
-		// 				},
-		// 				query: `
-  //           {
-  //             allMarkdownRemark(
-  //               limit: 1000,
-  //               sort: { order: DESC, fields: [fields___date] },
-  //             ) {
-  //               edges {
-  //                 node {
-  //                   excerpt
-  //                   html
-  //                   timeToRead
-  //                   fields {
-  //                     slug
-  //                     date
-  //                   }
-  //                   frontmatter {
-  //                     title
-  //                     cover
-  //                     date
-  //                     category
-  //                     tags
-  //                   }
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         `,
-		// 				output: Constants.siteRss,
-		// 				title: Constants.siteRssTitle
-		// 			}
-		// 		]
-		// 	}
-		// }
+		'gatsby-plugin-offline'
 	]
 };
