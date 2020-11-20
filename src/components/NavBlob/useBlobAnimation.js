@@ -6,7 +6,7 @@ import { useDarkMode } from "Context";
 import paper from 'paper';
 import SimplexNoise from 'simplex-noise';
 
-const useBlobAnimation = () => {
+const useBlobAnimation = (pathname) => {
 	const [, setIsDarkMode] = useDarkMode();
 
 	useEffect(() => {
@@ -234,7 +234,7 @@ const useBlobAnimation = () => {
 		   	unsubscribeAnimation()
 		    unsubscribeLinkListeners()
 		};
-	}, [window.location.href])
+	}, [pathname])
 };
 
 export default useBlobAnimation

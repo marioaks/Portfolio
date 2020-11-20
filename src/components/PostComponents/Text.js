@@ -41,7 +41,7 @@ export const PostHeader = ({title, subtitle, date, company, collaborators, categ
 		<MultiColumnLayout  css={[tw`mb-lg xl:col-count-2 lg:col-count-2`, css`max-width: 600px; column-gap: 4rem`]}>
 			{company && <StyledInfoText><b>Company:</b> <StyledA href={collabLinks[company] ?? null}>{company}</StyledA></StyledInfoText>}
 			{collaborators && <StyledInfoText><b>Collaborators:</b> {collaborators.map((c, i) => <StyledA href={collabLinks[c] ?? null}>{`${c}${i < collaborators.length - 1 ? ", " : ''}`}</StyledA>)}</StyledInfoText>}
-			<StyledInfoText tw="capitalize"><b>Roles: </b> {categories.map(c => c.replaceAll('-', ' ')).join(", ")}</StyledInfoText>
+			<StyledInfoText tw="capitalize"><b>Roles: </b> {categories.map(c => c.replace(/-/g, ' ')).join(", ")}</StyledInfoText>
 		</MultiColumnLayout>
 		<H4 tw="mt-sm">{subtitle}</H4>
 		<Divider/>

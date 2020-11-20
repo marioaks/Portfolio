@@ -20,7 +20,6 @@ const FluidContainer = styled.div([
 
 export const Fluid = ({children, maxWidth, ...props}) => {
 	const calculatedMaxWidth = maxWidth ?? getMaxWidth(props)
-	console.log(props, calculatedMaxWidth)
 	return (
 	 	<FluidContainer {...props}>
 	 		<PaddedContainer css={[css`max-width: none`]}>

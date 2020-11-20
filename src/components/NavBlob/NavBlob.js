@@ -1,8 +1,8 @@
 import React from 'react';
 import useBlobAnimation from "./useBlobAnimation";
 
-const NavBlob = () => {
-	useBlobAnimation()
+const NavBlob = ({pathname}) => {
+	useBlobAnimation(pathname)
 
 	return (
 		<canvas 

@@ -112,7 +112,7 @@
     "build:pp": "gatsby build --prefix-paths",
     "build:gh": "npm run clean && npm run build:pp && gh-pages -d public",
     "clean": "rm -rf public && rm -rf .cache",
-    "write-good": "write-good $(glob 'static/posts/**/*.md')",
+    "write-good": "write-good $(glob '/src/posts/**/*.{md, mdx}')",
     "lint": "source ./config/scripts/lint.sh && lint",
     "format": "source ./config/scripts/format.sh && format"
   },

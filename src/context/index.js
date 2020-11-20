@@ -12,7 +12,7 @@ const rootReducer = (prevState, action) => ({
 const GlobalContext = createContext();
 
 const ContextProvider = ({ initialState, children, ...x }) => {
-  const globalState = initialState ?? {...defaultGlobalState, [darkModeKey]: window && window.matchMedia("(prefers-color-scheme: dark)").matches}
+  const globalState = initialState ?? {...defaultGlobalState, [darkModeKey]: typeof window !== `undefined` ? (window && window.matchMedia("(prefers-color-scheme: dark)").matches) : false}
   return (
     <GlobalContext.Provider value={useReducer(rootReducer, globalState)}>
       {children}

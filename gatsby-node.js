@@ -92,8 +92,6 @@ exports.createPages = async function ({ actions, graphql, reporter }) {
 	  return [...new Set(a)].filter(x => setB.has(x)).length;
 	}
 
-console.log(posts)
-
   posts.forEach(({ node }, index) => {
   	const { id, fields: { slug } } = node;
 
