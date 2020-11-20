@@ -93,10 +93,15 @@ const StyledGrid = styled(MultiColumnLayout)([
     & ul {
       padding-left: 1.5rem;
       margin: 0;
-      & li {
+      li {
+        list-style: none;
+        transform: translateX(-3ch);
+      }
+      & a > li {
         list-style-type: "⟶";
         padding-inline-start: 1.5ch;
         transition: transform 100ms;
+        transform: translateX(0);
         &:hover {
           transform: translateX(1.5ch)
         }
@@ -117,24 +122,23 @@ const InfoGrid = () => (
     <div>
       <H6 paragraph>What I do</H6>
       <ul>
-        <li><H4><Link to="/work">UX UI Development</Link></H4></li>
-        <li><H4><Link to="/work">Product Design</Link></H4></li>
-        <li><H4><Link to="/work">Data Visualization</Link></H4></li>
-        <li><H4><Link to="/work">Algorithm innovation</Link></H4></li>
-        <li><H4><Link to="/work">Data Science</Link></H4></li>
-        <li><H4><Link to="/work">Graphic Design</Link></H4></li>
+        <li><H4>UX UI Development</H4></li>
+        <li><H4>Data Visualization</H4></li>
+        <li><H4>Algorithm innovation</H4></li>
+        <li><H4>Product Design</H4></li>
+        <li><H4>Data Science</H4></li>
+        <li><H4>Graphic Design</H4></li>
       </ul>
     </div> 
 
     <div>
       <H6 paragraph>Contact Me</H6>
       <ul>
-        <li><H4><a href="http://google.com">Email</a></H4></li>
-        <li><H4><a href="http://google.com">LinkedIn</a></H4></li>
-        <li><H4><a href="http://google.com">Github</a></H4></li>
-        <li><H4><a href="http://google.com">Dribbble</a></H4></li>
-        <li><H4><a href="http://google.com">Twitter</a></H4></li>
-        <li><H4><a href="http://google.com">Instagram</a></H4></li>
+        <a href="mailto:maksiyote@gmail.com"><li><H4>Email</H4></li></a>
+        <a href="https://www.linkedin.com/in/marioaks/"><li><H4>LinkedIn</H4></li></a>
+        <a href="https://github.com/marioaks"><li><H4>Github</H4></li></a>
+        <a href="https://twitter.com/maksiyote"><li><H4>Twitter</H4></li></a>
+        <a href="https://www.instagram.com/maksiyote/"><li><H4>Instagram</H4></li></a>
       </ul>
     </div>
     {/* </StyledGrid> */}
