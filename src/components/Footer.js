@@ -36,7 +36,7 @@ const Copyright = styled(Caption)([
 const Footer = () => {
 	const [isDarkMode] = useDarkMode()
 	return (
-			<div tw="grid grid-rows-4 mt-xl">
+			<div className="footer" tw="grid grid-rows-4 mt-xl">
 				<StyledFooterLink isDarkMode={isDarkMode} className="blob-target" activeClassName="active" to="/"><PaddedContainer><H3 id="target" tw="ml-md sm:ml-lg md:ml-xl">Home</H3></PaddedContainer></StyledFooterLink>
 				<StyledFooterLink isDarkMode={isDarkMode} className="blob-target" activeClassName="active" to="/about/"><PaddedContainer><H3 id="target" tw="ml-md sm:ml-lg md:ml-xl">About</H3></PaddedContainer></StyledFooterLink>
 				<StyledFooterLink isDarkMode={isDarkMode} className="blob-target" activeClassName="active" to="/work/"><PaddedContainer><H3 id="target" tw="ml-md sm:ml-lg md:ml-xl">Work</H3></PaddedContainer></StyledFooterLink>
