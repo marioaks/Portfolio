@@ -26,7 +26,7 @@ const StyledIntroText = styled(H5)([
 const IntroSection = ({ isDarkMode }) => (
   <>
     <StyledIntroText isDarkMode={isDarkMode}>
-      Hey there. I'm Mario Aksiyote. I'm a collaborative, experienced, and creative UX/UI developer from Mexico City. I'm someone who can take a product idea from end to end — from a napkin sketch to a real shipped product. I'm frequently <em>coding</em>, occasionally <em>designing</em>, and always <em>creating</em>. Have a look around, and don't miss out clicking on the blob above!
+      Hey there. I'm Mario Aksiyote. I'm a collaborative, adaptable, and creative UX/UI developer from Mexico City. I'm someone who can take a product idea from end to end — from a napkin sketch to a real shipped product. I'm frequently <em>coding</em>, occasionally <em>designing</em>, and always <em>creating</em>. Have a look around, and don't miss out clicking on the blob above!
     </StyledIntroText>
     <StyledDivider/>
   </>
