@@ -1,12 +1,12 @@
 ---
-name: "Everywhere"
-description: An art project meant to ask the question — What does distance mean in the 21st century?
+name: "[x] Everywhere"
+description: "An art project meant to ask the question — What does distance mean in the 21st century? [x] Everywhere is a visual (and arguably insane) way to explore neighborhood similarities."
 
-title: "Everywhere"
-subtitle: An art project meant to ask the question — What does distance mean in the 21st century?
+title: "[x] Everywhere"
+subtitle: "An art project meant to ask the question — What does distance mean in the 21st century? [x] Everywhere is a visual (and arguably insane) way to explore neighborhood similarities."
 
-date: "01-01-2020"
-order: 6
+date: "11-16-2017"
+order: 4
 thumbnail: media/thumbnail.jpg
 
 company: "Topos"
@@ -15,8 +15,107 @@ collaborators:
 
 categories:
   - graphic-design
-  - product-design
-  - front-end-development
+  - data-visualization
+
 embeddedImages:
+  - media/everywhere-stack.png
+  - media/everywhere-ayer.png
+  - media/everywhere-carroll-gardens.png
+  - media/everywhere-lower-queen-anne.png
+  - media/everywhere-north-watts.png
+  - media/network.gif
+  - media/old-unstyled-map.png
+  - media/street-losangeles.png
+  - media/the-naked-city.png
+  - media/thumbnail.jpg
+  - media/voronoi.png
 
 ---
+
+	<Img xxl {...props.embeddedImages.thumbnail}/>
+
+	### **What makes one neighborhood similar to another?**
+
+	Have you ever been walking around a city or neighorhood and think to yourself, "this place really reminds me of [x]". I've always felt that Mexico City, the city I grew up in, feels extremely similar in pace and culture to Istanbul, the city my dad grew up in. 
+
+	I've also had that same feeling with certain neighborhoods in NYC. Williamsburg is New York's version of Mexico City's Condesa. Greenpoint feels more like Roma to me. The Upper East Side is basically the American version of Polanco. 
+
+	So, what is it that makes places feel similar to each other? Is it how they look? The people that live there? How easy they are to navigate? The types of businesses in the area? Vegan restaurants vs fast food chains?
+
+	---
+
+	<Img xl {...props.embeddedImages.everywhereStack}/>
+
+	### [x] Everywhere is an art project built on the Topos Similarity Index
+
+	Whether its walkability, weather, or the music scene, places feel similar to us for tons of different reasons. The Topos Similarity Index was built to try to encompass all of these factors as an attempt to quantify how similar two places really are. Encompassing everything from topological analysis of urban form to the ratio of third-to-first wave coffee shops, Topos Similarity Index takes 50+ heterogeneous data sources, transforms them using a wide range of technological approaches (Natural Language Processing, Computer Vision, Topological Data Analysis, …) and integrates these inputs into a single normalized similarity metric. The computation of similarity scores between neighborhoods across the US led to this art project.
+
+	My task was to come up with a way to promote the TSI. After iterating through a multitude of ideas, I was inspired by the question: *what does distance mean in the 21st century?*
+
+	As taken from the article ["Rethinking ‘distance’ in New York City"](https://medium.com/topos-ai/rethinking-distance-in-new-york-city-d17212d24919) _"At some point in history, geographical proximity may have implied cultural proximity, but this is increasingly being called into question, as can be seen in everything from voting patterns to the distribution of third-wave coffee shops across the United States. We intuitively felt that Bushwick, Brooklyn has more to do with Silver Lake, Los Angeles than any neighborhood in Albany, New York despite the 3000 miles in between."_
+
+	The advances in technology and globalization of the 21st century means that geographic closeness no longer implies cultural closeness. But, _what if it did?_ That's the idea behind [x] Everywhere — _what if the most similar neighborhoods were also the closest geographically?_
+
+	---
+
+	### The making of [x] Everywhere
+
+	
+
+	<Wrap>
+
+		<Img {...props.embeddedImages.theNakedCity}/>
+
+		The general idea for the project was to construct a brand new city map using pieces of maps from different places. The TSI covered 1,718 different zipcodes, so the plan was to build 1,718 different unique maps. 
+
+		This idea was inspired by a diverse set of projects, ranging from *The Naked City* (Guy Debord) to [*Where is Williamsburg](http://www.whereiswilliamsburg.com/) *(Kate Ray). Most importantly though, I felt like a lot of city maps already look like disjointed puzzle pieces! Looking at a street map of Los Angeles, the major throughways break apart the city in a way that makes it look a little bit like a voronoi. 
+
+	</Wrap>
+
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.streetLosangeles}/>
+		<Img {...props.embeddedImages.voronoi}/>
+	</FlexImages>
+
+	##### **Voronoi Maps**
+
+	Mahir Yavuz and I worked on building these maps. The idea was simple: for each of the 1,718 neighborhoods in the system, make a voronoi with the selected neighborhoods map in the center and its ten most similar neighborhood maps surrounding it. 
+
+	
+
+
+	<Wrap>
+
+		<Img {...props.embeddedImages.network}/>
+
+		For each selected neighborhood we had to:
+
+		1. Get its top 10 most similar neighborhoods from the Topos Similarity Index. 
+		2. Create a similarity network with the 11 neighborhoods. Each node would represent a single neighborhood. Every node would be connected to every other node with an edge waited by the neighborhoods pairwise similarities. Force the selected neigborhoods node into the center of the network. 
+		3. Generate a voronoi using the node positions in the network.  
+		4. Load 11 different mapbox maps (one for each neighborhood) in the shadow-dom for the selected neighborhood and its ten most similar ones.
+
+		<Img {...props.embeddedImages.oldUnstyledMap}/>
+
+		5. Copy all the contents of the each map's canvas to a new canvas the exact width and height of one of the voronoi bubbles. 
+		6. Add the new map canvas images into the d3 voronoi and clip the edges so as to not overflow past the bubble.
+		7. Style the voronoi edges to look like streets.
+		8. Repeat for multiple screen aspect ratios. 
+		9. Profit.
+
+	</Wrap>
+
+
+	Getting all this to work required a lot of tedius work, but here is the output:
+	
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.everywhereAyer}/>
+		<Img {...props.embeddedImages.everywhereCarrollGardens}/>
+	</FlexImages>
+
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.everywhereLowerQueenAnne}/>
+		<Img {...props.embeddedImages.everywhereNorthWatts}/>
+	</FlexImages>
+	
+	

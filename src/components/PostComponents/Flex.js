@@ -6,7 +6,6 @@ import { css } from "twin.macro";
 
 export const FlexImages = ({children, caption, ...props}) => {
 	const {xs, sm, md, lg, xl, xxl} = props
-	console.log(!xs && !sm && !md && !xl && !xxl)
 	return (
 		<Fluid {...props} lg={!xs && !sm && !md && !xl && !xxl}>
 			<div css={[css`

@@ -6,7 +6,7 @@ title: FIT – An AI driven platform to modernize commercial real estate brokera
 subtitle: Commercial real estate brokerage is an old-fashion industry that is starting to experience a wave of innovation. AI tools able to process massive amounts of data are introducing efficiencies that weren't previously possible. Commercial brokerages are beginning to realize that if they don’t become data, tech, and AI leaders, they will be left behind. For the most part however, these brokerages are made up of data-illiterate brokers whose instincts often lead to decisions that are neither good for their clients nor the neighborhoods they do their work in. In this case study, I will talk about how I helped build FIT, an AI-driven platform meant to both provide unique efficiencies into brokers’ workloads and nudge them into better decision-making. 
 
 date: "03-14-2020"
-order: 3
+order: 5
 thumbnail: media/thumbnail.png
 
 company: "Topos"
@@ -75,7 +75,7 @@ embeddedImages:
 
 	### Landlord Flow: Starting with an address
 
-	<Img {...props.embeddedImages.landlordDrawTradeArea} caption="The landlord flow starts off with a single address and a customizable trade area around that address"/>
+	<Img {...props.embeddedImages.landlordDrawTradeArea} caption="The landlord flow starts off with a single address and a customizable trade area"/>
 
 	We designed FIT with two entry-points — The Landlord Rep Flow and The Tenant Rep Flow. The _Landlord Rep Flow_ in FIT is meant for landlord reps who are starting off with a single address. Since these brokers tend to be overburdened by menial manual tasks and happen to be non-tech-savvy, we needed everything to be _quick_ and _easy_ to understand and use. Therefore, we designed and built this flow with three goals in mind:
 
@@ -122,15 +122,15 @@ embeddedImages:
 
 	The task of displaying those recommendations however, turned out to be a real challenge. There were two main issues we faced. The first issue was that, despite a brand being a quality _fit_ at an address, there may be hundreds of reasons for why either the landlord or the brand might not be interested — for example, the property is too small or doesn’t have a kitchen, the address isn’t on the street corner, a landlord is only interested in leasing to clothing stores, and the broker already represents another coffee shop a block away. In other words, way too many things to add to a recommendation engine. The second issue was that, if a brand was in the list that defied our user’s intuition, broker’s proved to be very skeptical rather than intrigued. 
 
-	Our first attempt to solve these problems was the lengthening of the hit-list. We originally assumed that brokers wouldn’t want to be overwhelmed with hundreds of brands and that one of the top 5 or 10 brands recommended would _surely_ work. This was clearly a mistake so we went from showing a condensed list of brands to being a lot more liberal with it.
+	Our first attempt to solve these problems was the **lengthening of the hit-list**. We originally assumed that brokers wouldn’t want to be overwhelmed with hundreds of brands and that one of the top 5 or 10 brands recommended would _surely_ work. This was clearly a mistake so we went from showing a condensed list of brands to being a lot more liberal with it.
 
 	<Img {...props.embeddedImages.bestFitBrands} /> 
 
-	Our second attempt was the addition of a series of filters — square footage preferences, retail category, brand characteristics (ex. stylish, trendy, digitally-native), and preferred standalone or inline tenancy preferences — giving our users the ability to further curate the list to their liking. While the filters were a success with our testers, there still were plenty of reasons for why a broker wouldn’t want a brand to show up in his or her hit-list. 
+	Our second attempt was the addition of a series of **filters** — square footage preferences, retail category, brand characteristics (ex. stylish, trendy, digitally-native), and preferred standalone or inline tenancy preferences — giving our users the ability to further curate the list to their liking. While the filters were a success with our testers, there still were plenty of reasons for why a broker wouldn’t want a brand to show up in his or her hit-list. 
 
 	<Img {...props.embeddedImages.bestFitBrandFilters} />
 
-	Our third attempt was using Netflix’s “because you watched …” and Spotify’s “because you listened to …” form of recommendations as inspirations for splitting up our long list into interesting groupings. Groupings such as “Because CrossFit and Juice Press are nearby, here are more Health and Wellness Brands” and “Because Bluestone Lane is nearby, here are more Trendy Brands” accomplished a two things: (1) It added a quick justification for why a brand appeared in the list, and (2) it gave brokers the ability to skip entire groupings of brands that they weren’t interested in. In other words, it seemed to make broker’s less skeptical of the algorithm and more efficient in finding brands they’d like to reach out to. 
+	Our third attempt was using Netflix’s “because you watched …” and Spotify’s “because you listened to …” form of recommendations as inspirations for splitting up our long list into interesting groupings. Groupings such as **“Because CrossFit and Juice Press are nearby, here are more Health and Wellness Brands”** and **“Because Bluestone Lane is nearby, here are more Trendy Brands”** accomplished a two things: (1) It added a quick justification for why a brand appeared in the list, and (2) it gave brokers the ability to skip entire groupings of brands that they weren’t interested in. In other words, it seemed to make broker’s less skeptical of the algorithm and more efficient in finding brands they’d like to reach out to. 
 
 	<Img {...props.embeddedImages.bestFitBrands2} />
 
