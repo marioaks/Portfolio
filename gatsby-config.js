@@ -23,7 +23,6 @@ module.exports = {
 		'gatsby-remark-images',
 		'gatsby-transformer-sharp',
 		'gatsby-plugin-catch-links',
-		'gatsby-plugin-twitter',
 		'gatsby-plugin-advanced-sitemap',
 	    {
 	      resolve: `gatsby-plugin-postcss`,
