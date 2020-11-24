@@ -36,9 +36,9 @@ embeddedImages:
 
 	### **What makes one neighborhood similar to another?**
 
-	Have you ever been walking around a city or neighorhood and think to yourself, "this place really reminds me of [x]". I've always felt that Mexico City, the city I grew up in, feels extremely similar in pace and culture to Istanbul, the city my dad grew up in. 
+	Have you ever been walking around a city or neighorhood and thought to yourself, "this place really reminds me of [x]". Personally, I have always felt that Mexico City, the city I grew up in, feels extremely similar in pace and culture to Istanbul, the city my dad grew up in. 
 
-	I've also had that same feeling with certain neighborhoods in NYC. Williamsburg is New York's version of Mexico City's Condesa. Greenpoint feels more like Roma to me. The Upper East Side is basically the American version of Polanco. 
+	I have also had that same feeling with certain neighborhoods in New York City. Williamsburg is New York's version of Mexico City's Condesa. Greenpoint feels a lot like Roma to me. The Upper East Side could be described as the American version of Polanco. 
 
 	So, what is it that makes places feel similar to each other? Is it how they look? The people that live there? How easy they are to navigate? The types of businesses in the area? Vegan restaurants vs fast food chains?
 
@@ -46,13 +46,13 @@ embeddedImages:
 
 	<Img xl {...props.embeddedImages.everywhereStack}/>
 
-	### [x] Everywhere is an art project built on the Topos Similarity Index
+	### [x] Everywhere brings similar places together using the Topos Similarity Index
 
-	Whether its walkability, weather, or the music scene, places feel similar to us for tons of different reasons. The Topos Similarity Index was built to try to encompass all of these factors as an attempt to quantify how similar two places really are. Encompassing everything from topological analysis of urban form to the ratio of third-to-first wave coffee shops, Topos Similarity Index takes 50+ heterogeneous data sources, transforms them using a wide range of technological approaches (Natural Language Processing, Computer Vision, Topological Data Analysis, …) and integrates these inputs into a single normalized similarity metric. The computation of similarity scores between neighborhoods across the US led to this art project.
+	Whether its the walkability, weather, or music scene, places feel similar to us for tons of different reasons. The Topos Similarity Index was built to try to encompass all of these factors as an attempt to quantify how similar two places really are. Encompassing everything from topological analysis of urban form to the ratio of third-to-first wave coffee shops, the Topos Similarity Index takes 50+ heterogeneous data sources, transforms them using a wide range of technological approaches (Natural Language Processing, Computer Vision, Topological Data Analysis, …) and integrates these inputs into a single normalized similarity metric. The computation of similarity scores between neighborhoods across the US led to this art project.
 
 	My task was to come up with a way to promote the TSI. After iterating through a multitude of ideas, I was inspired by the question: *what does distance mean in the 21st century?*
 
-	As taken from the article ["Rethinking ‘distance’ in New York City"](https://medium.com/topos-ai/rethinking-distance-in-new-york-city-d17212d24919) _"At some point in history, geographical proximity may have implied cultural proximity, but this is increasingly being called into question, as can be seen in everything from voting patterns to the distribution of third-wave coffee shops across the United States. We intuitively felt that Bushwick, Brooklyn has more to do with Silver Lake, Los Angeles than any neighborhood in Albany, New York despite the 3000 miles in between."_
+	As taken from the article ["Rethinking ‘distance’ in New York City"](https://medium.com/topos-ai/rethinking-distance-in-new-york-city-d17212d24919), _"At some point in history, geographical proximity may have implied cultural proximity, but this is increasingly being called into question, as can be seen in everything from voting patterns to the distribution of third-wave coffee shops across the United States. We intuitively felt that Bushwick, Brooklyn has more to do with Silver Lake, Los Angeles than any neighborhood in Albany, New York despite the 3000 miles in between."_
 
 	The advances in technology and globalization of the 21st century means that geographic closeness no longer implies cultural closeness. But, _what if it did?_ That's the idea behind [x] Everywhere — _what if the most similar neighborhoods were also the closest geographically?_
 
@@ -79,29 +79,33 @@ embeddedImages:
 
 	##### **Voronoi Maps**
 
-	Mahir Yavuz and I worked on building these maps. The idea was simple: for each of the 1,718 neighborhoods in the system, make a voronoi with the selected neighborhoods map in the center and its ten most similar neighborhood maps surrounding it. 
-
-	
+	For a given neighborhood N of the 1,718 neighborhoods in the TSI, the plan was to build a new city map by essentially fitting together the map of N with the maps of its ten most similar neighborhoods. To do this, we decided to use voronois. After I came up with this idea, Mahir Yavuz and I worked on actually building the maps. 
 
 
 	<Wrap>
 
 		<Img {...props.embeddedImages.network}/>
 
-		For each selected neighborhood we had to:
+		For each neighborhood N in the TSI we had to:
 
 		1. Get its top 10 most similar neighborhoods from the Topos Similarity Index. 
-		2. Create a similarity network with the 11 neighborhoods. Each node would represent a single neighborhood. Every node would be connected to every other node with an edge waited by the neighborhoods pairwise similarities. Force the selected neigborhoods node into the center of the network. 
-		3. Generate a voronoi using the node positions in the network.  
-		4. Load 11 different mapbox maps (one for each neighborhood) in the shadow-dom for the selected neighborhood and its ten most similar ones.
+
+		2. Create a similarity network with the 11 neighborhoods, where each node represents a single neighborhood and each edge represents the similarity between two neighborhoods. Edges with a higher similarity score should pull nodes closer together. Finally, force the node for the selected neigborhood N into the center of the network. 
+
+		3. Generate a D3 voronoi using the node positions in the network as its initial set of points.
+
+
+		4. Load 11 different mapbox maps (one for each neighborhood) in the shadow-dom. Set the maps to an appropriate zoom level.
 
 		<Img {...props.embeddedImages.oldUnstyledMap}/>
 
-		5. Copy all the contents of the each map's canvas to a new canvas the exact width and height of one of the voronoi bubbles. 
-		6. Add the new map canvas images into the d3 voronoi and clip the edges so as to not overflow past the bubble.
+		5. Copy all the contents of each neighborhood's mapbox canvas to a new canvas of the exact width and height of its corresponding voronoi bubble. 
+
+		6. Add the 11 new map canvas images into the D3 voronoi and clip the edges so as to not overflow past each voronoi bubble.
+
 		7. Style the voronoi edges to look like streets.
-		8. Repeat for multiple screen aspect ratios. 
-		9. Profit.
+
+		8. Repeat process for multiple screen aspect ratios. 
 
 	</Wrap>
 

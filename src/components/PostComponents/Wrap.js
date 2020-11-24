@@ -8,7 +8,7 @@ export const Wrap = ({children}) => {
 	const margin = 32
 	let images = []
 	Children.forEach(children, child => {
-	    if (!['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'].includes(child?.props?.mdxType.toLowerCase())) {
+	    if (!['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'ul', 'ol', 'li'].includes(child?.props?.mdxType.toLowerCase())) {
 	        images.push(child);
 	    }
 	});
@@ -22,6 +22,7 @@ export const Wrap = ({children}) => {
 		float: ${child?.props?.float ?? 'left'};
 		width: ${maxWidth - textMaxWidth - margin}px;
 		margin: 10px ${!child?.props?.float || child?.props?.float === 'left' ? margin : 0}px 10px ${child?.props?.float === 'right' ? margin : 0}px;
+
 		@media only screen and (max-width: ${wrappedElWidth + 300}px) {
 			margin: auto auto 1rem;
 			display: block;
@@ -32,6 +33,10 @@ export const Wrap = ({children}) => {
 
 	const textStyle = css`
 		max-width: ${images.length ? 1000 : textMaxWidth}px; 
+		li p {
+			/*margin: auto;*/
+			max-width: none;
+		}
 		@media only screen and (max-width: ${wrappedElWidth + 300}px) {
 			max-width: ${textMaxWidth}px;
 			margin-left: 0 !important;
@@ -41,7 +46,7 @@ export const Wrap = ({children}) => {
 	return (
 		<Fluid maxWidth={`${maxWidth + 150}px`}>
 			{Children.map(children, child => {
-				if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'].includes(child?.props?.mdxType.toLowerCase()))
+				if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'ul', 'ol', 'li'].includes(child?.props?.mdxType.toLowerCase()))
 					return cloneElement(child, { css: [textStyle], style: {marginLeft: `calc(max((100% - 1000px) / 2, 0px))` }});
 				return cloneElement(child, { css: [wrappedElStyle(child)] });
 			})}

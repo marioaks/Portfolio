@@ -6,12 +6,12 @@ import tw, { css, styled } from "twin.macro"
 
 export const h1 = props => <H1 paragraph {...props}/>
 export const h2 = props => <H2 paragraph {...props}/>
-export const h3 = props => <H3 paragraph {...props}/>
+export const h3 = props => <H3 paragraph css={css`max-width: ${textMaxWidth}px`} {...props}/>
 export const h4 = props => <H4 paragraph {...props}/>
-export const h5 = props => <H5 paragraph {...props}/>
+export const h5 = props => <H5 paragraph css={css`max-width: ${textMaxWidth}px`} {...props}/>
 export const h6 = props => <H6 paragraph {...props}/>
 export const p = props => <P1 paragraph css={css`max-width: ${textMaxWidth}px`}{...props}/>
-export const ol = props => <ol tw="font-body-serif" {...props}/>
+export const ol = props => <ol tw="font-body-serif" css={css`padding-left: 2ch;`} {...props}/>
 export const li = ({children, ...props}) => <li {...props}><P1>{children}</P1></li>
 const StyledA = tw.a`hover:opacity-75`
 export const a = StyledA

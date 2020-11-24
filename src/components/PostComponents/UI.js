@@ -22,8 +22,8 @@ export const MorePostsFooter = ({posts}) => (
 		<H2 tw="mb-xs">Did you like that last post?</H2>
 		<H5 style={{maxWidth: textMaxWidth}}>Check out some more of my work</H5>
 
-		<Fluid maxWidth="1100px">
-			<PostsList maxImgWidth={700} minImgWidth={700} posts={posts}/>
+		<Fluid>
+			<PostsList posts={posts}/>
 		</Fluid>
 	</>
 )
