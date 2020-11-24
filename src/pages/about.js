@@ -13,10 +13,11 @@ const AboutPage = ({ data }) => {
 	return (
 	<PaddedContainer>
 		<MultiColumnLayout tw="lg:col-count-2">
-			<H2 paragraph>My work lies in the intersection of code, design, data, and whatever subject I’m interested in on a particular day. </H2>
+			{/* <H2 paragraph>My work lies in the intersection of code, design, data, and whatever subject I’m interested in on a particular day. </H2> */}
+			<H2 paragraph>My work lies at the intersection of code, design, and data. I turn complex ideas into creative digital products.</H2>
 
 			<H5 paragraph>I was born and raised in Mexico City in a Turkish-American household. I went on to study at the University of Pennsylvania, graduating with honors and a degree and in Computer Science and Economics. Since then, I’ve designed and developed 20+ data-rich large-scale applications, cooked up a multitude of complex algorithms, given lectures at my alma mater, and been featured multiple times on The Rachel Maddow Show. </H5>
-			<H5 paragraph>There is no such thing as a typical day on the job for me. On some days I’ll be writing production-level software from scratch, and on others I’ll be working on scrappy prototypes. Some days I’m designing unique product experiences, while others I’m reading research papers on geospatial AI, information design, economics, game theory, physics, etc, etc, etc. All this is to say that I do lots of things! </H5>
+			<H5 paragraph>There is no such thing as a typical day on the job for me. On some days I’ll be writing production-level software from scratch, and on others I’ll be working on scrappy prototypes. Some days I’m designing unique product experiences, while others I’m reading research papers on geospatial AI, information design, economics and game theory. All this is to say that I do lots of things! </H5>
 			<H5 paragraph>My most advanced skill to date is front-end development. Having a strong foundation in FE allows me to execute all sorts of cool and interesting ideas. I see coding – like design, data science, or data visualization – as a tool to be used in service of these ideas. Sometimes they require writing some heavy-duty code but sometimes they require no coding at all. I like to think of myself as an ideas person rather than a coder — someone with a unique combination of qualities, interests, and skills who can both think up and execute ideas in all different forms. </H5>
 			<H5 paragraph>For the last few years I’ve been working at Topos, a small startup based in New York City developing a holistic understanding of cities through the interconnected lenses of data and artificial intelligence. </H5>
 			<H5 paragraph>When I’m not working, I’m either playing guitar, riding my bike around NYC, reading in the park, or discovering cool coffee shops.</H5>
@@ -64,10 +65,10 @@ const AboutPage = ({ data }) => {
 						<H6 className="subheader">Philadelphia, PA | 2014 - 2017</H6>
 					</ResumeItemHeader>
 					<H6> Oversaw all matters related to business development, financial planning, and marketing. Managed $350,000 in annual revenue </H6>
-					<H6> Held profit & loss responsibilities for the educational nonprofit.</H6>
+					{/* <H6> Held profit & loss responsibilities for the educational nonprofit.</H6> */}
 					<H6> Formalized legal and accounting processes by hiring bookkeepers, accountants, and lawyers </H6>
-					<H6> Led contract negotiations and managed relationships with key partners including University of Pennsylvania, World Strides (backed by Carlyle Group), and travel partners from India, Brazil, and China </H6>
-					<H6> Elected to Board of Directors after raising sponsorship revenues by 100%</H6>
+					{/* <H6> Led contract negotiations and managed relationships with key partners including University of Pennsylvania, World Strides (backed by Carlyle Group), and travel partners from India, Brazil, and China </H6> */}
+					{/* <H6> Elected to Board of Directors after raising sponsorship revenues by 100%</H6> */}
 				</ResumeItem>
 
 				<ResumeItem>
@@ -131,7 +132,7 @@ const AboutPage = ({ data }) => {
 					</ResumeItem>
 
 					<ResumeItem>
-						<H6><b>On <Link to="/covid-19-beyond-counties/">Visualizing COVID-19 Beyond Counties:</Link></b></H6>
+						<H6><b>On <Link to="/archive/">Visualizing COVID-19 Beyond Counties:</Link></b></H6>
 
 						<H6> <a href="https://www.brownalumnimagazine.com/articles/2020-08-27/disparate-data">Brown Alumni Magazine</a></H6>
 						<H6> <a href="https://penntoday.upenn.edu/news/maps-pandemics-and-reckoning-history">Penn Today</a></H6>
@@ -192,23 +193,23 @@ const AboutPage = ({ data }) => {
 					<H6>Gatsby</H6>
 					<H6>React Native</H6>
 					<H6>React Native Web</H6>
-					<H6>Expo</H6>
+					{/* <H6>Expo</H6> */}
 					<H6>DeckGL.js</H6>
 					<H6>GeoJson/TopoJson</H6>
 					<H6>Mapbox</H6>
-					<H6>S2/H3 Cells</H6>
-					<H6>LESS/SASS</H6>
+					{/* <H6>S2/H3 Cells</H6> */}
+					{/* <H6>LESS/SASS</H6> */}
 					<H6>Webpack</H6>
 					<H6>Babel</H6>
-					<H6>Auth0</H6>
-					<H6>Firebase</H6>
+					{/* <H6>Auth0</H6> */}
+					{/* <H6>Firebase</H6> */}
 					<H6>Node</H6>
-					<H6>Express</H6>
-					<H6>AntDesign</H6>
-					<H6>Tailwind</H6>
-					<H6>Emotion</H6>
-					<H6>ESLint</H6>
-					<H6>Npm/Yarn</H6>
+					{/* <H6>Express</H6> */}
+					{/* <H6>AntDesign</H6> */}
+					{/* <H6>Tailwind</H6> */}
+					{/* <H6>Emotion</H6> */}
+					{/* <H6>ESLint</H6> */}
+					{/* <H6>Npm/Yarn</H6> */}
 					<H6>Python</H6>
 					<H6>SQL</H6>
 					<H6>and more...</H6>
@@ -220,9 +221,9 @@ const AboutPage = ({ data }) => {
 					<H6>Figma</H6>
 					<H6>Photoshop</H6>
 					<H6>InDesign</H6>
-					<H6>Data Visualization</H6>
-					<H6>UX Research</H6>
-					<H6>Designing for Development</H6>
+					{/* <H6>Data Visualization</H6> */}
+					{/* <H6>UX Research</H6> */}
+					{/* <H6>Designing for Development</H6> */}
 				</ResumeItem2>
 
 				<ResumeItem2>
@@ -232,7 +233,7 @@ const AboutPage = ({ data }) => {
 					<H6>Product Ideation and Planning</H6>
 					<H6>Data Science</H6>
 					<H6>Game Theoretic Modeling</H6>
-					<H6>Algorithms</H6>
+					<H6>Algorithm Design</H6>
 				</ResumeItem2>
 				</MultiColumnLayout>
 			</ResumeSection>

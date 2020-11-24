@@ -40,11 +40,17 @@ const PostsList = ({ posts, maxImgWidth=700, minImgWidth=700 }) => {
 		  			filter: none;
 		  		}
 		  	}
-		  	@media only screen and (min-width: 1500px) {
-		  		zoom: 1.1;
+		  	@media only screen and (min-width: ${theme('screens.xl.min')}) {
+		  		zoom: 1;
+		  	}
+		  	@media only screen and (min-width: 1430px) {
+		  		zoom: 1.2;
+		  	}
+		  	@media only screen and (min-width: 1600px) {
+		  		zoom: 1.3;
 		  	}
 		  	@media only screen and (min-width: 1800px) {
-		  		zoom: 1.3;
+		  		zoom: 1;
 		  	}
 
 		`

@@ -19,6 +19,7 @@ export default {
 		outline: 'none'
 	},
 	html: {
+		overflowX: 'hidden',
 		'&.dark-mode': {
 			'body': {
 				backgroundColor: theme('colors.darkBackground'),

@@ -26,7 +26,7 @@ const StyledIntroText = styled(H5)([
 const IntroSection = ({ isDarkMode }) => (
   <>
     <StyledIntroText isDarkMode={isDarkMode}>
-      Hey there. I'm Mario Aksiyote. I'm a collaborative, adaptable, and creative UX/UI developer from Mexico City. I'm someone who can take a product idea from end to end — from a napkin sketch to a real shipped product. I'm frequently <em>coding</em>, occasionally <em>designing</em>, and always <em>creating</em>. Have a look around, and don't miss out clicking on the blob above!
+      Hey there. I'm Mario Aksiyote. I'm a collaborative, adaptable, and creative UX/UI developer from Mexico City. I'm someone who can take a product idea from end to end — from a napkin sketch to a real shipped product. I'm frequently <em>coding</em>, occasionally <em>designing</em>, and always <em>creating</em>. Have a look around!
     </StyledIntroText>
     <StyledDivider/>
   </>
@@ -37,7 +37,7 @@ const PostsLinkStyle = [
   // tw`font-header-sans font-bold xs:mt-lg`,
   css`
     /*word-break: break-all;*/
-    max-width: 600px;
+    max-width: 550px;
     letter-spacing: -0.05rem;
     zoom: 1.4;
   `
@@ -52,7 +52,7 @@ const StyledLink = styled(Link, { shouldForwardProp: isPropValid })([
 
 const PostsSection = ({ posts, isDarkMode }) => (
   <>
-    <H6 paragraph>Some Recent Work</H6>
+    <H6 paragraph>Some Notable Work</H6>
     <H2 css={PostsLinkStyle}>{
       posts.map(({node: {id, frontmatter: { name }, fields: { slug }}}, i) => (
         <Fragment key={id}>
@@ -101,11 +101,15 @@ const StyledGrid = styled(MultiColumnLayout)([
       }
       & a > li {
         list-style-type: "⟶";
+        color: currentColor;
         padding-inline-start: 1.5ch;
         transition: transform 100ms;
         transform: translateX(0);
         &:hover {
           transform: translateX(1.5ch)
+        }
+        &::marker {
+          color: currentColor;
         }
       }
     }
@@ -164,7 +168,7 @@ export const HomeQuery = graphql`
     allMdx(filter: {
       fileAbsolutePath: {regex: "/posts/"}
       frontmatter: {hidden: { ne: true }}
-    }, limit: 6, sort: {order: ASC, fields: frontmatter___order}) {
+    }, limit: 5, sort: {order: ASC, fields: frontmatter___order}) {
       edges {
         node {
           id
