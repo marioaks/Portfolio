@@ -22,7 +22,7 @@ const PostMdxLayout = ({ data: {relevant1, relevant2, relevant3, relevant4, mdx:
           <PostComponents.BackButton/>
           <PostComponents.PostHeader {...frontmatter}/>
           <MDXRenderer embeddedImages={embeddedImagesByKey}>{body}</MDXRenderer>
-          <PostComponents.MorePostsFooter title={frontmatter.name} posts={[{node: relevant1}, {node: relevant2}, {node:relevant3}, {node:relevant4}]}/>
+          <PostComponents.MorePostsFooter posts={[{node: relevant1}, {node: relevant2}, {node:relevant3}, {node:relevant4}]}/>
         </div>
       </PaddedContainer>
     </MDXProvider>

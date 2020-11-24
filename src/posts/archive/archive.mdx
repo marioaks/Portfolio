@@ -1,4 +1,5 @@
 ---
+hidden: false
 name: "Archive"
 
 title: "Archive"
@@ -14,19 +15,15 @@ embeddedImages:
   - media/behavery/behavery-library.jpg 
   - media/behavery/behavery.png 
   - media/covid-beyond-counties/covid-beyond-counties-3d-animation.gif
-  - media/covid-beyond-counties/covid-beyond-counties-3d-grid.png
   - media/covid-beyond-counties/covid-beyond-counties-chicago.png
   - media/covid-beyond-counties/covid-beyond-counties-nyc.png
   - media/covid-university/covid-university-campus.png 
   - media/covid-university/covid-university-city.png 
   - media/covid-university/covid-university-nation.png 
-  - media/covid-university/covid-university.jpg 
   - media/explore/explore-address-report.png 
   - media/explore/explore-clusters.png 
   - media/explore/explore-neighborhood-page.png 
   - media/explore/explore-similarities.png 
-  - media/explore/explore.png 
-  - media/micro-neighborhoods/micro-neighborhoods.png 
   - media/micro-neighborhoods/micro-neighborhoods-nyc.jpeg
   - media/micro-neighborhoods/micro-neighborhoods-nyc-outline.jpeg
   - media/micro-neighborhoods/micro-neighborhoods-zoomed.jpeg
@@ -119,7 +116,7 @@ embeddedImages:
 
     The algorithm goes as follows: Starting with the s2 cell that fully covers the US, recursively divide each cell into 4 equal sub-cells if it has more than X number of stores in it. If the cell has fewer than X stores, leave the cell as is. Once the recurssion is done, we will have an S2 covering of the nation where every cell has fewer than X stores. Next, we can remove all computed cells with fewer than Y stores in order to get rid of the areas that have little to no commercial activity. Now, each computed S2 cell has a roughly equal commercial density value between X and Y and can be used in a classification model like the one in [FIT](/fit). This algorithm helps to break down extremely dense commercial areas and get much more granular recommendations. 
 
-    <FlexImages>
+    <FlexImages xxl>
 	    <Img {...props.embeddedImages.adaptiveS2Chicago} caption="Adaptive cell covering in Chicago"/>
 	    <Img {...props.embeddedImages.adaptiveS2Nyc} caption="Adaptive cell covering in New York City"/>
 	</FlexImages>
@@ -182,7 +179,7 @@ embeddedImages:
 
 	---
 
-	### 2) Explore
+	### 6) Explore
 	###### **Roles:** Product Design & Front-End Development  //  **Collaborators:** Eric Buth, Mahir Yavuz, Will Shapiro
 
 	This is an app I designed and built using React, D3, Mapbox, and Turf.js in order to explain and visualize hundreds of thousands of census-derived metrics in a multitude of ways. The app consisted of five pages:
@@ -210,7 +207,7 @@ embeddedImages:
 
 	---
 
-	### 3) Performance
+	### 7) Performance
 	###### **Roles:** Product Design & Front-End Development  //  **Collaborators:** Carlo Bailey, Mahir Yavuz, Ria McIlwraith
 
 	This is an app I designed and built meant to provide businesses with address-level revenue predictions for prospective store locations. By inputting existing store revenue data, a client could get revenue predictions for a set of new addresses.
@@ -225,10 +222,23 @@ embeddedImages:
 
 	---
 
-	<BehaveryMdx/>
+	### 8) Behavery
+	###### **Roles:** Product Design
 
+	Behavery is a platform made for running and crowd sourcing online experiments. I was tasked with fully redesigning the existing app in order to make it more user-friendly and visually appealing. This work was really my first exposure to any sort of product design or development.
 
-	### 7) Graphic Design Projects
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.behavery}/>
+		<Img {...props.embeddedImages.behaveryLibrary}/>
+	</FlexImages>
+
+	---
+
+	<Divider/>
+
+	---
+
+	### 9) Graphic Design Projects
 
 	---
 	##### **Hand-Drawn Surfer Animation**

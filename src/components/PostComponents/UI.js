@@ -16,11 +16,11 @@ export const BackButton = () => (
 	<Link tw="mb-lg no-underline" to="/work/"><H6 tw="opacity-75 hover:opacity-50"> <LeftArrowIcon css={[css`fill: currentColor; height: 12px; margin-right: .5rem`]}/> Back to all work</H6></Link>
 )
 
-export const MorePostsFooter = ({posts, title}) => (
+export const MorePostsFooter = ({posts}) => (
 	<>
 		<Divider/>
 		<H2 tw="mb-xs">Did you like that last post?</H2>
-		<H5 style={{maxWidth: textMaxWidth}}>Here's more of my work similar to {title}</H5>
+		<H5 style={{maxWidth: textMaxWidth}}>Check out some more of my work</H5>
 
 		<Fluid maxWidth="1100px">
 			<PostsList maxImgWidth={700} minImgWidth={700} posts={posts}/>

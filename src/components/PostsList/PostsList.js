@@ -5,7 +5,7 @@ import { Link } from "gatsby"
 import { H2, H5 } from "Components";
 import tw, { styled, theme, css } from "twin.macro"
 
-const PostsList = ({ posts, maxImgWidth=900, minImgWidth=500 }) => {
+const PostsList = ({ posts, maxImgWidth=700, minImgWidth=700 }) => {
   	useParallax(posts)
 
   	const postsWithSize = useCallback(posts.map(p => ({
