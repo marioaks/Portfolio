@@ -114,7 +114,7 @@ embeddedImages:
       Rather than using CBGs that partition the US by population density, what if we could partition the US ourselves based on commercial density. The idea Eric Buth and I came up with was one that utilized [Google's S2 Cell library](https://s2geometry.io/devguide/s2cell_hierarchy.html). S2 cells are a great technological innovation because they are a useful for making spacial indexes that speed up point level databases and for approximating regions as a collection of cells.
     </Wrap>
 
-    The algorithm goes as follows: Starting with the s2 cell that fully covers the US, recursively divide each cell into 4 equal sub-cells if it has more than X number of stores in it. If the cell has fewer than X stores, leave the cell as is. Once the recurssion is done, we will have an S2 covering of the nation where every cell has fewer than X stores. Next, we can remove all computed cells with fewer than Y stores in order to get rid of the areas that have little to no commercial activity. Now, each computed S2 cell has a roughly equal commercial density value between X and Y and can be used in a classification model like the one in [FIT](/fit). This algorithm helps to break down extremely dense commercial areas and get much more granular recommendations. 
+    The algorithm goes as follows: Starting with the s2 cell that fully covers the US, recursively divide each cell into 4 equal sub-cells if it has more than X number of stores in it. If the cell has fewer than X stores, leave the cell as is. Once the recurssion is done, we will have an S2 covering of the nation where every cell has fewer than X stores. Next, we can remove all computed cells with fewer than Y stores in order to get rid of the areas that have little to no commercial activity. Now, each computed S2 cell has a roughly equal commercial density value between X and Y and can be used in a classification model like the one in [FIT](/fit). This algorithm helps to break down extremely dense commercial areas to get much more granular recommendations. 
 
     <FlexImages xxl>
 	    <Img {...props.embeddedImages.adaptiveS2Chicago} caption="Adaptive cell covering in Chicago"/>
@@ -145,7 +145,7 @@ embeddedImages:
 
 	<Img xl {...props.embeddedImages.covidUniversityCampus}/>
 
-	This is a prototype I made for Samsung in order to track COVID-19 cases in universities. The app has three different pages:
+	This is a prototype I designed and built for Samsung in order to track COVID-19 cases in universities. The app has three different pages:
 
 	1. Nationwide page: Meant for tracking where students are traveling to and from around the nation. This is visualized using an arc map — each arc is colored and scaled based on both the number of students traveling and how risky the place they are traveling to/from is.
 
