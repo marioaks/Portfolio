@@ -28,7 +28,7 @@ const WorkPage = ({data: {allMdx: {edges: posts, categories}}, location}) => {
   
   const filteredPosts = useCallback(posts.filter(p => {
      if (selectedCategory.name === "all") return true
-  	return p.node.frontmatter.categories.includes(selectedCategory.name)
+  	return ((p.node.frontmatter.categories ?? []).includes(selectedCategory.name))
   }), [posts, selectedCategory.name])
 
   const StyledFilterLink = styled.span([
@@ -44,13 +44,13 @@ const WorkPage = ({data: {allMdx: {edges: posts, categories}}, location}) => {
   			Below are some of the works I am most proud of. These selected projects cover the fields of{" "}
   			{sortedCategories.map((c, i) => 
   				<Fragment key={c.name}>
-  					<StyledFilterLink className="blob-target" isDarkMode={isDarkMode} isSelected={selectedCategory.name === c.name} onClick={() => setCategory(c.name)}>
+  					<StyledFilterLink isDarkMode={isDarkMode} isSelected={selectedCategory.name === c.name} onClick={() => setCategory(c.name)}>
   						{c.name.replace("-", ' ')}
   					</StyledFilterLink>
   					{i < sortedCategories.length - 2 ? ', ' : i === sortedCategories.length - 2 ? ', and ' : ''}
   				</Fragment>
   		 	)}. Click on a subject to filter or click{" "}
-  				<StyledFilterLink className="blob-target" isDarkMode={isDarkMode} onClick={() => setCategory('all')}>
+  				<StyledFilterLink isDarkMode={isDarkMode} onClick={() => setCategory('all')}>
   					here
   				</StyledFilterLink> 
   			{" "}to reset.
@@ -73,12 +73,14 @@ export default WorkPage
 
 export const post = graphql`
 	query PostsQuery {
-	  allMdx(filter: {fileAbsolutePath: {regex: "/posts/"}}, sort: {order: ASC, fields: frontmatter___order}) {
+	  allMdx(filter: {
+	  	fileAbsolutePath: {regex: "/posts/"},
+	  	frontmatter: {hidden: { ne: true }}
+	  }, sort: {order: ASC, fields: frontmatter___order}) {
 	    edges {
 	      node {
 	        id
 	        fields {
-	        	date(formatString: "MM/DD/YYYY")
 	        	slug
 	        }
 	        frontmatter {

@@ -7,7 +7,7 @@ import { css } from "twin.macro"
 import { PaddedContainer, PostsList } from "Components"
 import PostComponents from "Components/PostComponents"
 
-const PostMdxLayout = ({ data: {relevant1, relevant2, relevant3, relevant4, mdx: { body, fields: { date }, frontmatter: { embeddedImages, ...frontmatter } } }, ...props }) => {
+const PostMdxLayout = ({ data: {relevant1, relevant2, relevant3, relevant4, mdx: { body, frontmatter: { embeddedImages, ...frontmatter } } }, ...props }) => {
 
   const embeddedImagesByKey = (embeddedImages ?? []).reduce((imageObj, image) => {
     const { childImageSharp, name, publicURL } = image
@@ -20,7 +20,7 @@ const PostMdxLayout = ({ data: {relevant1, relevant2, relevant3, relevant4, mdx:
       <PaddedContainer>
         <div css={[css`max-width: 1000px; width: 100%; margin: 5rem auto;`]}>
           <PostComponents.BackButton/>
-          <PostComponents.PostHeader date={date} {...frontmatter}/>
+          <PostComponents.PostHeader {...frontmatter}/>
           <MDXRenderer embeddedImages={embeddedImagesByKey}>{body}</MDXRenderer>
           <PostComponents.MorePostsFooter title={frontmatter.name} posts={[{node: relevant1}, {node: relevant2}, {node:relevant3}, {node:relevant4}]}/>
         </div>
@@ -34,11 +34,9 @@ export const post = graphql`
     mdx(id: { eq: $id }) {
       id
       body
-      fields {
-        date(formatString: "LL")
-      }
       frontmatter {
         name
+        date
         title
         subtitle
         categories

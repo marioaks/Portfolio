@@ -28,7 +28,7 @@ export default {
 				borderColor: `${theme('colors.background')}A0 !important`,
 			},
 			'img:not([src*=".svg"])': {
-			  filter: 'grayscale(30%)'
+			  filter: 'grayscale(15%)'
 			}
 		}
 	},

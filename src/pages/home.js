@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link, graphql } from "gatsby";
 import { useDarkMode } from "Context";
 import tw, { css, styled, theme } from "twin.macro";
-import { H1, H5, H6, H4, InnerPaddedContainer, PaddedContainer, MultiColumnLayout, Divider } from "Components";
+import { H1, H2, H5, H6, H4, InnerPaddedContainer, PaddedContainer, MultiColumnLayout, Divider } from "Components";
 import isPropValid from '@emotion/is-prop-valid'
 
 const StyledDivider = styled(Divider)([
@@ -34,11 +34,12 @@ const IntroSection = ({ isDarkMode }) => (
 
 
 const PostsLinkStyle = [
-  tw`font-header-sans font-bold xs:mt-lg`,
+  // tw`font-header-sans font-bold xs:mt-lg`,
   css`
-    word-break: break-all;
-    max-width: 1200px;
-    letter-spacing: -0.1rem;
+    /*word-break: break-all;*/
+    max-width: 600px;
+    letter-spacing: -0.05rem;
+    zoom: 1.4;
   `
 ]
 const PostsSlash = styled.span([ tw`font-light italic font-header-serif`, (props => !props.isDarkMode ? tw`text-primary` : tw`text-secondary`)])
@@ -51,21 +52,22 @@ const StyledLink = styled(Link, { shouldForwardProp: isPropValid })([
 
 const PostsSection = ({ posts, isDarkMode }) => (
   <>
-    <H5 paragraph>Some Recent Work</H5>
-    <H1 css={PostsLinkStyle}>{
+    <H6 paragraph>Some Recent Work</H6>
+    <H2 css={PostsLinkStyle}>{
       posts.map(({node: {id, frontmatter: { name }, fields: { slug }}}, i) => (
         <Fragment key={id}>
             <StyledLink isDarkMode={isDarkMode} to={slug}>
               {name}
             </StyledLink>
-          <PostsSlash isDarkMode={isDarkMode}>&nbsp;/</PostsSlash>
-          {" "}
+            {"  "}
+          <PostsSlash isDarkMode={isDarkMode}>/</PostsSlash>
+          {"  "}
         </Fragment>
       ))}
         <StyledLink isDarkMode={isDarkMode} to="/work">
           See all projects
         </StyledLink>
-    </H1>
+    </H2>
     <StyledDivider/>
   </>
 )
@@ -127,7 +129,6 @@ const InfoGrid = () => (
         <li><H4>Algorithm innovation</H4></li>
         <li><H4>Product Design</H4></li>
         <li><H4>Data Science</H4></li>
-        <li><H4>Graphic Design</H4></li>
       </ul>
     </div> 
 
@@ -160,7 +161,10 @@ export default function HomePage({data: { allMdx: { edges: posts }}}) {
 
 export const HomeQuery = graphql`
   query get5RecentPosts {
-    allMdx(filter: {fileAbsolutePath: {regex: "/posts/"}}, limit: 6, sort: {order: ASC, fields: frontmatter___order}) {
+    allMdx(filter: {
+      fileAbsolutePath: {regex: "/posts/"}
+      frontmatter: {hidden: { ne: true }}
+    }, limit: 6, sort: {order: ASC, fields: frontmatter___order}) {
       edges {
         node {
           id

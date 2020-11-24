@@ -5,7 +5,7 @@ const GlobalLayout = ({ element, props }) => (
   <div>
     {/* <SEO />  */}
     {/* <GrainyBackground/> */}
-    <NavBlob pathname={props.location.pathname}/>
+    {/* <NavBlob pathname={props.location.pathname}/> */}
     <Navbar/>
     {element}
     <Footer/>

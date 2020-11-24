@@ -33,13 +33,13 @@ const ContactPage = () => {
           <div tw="mb-xl"><H5 paragraph css={[css`max-width: 600px`]}>I'm currently open to hearing out new opportunities! Let me know if you think we should collaborate — I'd love to chat!</H5><H5>I'm not meeting people in person at this time due to COVID-19, but hopefully this will all be over soon. When it is, let's grab a cup of coffee!</H5></div>
 
             <div tw="my-xl">
-              <StyledLink isDarkMode={isDarkMode} href="mailto:maksiyote@gmail.com"><H6><b>Email:</b> maksiyote@gmail.com</H6></StyledLink>
-              <H6 paragraph><b>Phone:</b> (1)-917-803-1401</H6>
+              <StyledLink isDarkMode={isDarkMode} href="mailto:maksiyote@gmail.com"><H5><b>Email:</b> maksiyote@gmail.com</H5></StyledLink>
+              <H5 paragraph><b>Phone:</b> (1)-917-803-1401</H5>
 
-              <StyledLink isDarkMode={isDarkMode} href="https://www.linkedin.com/in/marioaks/"><H6>LinkedIn</H6></StyledLink>
-              <StyledLink isDarkMode={isDarkMode} href="https://github.com/marioaks"><H6>Github</H6></StyledLink>
-              <StyledLink isDarkMode={isDarkMode} href="https://twitter.com/maksiyote"><H6>Twitter</H6></StyledLink>
-              <StyledLink isDarkMode={isDarkMode} href="https://www.instagram.com/maksiyote/"><H6>Instagram</H6></StyledLink>
+              <StyledLink isDarkMode={isDarkMode} href="https://www.linkedin.com/in/marioaks/"><H5>LinkedIn</H5></StyledLink>
+              <StyledLink isDarkMode={isDarkMode} href="https://github.com/marioaks"><H5>Github</H5></StyledLink>
+              <StyledLink isDarkMode={isDarkMode} href="https://twitter.com/maksiyote"><H5>Twitter</H5></StyledLink>
+              <StyledLink isDarkMode={isDarkMode} href="https://www.instagram.com/maksiyote/"><H5>Instagram</H5></StyledLink>
             </div>
 
       </MultiColumnLayout>

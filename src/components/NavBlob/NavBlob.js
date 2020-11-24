@@ -1,8 +1,11 @@
 import React from 'react';
 import useBlobAnimation from "./useBlobAnimation";
+import { useDarkMode } from "Context";
 
 const NavBlob = ({pathname}) => {
-	useBlobAnimation(pathname)
+	const [isDarkMode, setIsDarkMode] = useDarkMode();
+
+	useBlobAnimation(pathname, isDarkMode, setIsDarkMode)
 
 	return (
 		<canvas 

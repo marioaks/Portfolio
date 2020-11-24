@@ -27,7 +27,7 @@ export default function useParallax() {
 
 				// const distFromBottom = Math.abs(windowCenter[1] - bottom)
 				const distFromCenter = centerY < 0 ? Math.abs(centerY) : (centerY > window.innerHeight ? Math.abs(window.innerHeight - centerY) : 0)
-				const a = 2.5 - 15 * distFromCenter / window.innerHeight
+				const a = 3.5 - 15 * distFromCenter / window.innerHeight
 				// const b = 2.5 - 2 * distFromCenter / window.innerHeight
 				
 				

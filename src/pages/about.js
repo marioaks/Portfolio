@@ -3,6 +3,7 @@ import { useDarkMode } from "Context"
 import { H2, H5, H6, PaddedContainer, MultiColumnLayout, Divider, QuoteBlock } from "Components";
 import tw, {css} from "twin.macro"
 import Img from "gatsby-image"
+import ResumePdf from "Assets/files/resume.pdf"
 import { graphql, Link } from "gatsby"
 import { ResumeSection, ResumeItem, ResumeItemHeader, ResumeItem2 } from "Components/Resume"
 
@@ -17,7 +18,7 @@ const AboutPage = ({ data }) => {
 			<H5 paragraph>I was born and raised in Mexico City in a Turkish-American household. I went on to study at the University of Pennsylvania, graduating with honors and a degree and in Computer Science and Economics. Since then, I’ve designed and developed 20+ data-rich large-scale applications, cooked up a multitude of complex algorithms, given lectures at my alma mater, and been featured multiple times on The Rachel Maddow Show. </H5>
 			<H5 paragraph>There is no such thing as a typical day on the job for me. On some days I’ll be writing production-level software from scratch, and on others I’ll be working on scrappy prototypes. Some days I’m designing unique product experiences, while others I’m reading research papers on geospatial AI, information design, economics, game theory, physics, etc, etc, etc. All this is to say that I do lots of things! </H5>
 			<H5 paragraph>My most advanced skill to date is front-end development. Having a strong foundation in FE allows me to execute all sorts of cool and interesting ideas. I see coding – like design, data science, or data visualization – as a tool to be used in service of these ideas. Sometimes they require writing some heavy-duty code but sometimes they require no coding at all. I like to think of myself as an ideas person rather than a coder — someone with a unique combination of qualities, interests, and skills who can both think up and execute ideas in all different forms. </H5>
-			<H5 paragraph>Most recently, I’ve been working at Topos, a small startup based in New York City using Artificial Intelligence to uncover the nuanced underpinnings of urban culture and the interaction between people and place. </H5>
+			<H5 paragraph>For the last few years I’ve been working at Topos, a small startup based in New York City developing a holistic understanding of cities through the interconnected lenses of data and artificial intelligence. </H5>
 			<H5 paragraph>When I’m not working, I’m either playing guitar, riding my bike around NYC, reading in the park, or discovering cool coffee shops.</H5>
 
 			<div css={[tw`mt-xl`, css`max-width: 500px;`]}>
@@ -27,8 +28,8 @@ const AboutPage = ({ data }) => {
 
 		<Divider/>
 
-		<H2 paragraph>C.V.</H2>
-		{/* <MultiColumnLayout> */}
+		<H2>C.V.</H2>
+		<a href={ResumePdf} download><H6 tw="mb-md">Download PDF</H6></a>
 
 		<MultiColumnLayout>
 			<ResumeSection>
@@ -39,14 +40,12 @@ const AboutPage = ({ data }) => {
 						<H5 className="header">Lead UX/UI Developer, Topos</H5>
 						<H6 className="subheader"> New York, NY | 2017 - 2020</H6>
 					</ResumeItemHeader>
-					{/* <H6> single-handedly ideated, designed, and developed geospatial front-end prototypes aiming to find product-market fit. </H6> */}
 					<H6> As first employee, established company’s front-end development processes — tech stack, best practices, and hiring approach.</H6>
 					<H6> Led front-end team in development of 10+ production-level React applications; built products for leading companies in Commercial Real Estate, Retail, Technology, and Public Health.</H6>
-					{/* worked in collaboration with Kushman & Wakefield, Avison Young, CBRE, Samsung, Mastercard, ByChloe, Buddys, and Ugly Produce. */}
-					<H6> Member of three-person product team that researched and planned roadmap for all new and existing products – served as team’s technical voice.</H6>
+					<H6> Member of three-person product team that roadmapped and managed all new and existing products – served as team’s technical voice.</H6>
 					<H6> Built Covid-19 Compiler featured extensively on the Rachel Maddow Show. User base in the hundreds of thousands at it's peak.</H6>
 					<H6> Ideated, designed, and developed geospatial front-end prototypes from scratch, aiming to find product-market fit. </H6>
-					<H6> Created multiple algorithms for optimizing store locations — two awaiting patents.</H6>
+					<H6> Created multiple algorithms for optimizing store locations — one awaiting patent.</H6>
 					<H6> Contributed to the research and writing of various articles on the Topos Blog.</H6>
 				</ResumeItem>
 
@@ -77,9 +76,7 @@ const AboutPage = ({ data }) => {
 						<H6 className="subheader">Philadelphia, PA | 2017</H6>
 					</ResumeItemHeader>
 					<H6> Aided Dr. Sumantra Sen in all course matters</H6>
-					<H6> Instructed students in weekly office hours</H6>
-					<H6> Conducted review sessions prior to midterm and final exams</H6>
-					<H6> Graded all exams</H6>
+					<H6> Graded all homeworks, midterms, and finals</H6>
 				</ResumeItem>
 
 				<ResumeItem>
@@ -119,17 +116,14 @@ const AboutPage = ({ data }) => {
 						<H6 className="subheader">Mexico City | Graduated in 2013</H6>
 					</ResumeItemHeader>
 				</ResumeItem>
-			</ResumeSection>
-			
-			{/* <MultiColumnLayout tw="col-count-1 xl:col-count-2 col-gap-xs"> */}
-			
+			</ResumeSection>			
 
 			<div>
 			<ResumeSection>
 				<H5 paragraph><b>Publications and Mentions</b></H5>
 				<MultiColumnLayout tw="col-count-2 xl:col-count-1">
 					<ResumeItem>
-						<H6><b>On <Link to="/work">The COVID-19 Compiler:</Link></b></H6>
+						<H6><b>On <Link to="/the-covid-19-compiler/">The COVID-19 Compiler:</Link></b></H6>
 
 						<H6> <a href="https://www.msnbc.com/transcripts/rachel-maddow-show/2020-04-21-msna1350876">The Rachel Maddow Show</a></H6>
 						<H6> <a href="http://cooper.edu/architecture/news/covid-19-compiler-transforms-pandemic-data"> Cooper Union</a></H6>
@@ -137,7 +131,7 @@ const AboutPage = ({ data }) => {
 					</ResumeItem>
 
 					<ResumeItem>
-						<H6><b>On <Link to="/work">Visualizing COVID-19 Beyond Counties:</Link></b></H6>
+						<H6><b>On <Link to="/covid-19-beyond-counties/">Visualizing COVID-19 Beyond Counties:</Link></b></H6>
 
 						<H6> <a href="https://www.brownalumnimagazine.com/articles/2020-08-27/disparate-data">Brown Alumni Magazine</a></H6>
 						<H6> <a href="https://penntoday.upenn.edu/news/maps-pandemics-and-reckoning-history">Penn Today</a></H6>
@@ -145,14 +139,14 @@ const AboutPage = ({ data }) => {
 					</ResumeItem>
 
 					<ResumeItem>
-						<H6><b>On <Link to="/work">The Next Wave:</Link></b></H6>
+						<H6><b>On <Link to="/the-next-wave/">The Next Wave:</Link></b></H6>
 
 						<H6> <a href="https://theeconreview.com/2017/12/16/coffee-location-decisions/">NYU's The Economics Review</a></H6>
 						<H6> <a href="https://github.com/moorebryan/CoFFee-Shop-Blues">Inspired Github Project</a></H6>
 					</ResumeItem>
 
 					<ResumeItem>
-						<H6><b>On <Link to="/work">Band on the Run:</Link></b></H6>
+						<H6><b>On <Link to="/band-on-the-run/">Band on the Run:</Link></b></H6>
 
 						<H6> <a href="https://www.fastcompany.com/90162559/a-fascinating-look-at-how-musicians-tour-the-u-s">Fast Company</a></H6>
 					</ResumeItem>
@@ -171,77 +165,70 @@ const AboutPage = ({ data }) => {
 				<H5 paragraph><b>Testimonials</b></H5>
 				<QuoteBlock>
 					<H6>“Everyone is trying to do their own data visualization tools because the U.S. government is putting out basically nothing useful. But this at least as of today is the handiest thing I've seen so far to figure out basically what parts of country ought to be freaking out a little bit more than they are.”</H6>
-					<H6><b>— Rachel Maddow on <Link to="work">“The COVID Compiler”</Link></b></H6>
+					<H6><b>— Rachel Maddow on <Link to="/the-covid-19-compiler/">“The COVID Compiler”</Link></b></H6>
 				</QuoteBlock>
 
 				<QuoteBlock>
 					<H6> “I always enjoy seeing someone do the best version of a thing. This analysis is inspirational for anyone trying to come to a specific answer to a complicated problem.”</H6>
-					<H6><b>— Tristan Handy on my article <Link to="work">“The Next Wave”</Link></b></H6>
+					<H6><b>— Tristan Handy on my article <Link to="/the-next-wave/">“The Next Wave”</Link></b></H6>
 				</QuoteBlock>
 
-				<QuoteBlock>
-					<H6> “Mahir quote / Will Quote / Brian Quote”</H6>
-					<H6><b>— Mahir Yavuz</b></H6>
-				</QuoteBlock>
+				{/* <QuoteBlock> */}
+				{/* 	<H6> “Mahir quote / Will Quote / Brian Quote”</H6> */}
+				{/* 	<H6><b>— Mahir Yavuz</b></H6> */}
+				{/* </QuoteBlock> */}
 			</ResumeSection>
 			</div>
 			<ResumeSection>
 				<H5 paragraph><b>Skills</b></H5>
 
 				<MultiColumnLayout tw="col-count-2 xl:col-count-1">
-				<ResumeItem2 >
+				<ResumeItem2>
 					<H6>Software Skills</H6>
-					<H6> Javascript</H6>
-					<H6> ReactJS</H6>
-					<H6> Redux</H6>
-					<H6> Context API</H6>
-					<H6> Hooks</H6>
-					<H6> Babel</H6>
-					<H6> Webpack</H6>
-					<H6> ESLint</H6>
-					<H6> Suspense</H6>
-					<H6> HTML/CSS/LESS/SASS</H6>
-					<H6> React Native </H6>
-					<H6> React Native Web </H6>
-					<H6> Expo </H6>
-					<H6> RESTful APIs</H6>
-					<H6> GraphQL APIs </H6>
-					<H6> Apollo.js</H6>
-					<H6> DeckGL.js</H6>
-					<H6> GeoJson/TopoJson </H6>
-					<H6> S2/H3 Cells </H6>
-					<H6> D3.js</H6>
-					<H6> Mapbox</H6>
-					<H6> Gatsby</H6>
-					<H6> Auth0</H6>
-					<H6> Firebase</H6>
-					<H6> Node</H6>
-					<H6> Express</H6>
-					<H6> Python</H6>
-					<H6> GIT</H6>
-					<H6> AntDesign</H6>
-					<H6> Npm/Yarn</H6>
-					<H6> SQL</H6>
-					<H6> Java</H6>
-					<H6> Google Analytics</H6>
-					<H6> Heap Analytics</H6>
+					<H6>Javascript</H6>
+					<H6>React</H6>
+					<H6>GraphQL</H6>
+					<H6>Apollo</H6>
+					<H6>Gatsby</H6>
+					<H6>React Native</H6>
+					<H6>React Native Web</H6>
+					<H6>Expo</H6>
+					<H6>DeckGL.js</H6>
+					<H6>GeoJson/TopoJson</H6>
+					<H6>Mapbox</H6>
+					<H6>S2/H3 Cells</H6>
+					<H6>LESS/SASS</H6>
+					<H6>Webpack</H6>
+					<H6>Babel</H6>
+					<H6>Auth0</H6>
+					<H6>Firebase</H6>
+					<H6>Node</H6>
+					<H6>Express</H6>
+					<H6>AntDesign</H6>
+					<H6>Tailwind</H6>
+					<H6>Emotion</H6>
+					<H6>ESLint</H6>
+					<H6>Npm/Yarn</H6>
+					<H6>Python</H6>
+					<H6>SQL</H6>
+					<H6>and more...</H6>
 				</ResumeItem2>
 
 				<ResumeItem2>
 					<H6>Design Skills</H6>
 					<H6>Sketch</H6>
 					<H6>Figma</H6>
-					<H6>Data Visualization, </H6>
 					<H6>Photoshop</H6>
 					<H6>InDesign</H6>
+					<H6>Data Visualization</H6>
 					<H6>UX Research</H6>
 					<H6>Designing for Development</H6>
 				</ResumeItem2>
 
 				<ResumeItem2>
 					<H6>Other Skills</H6>
-					<H6>Bilingual: English & Spanish</H6>
-					<H6>Team Management & Delegation</H6>
+					<H6>Fluent Spanish</H6>
+					<H6>Team Management</H6>
 					<H6>Product Ideation and Planning</H6>
 					<H6>Data Science</H6>
 					<H6>Game Theoretic Modeling</H6>
@@ -249,8 +236,6 @@ const AboutPage = ({ data }) => {
 				</ResumeItem2>
 				</MultiColumnLayout>
 			</ResumeSection>
-			
-		{/* </MultiColumnLayout> */}
 		</MultiColumnLayout>
 	</PaddedContainer>
 )

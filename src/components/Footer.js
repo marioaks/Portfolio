@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from "gatsby";
-import { Caption, H3 } from "./Typography";
-import { PaddedContainer } from "./ui"
+import { Caption, H1, H2, H5, H3, H6 } from "./Typography";
+import { Fluid } from "./PostComponents/Fluid"
+import { PaddedContainer, Divider } from "./ui"
 import tw, { styled, css, theme } from "twin.macro";
 import Constants from "Config"
 import { useDarkMode } from "Context";
 import isPropValid from '@emotion/is-prop-valid'
 
 const StyledFooterLink = styled(Link, { shouldForwardProp: isPropValid })([
-	tw`py-sm lg:py-md  
+	tw`py-sm lg:py-md
 	   no-underline
-	   border-solid border-0 border-t-1 border-gray-light
+	   border-solid border-0 border-t-1 border-b-1 border-r-1 border-gray-light
 	   hover:text-primary
 	`,
 	css`
@@ -28,6 +29,7 @@ const StyledFooterLink = styled(Link, { shouldForwardProp: isPropValid })([
 ])
 
 const Copyright = styled(Caption)([
+	tw`text-left`,
 	props => !props.isDarkMode ? 
 	    css`color: ${theme('colors.gray.mid')} !important` 
 	    : css`color: ${theme('colors.background')} !important`
@@ -36,19 +38,14 @@ const Copyright = styled(Caption)([
 const Footer = () => {
 	const [isDarkMode] = useDarkMode()
 	return (
-			<div tw="grid grid-rows-4 mt-xl">
-				<StyledFooterLink isDarkMode={isDarkMode} className="blob-target" activeClassName="active" to="/"><PaddedContainer><H3 id="target" tw="ml-md sm:ml-lg md:ml-xl">Home</H3></PaddedContainer></StyledFooterLink>
-				<StyledFooterLink isDarkMode={isDarkMode} className="blob-target" activeClassName="active" to="/about/"><PaddedContainer><H3 id="target" tw="ml-md sm:ml-lg md:ml-xl">About</H3></PaddedContainer></StyledFooterLink>
-				<StyledFooterLink isDarkMode={isDarkMode} className="blob-target" activeClassName="active" to="/work/"><PaddedContainer><H3 id="target" tw="ml-md sm:ml-lg md:ml-xl">Work</H3></PaddedContainer></StyledFooterLink>
-				<StyledFooterLink isDarkMode={isDarkMode} className="blob-target" activeClassName="active" to="/contact/"><PaddedContainer><H3 id="target" tw="ml-md sm:ml-lg md:ml-xl">Contact</H3></PaddedContainer></StyledFooterLink>
-				<StyledFooterLink to="/" disabled>
-					<PaddedContainer>
-						<div tw="flex ml-md sm:ml-lg md:ml-xl">
-							<Copyright isDarkMode={isDarkMode}>{Constants.copyright}</Copyright>
-						</div>
-					</PaddedContainer>
-				</StyledFooterLink>
-			</div>
+		<PaddedContainer>
+				<div css={[tw`py-xl mt-xl grid grid-cols-4`, css`max-width: 400px; margin-left: auto; margin-right: auto`]}>
+					<Link tw="no-underline mt-xs" to="/"><H6 tw="text-center hover:opacity-75">Home</H6></Link>
+					<Link tw="no-underline mt-xs" to="/about/"><H6 tw="text-center hover:opacity-75">About</H6></Link>
+					<Link tw="no-underline mt-xs" to="/work/"><H6 tw="text-center hover:opacity-75">Work</H6></Link>
+					<Link tw="no-underline mt-xs" to="/contact/"><H6 tw="text-center hover:opacity-75">Contact</H6></Link>
+				</div>
+		</PaddedContainer>
 	)
 }
 

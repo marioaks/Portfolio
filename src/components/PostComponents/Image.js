@@ -10,7 +10,7 @@ export const Caption = tw(DefaultCaption)`mt-xs opacity-75`
 
 const UnstyledImg = ({fluid, original, src, caption, alt, ...props}) => {
 	const { lg, xl, xxl } = props
-	const Image = fluid ? <Zoom wrapStyle={{width: '100%'}}><GatsbyImg tw="w-full" fluid={fluid} original={original} alt={alt ?? caption ?? ""}/></Zoom> : <Zoom tw="w-full"><img tw="w-full" src={src} alt={alt ?? caption ?? ""}/></Zoom>
+	const Image = fluid ? <Zoom wrapStyle={{width: '100%', height: '100%'}}><GatsbyImg tw="w-full h-full" fluid={fluid} original={original} alt={alt ?? caption ?? ""}/></Zoom> : <Zoom tw="w-full h-full"><img tw="w-full h-full" src={src} alt={alt ?? caption ?? ""}/></Zoom>
 	const ImageWithCaption = (
 		<> {Image}
 		   {caption && <Caption tw="opacity-75">{caption}</Caption>} 
@@ -22,7 +22,7 @@ const UnstyledImg = ({fluid, original, src, caption, alt, ...props}) => {
 }
 
 export const Img = styled(UnstyledImg)(({xs, sm, md, lg, xl, xxl}) => [
-	css`margin-bottom: ${theme('spacing.md')}; margin-top: ${theme('spacing.md')}; & div {width: 100%;}`,
+	css`margin-bottom: ${theme('spacing.md')}; margin-top: ${theme('spacing.md')}; & div {width: 100%; height: 100%}`,
 	xs && css`max-width:${sizes['xs']}`,
 	sm && css`max-width:${sizes['sm']}`,
 	md && css`max-width:${sizes['md']}`,

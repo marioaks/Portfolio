@@ -34,15 +34,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
 	  	if (Object.prototype.hasOwnProperty.call(node, 'frontmatter')) {
 		  	if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')) slug = `/${_.kebabCase(node.frontmatter.slug)}`;
-		  	if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
-		  		const date = moment(node.frontmatter.date, Constants.dateFromFormat);
-		  		if (!date.isValid) console.warn(`WARNING: Invalid date.`, node.frontmatter);  
-		  		createNodeField({ 
-		  			node, 
-		  			name: 'date', 
-		  			value: date.toISOString() 
-		  		});
-		  	}
+		  	// if (Object.prototype.hasOwnProperty.call(node.frontmatter, 'date')) {
+		  	// 	const date = moment(node.frontmatter.date, Constants.dateFromFormat);
+		  	// 	if (!date.isValid) console.warn(`WARNING: Invalid date.`, node.frontmatter);  
+		  	// 	createNodeField({ 
+		  	// 		node, 
+		  	// 		name: 'date', 
+		  	// 		value: date.toISOString() 
+		  	// 	});
+		  	// }
 		}
 	}
 	createNodeField({ 
@@ -62,7 +62,10 @@ exports.createPages = async function ({ actions, graphql, reporter }) {
 
   const { data: postsData } = await graphql(`
     query getAllMdxPosts {
-      allMdx(filter: {fileAbsolutePath: {regex: "/posts/"}}, sort: {fields: [frontmatter___order], order: ASC}) {
+      allMdx(filter: {
+      	fileAbsolutePath: {regex: "/posts/"},
+      	frontmatter: {hidden: { ne: true }}
+      }, sort: {fields: [frontmatter___order], order: ASC}) {
         edges {
           node {
             id
@@ -95,10 +98,14 @@ exports.createPages = async function ({ actions, graphql, reporter }) {
   posts.forEach(({ node }, index) => {
   	const { id, fields: { slug } } = node;
 
-  	const sortedByRelevance = [...posts].sort((a, b) => (
-  		(commonCategories(b.node.frontmatter.categories, node.frontmatter.categories) / b.node.frontmatter.categories.length)
-  		- (commonCategories(a.node.frontmatter.categories, node.frontmatter.categories) / a.node.frontmatter.categories.length)
-  	)).filter(p => p.node.id !== id)
+  	const sortedByRelevance = [...posts].sort((a, b) => {
+  		if (!b.node.frontmatter.categories) return -1;
+  		if (!a.node.frontmatter.categories) return 1;
+  		return (
+  			(commonCategories(b.node.frontmatter.categories, node.frontmatter.categories) / b.node.frontmatter.categories.length)
+	  		- (commonCategories(a.node.frontmatter.categories, node.frontmatter.categories) / a.node.frontmatter.categories.length)
+	  	)
+  	}).filter(p => p.node.id !== id)
 
   	const relevantPosts = sortedByRelevance.slice(0, 4).sort((a, b) => a.node.frontmatter.order - b.node.frontmatter.order)
   	// const nextIndex = index + 1 < posts.length ? index + 1 : 0;

@@ -18,6 +18,7 @@ export const a = StyledA
 
 const collabLinks = {
 	"Topos": "https://topos.com",
+	"Bo Han": "https://www.linkedin.com/in/bohan2/",
 	"Will Shapiro": "https://www.linkedin.com/in/will-shapiro-ba2477aa/",
 	"Mahir Yavuz": "https://mahiryavuz.com/",
 	"Ria McIlwraith": "http://lovefromria.com/",
@@ -35,13 +36,15 @@ const StyledInfoText = styled(H6)([
 
 export const PostHeader = ({title, subtitle, date, company, collaborators, categories}) => (
 	<>
-		<H1 tw="my-xl">{title}</H1>
-		<StyledInfoText tw="mb-sm">{date}</StyledInfoText>
+		<H1 css={[
+			!subtitle && !date && !company && !collaborators && !categories ? tw`mt-xl` : tw`my-xl`
+		]}>{title}</H1>
+		{date && <StyledInfoText tw="mb-sm">{date}</StyledInfoText>}
 
 		<MultiColumnLayout  css={[tw`mb-lg xl:col-count-2 lg:col-count-2`, css`max-width: 600px; column-gap: 4rem`]}>
 			{company && <StyledInfoText><b>Company:</b> <StyledA href={collabLinks[company] ?? null}>{company}</StyledA></StyledInfoText>}
 			{collaborators && <StyledInfoText><b>Collaborators:</b> {collaborators.map((c, i) => <StyledA href={collabLinks[c] ?? null}>{`${c}${i < collaborators.length - 1 ? ", " : ''}`}</StyledA>)}</StyledInfoText>}
-			<StyledInfoText tw="capitalize"><b>Roles: </b> {categories.map(c => c.replace(/-/g, ' ')).join(", ")}</StyledInfoText>
+			{categories && <StyledInfoText tw="capitalize"><b>Roles: </b> {categories.map(c => c.replace(/-/g, ' ')).join(", ")}</StyledInfoText> }
 		</MultiColumnLayout>
 		<H4 tw="mt-sm">{subtitle}</H4>
 		<Divider/>

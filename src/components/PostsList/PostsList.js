@@ -5,15 +5,15 @@ import { Link } from "gatsby"
 import { H2, H5 } from "Components";
 import tw, { styled, theme, css } from "twin.macro"
 
-const PostsList = ({ posts, maxImgWidth=900, minImgWidth=400 }) => {
+const PostsList = ({ posts, maxImgWidth=900, minImgWidth=500 }) => {
   	useParallax(posts)
 
   	const postsWithSize = useCallback(posts.map(p => ({
 	  	...p,
 	  	width: Math.floor(Math.random() * (maxImgWidth - minImgWidth + 1) + minImgWidth),
 	  	margin: {
-	  		left: 1,//(Math.random() * 6) + .2,
-	  		right: 1//(Math.random() * 6) + .2
+	  		left: 1.4,//(Math.random() * 6) + .2,
+	  		right: 1.4//(Math.random() * 6) + .2
 	  	}
 	})), [posts])
 
@@ -22,10 +22,11 @@ const PostsList = ({ posts, maxImgWidth=900, minImgWidth=400 }) => {
 		props => css`
 			display: inline-block;
 		  	max-width: 100%;
-			width: ${props.width}px;
+			width: ${props.width * .7}px;
 			opacity: 0;
 	  		margin: 0 ${props.margin.left}rem 4rem ${props.margin.right}rem;
 	  		transition: opacity .7s, filter .3s;
+	  		/*zoom: .7;*/
 	  		&:hover {
 	  			filter: opacity(.75);
 	  		}
@@ -34,10 +35,18 @@ const PostsList = ({ posts, maxImgWidth=900, minImgWidth=400 }) => {
 			@media only screen and (max-width: ${theme('screens.xl.min')}) {
 		  		width: 100% !important;
 		  		margin: 0 0 5rem !important;
+		  		/*zoom: 1;*/
 		  		&:hover {
 		  			filter: none;
 		  		}
 		  	}
+		  	@media only screen and (min-width: 1500px) {
+		  		zoom: 1.1;
+		  	}
+		  	@media only screen and (min-width: 1800px) {
+		  		zoom: 1.3;
+		  	}
+
 		`
 	])
 

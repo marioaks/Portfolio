@@ -1,0 +1,248 @@
+---
+name: "Archive"
+
+title: "Archive"
+
+order: 14
+thumbnail: media/thumbnail.png
+
+embeddedImages:
+  - media/adaptive-s2/adaptive-s2-chicago.png
+  - media/adaptive-s2/adaptive-s2-nyc.png
+  - media/adaptive-s2/adaptive-s2-us.png
+  - media/adaptive-s2/s2-cells.png
+  - media/behavery/behavery-library.jpg 
+  - media/behavery/behavery.png 
+  - media/covid-beyond-counties/covid-beyond-counties-3d-animation.gif
+  - media/covid-beyond-counties/covid-beyond-counties-3d-grid.png
+  - media/covid-beyond-counties/covid-beyond-counties-chicago.png
+  - media/covid-beyond-counties/covid-beyond-counties-nyc.png
+  - media/covid-university/covid-university-campus.png 
+  - media/covid-university/covid-university-city.png 
+  - media/covid-university/covid-university-nation.png 
+  - media/covid-university/covid-university.jpg 
+  - media/explore/explore-address-report.png 
+  - media/explore/explore-clusters.png 
+  - media/explore/explore-neighborhood-page.png 
+  - media/explore/explore-similarities.png 
+  - media/explore/explore.png 
+  - media/micro-neighborhoods/micro-neighborhoods.png 
+  - media/micro-neighborhoods/micro-neighborhoods-nyc.jpeg
+  - media/micro-neighborhoods/micro-neighborhoods-nyc-outline.jpeg
+  - media/micro-neighborhoods/micro-neighborhoods-zoomed.jpeg
+  - media/micro-neighborhoods/micro-neighborhoods-zoomed-2.jpeg
+  - media/graphic-design/museum-poster-1.jpg
+  - media/graphic-design/museum-poster-2.jpg
+  - media/graphic-design/saturn.jpg 
+  - media/graphic-design/surfer.gif
+  - media/performance/performance-animation.gif
+  - media/performance/performance.png
+  - media/x/x-distances.gif 
+  - media/x/x-real-estate.gif 
+  - media/x/x-thresholds.gif 
+  - media/x/x.png 
+
+---
+
+	### 1) Visualizing COVID-19 Beyond Counties
+	###### **Roles:** Data Visualization  //  **Collaborators:** Eric Buth
+
+	While most COVID-19 data is being reported at the county level, visualizing data at this level can be problematic. Counties accross the country have arbitrary geometries and can often misrepresent the actual numbers. This happens particularly in large rural counties that also have small urban areas.
+
+	Using Eric Buth's algorithm for disaggregating county-level data, I was able to make some map visualizations that represented COVID-19 cases in a more honest way. 
+
+	To read more about the process, read this [article](https://medium.com/topos-ai/visualizing-covid-19-beyond-counties-d1026e5c7efa).
+
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.covidBeyondCountiesNyc}/>
+		<Img {...props.embeddedImages.covidBeyondCountiesChicago}/>
+	</FlexImages>
+	<Img xxl {...props.embeddedImages.covidBeyondCounties3DAnimation}/>
+
+	---
+
+	<Divider/>
+
+	---
+
+	### 2) X: Distance Based Recommendations
+	###### **Roles:** Product Design, Front-End Development, Algorithm Design, and Data Visualization  //  **Collaborators:** Eric Buth, Mahir Yavuz
+
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.xDistances}/>
+		<Img {...props.embeddedImages.xThresholds}/>
+	</FlexImages>
+
+	This was a prototype I designed and built using React, Deck.GL, and Google's S2 cell library. By calculating n^2 subway, drive, and walk travel time distances between hundreds of thousands of points in New York City and Charleston, I was able to make an app that visually highlights all the places that meet a certain set of distance criteria. For example, as a user, I would be able to find all the places in the city that are within a 20 minute subway ride from a public school, a 10 minute walk from a park, a 10 minute drive from my favorite restaurant, and a 15 minute subway ride from my job.
+
+	
+
+	<Img xxl {...props.embeddedImages.x}/>
+
+	Using the same technologies, I built a version of this prototype for Residential Real Estate in Charleston. This version had an added recommendation algorithm that scored properties based on the number of distance criteria each one satisfied. 
+
+	<Img {...props.embeddedImages.xRealEstate}/>
+
+
+	---
+
+	<Divider/>
+
+	---
+
+
+	### 3) Adaptive S2 Cells
+	###### **Roles:** Algorithm Design  //  **Collaborators:** Eric Buth
+
+	<Img xl {...props.embeddedImages.adaptiveS2Us}/>
+
+
+
+    When building [FIT](/fit), my coworkers and I were discussing how to build a model that recommended the georaphic locations for where a brand should open up a new store based on it's previous site-selection patterns.
+
+    A first iteration of this model involved counting up all of the points of interest in the Census Block Groups in the US and generating a model that recommended CBGs to brands based on their brand composition. Gucci might be recommended CBGs with lots of high-end fashion and a local coffee shop might be recommended CBGs with lots of other local food options. 
+
+    The main problem that we had with this initial version of the algorithm was that CBGs simply aren't a great geographic unit for these recommendations. The reason comes down to normalization. CBGs are designed to contain approximately 600 to 3,000 people — CBGs in rural areas tend to be larger than those in urban areas. While this means using CBGs as classes is better than using Zipcodes or Counties for example, when trying to score locations based on commercial activity, residential population density based regions don't really give us a good apples to apples comparisson between places. Though all CBGs have roughly the same population, they don't have roughly the same commercial activity. Therefore, the CBGs in our algorithm will not be scored perfectly. 
+
+    ---
+
+    ##### **A better solution**
+
+
+
+    <Wrap>
+
+      <Img {...props.embeddedImages.s2Cells}/>
+
+      Rather than using CBGs that partition the US by population density, what if we could partition the US ourselves based on commercial density. The idea Eric Buth and I came up with was one that utilized [Google's S2 Cell library](https://s2geometry.io/devguide/s2cell_hierarchy.html). S2 cells are a great technological innovation because they are a useful for making spacial indexes that speed up point level databases and for approximating regions as a collection of cells.
+    </Wrap>
+
+    The algorithm goes as follows: Starting with the s2 cell that fully covers the US, recursively divide each cell into 4 equal sub-cells if it has more than X number of stores in it. If the cell has fewer than X stores, leave the cell as is. Once the recurssion is done, we will have an S2 covering of the nation where every cell has fewer than X stores. Next, we can remove all computed cells with fewer than Y stores in order to get rid of the areas that have little to no commercial activity. Now, each computed S2 cell has a roughly equal commercial density value between X and Y and can be used in a classification model like the one in [FIT](/fit). This algorithm helps to break down extremely dense commercial areas and get much more granular recommendations. 
+
+    <FlexImages>
+	    <Img {...props.embeddedImages.adaptiveS2Chicago} caption="Adaptive cell covering in Chicago"/>
+	    <Img {...props.embeddedImages.adaptiveS2Nyc} caption="Adaptive cell covering in New York City"/>
+	</FlexImages>
+
+    ---
+
+    ##### **Other Uses For Adaptive S2 Coverings**
+
+    This adaptive s2 cell covering algorithm can be used for all sorts of modeling exersizes where regions should be defined by discrete points. An example of this would be defining regions by mobile phone geolocation pings to generate regions normalized by daytime population rather than residential population. This could be used to figure out the best place to put up a billboard for example. Alternatively, you could use this algorithm to generate geolocation predictions for photographs or social media posts. Computing regions with the same number of hospitals, schools, or subways in them may also prove useful in a urban planning function.
+
+    One reason for why this normalization technique might not be useful is if census data also needs to be taken into account. If, for example, you had zipcode-level data that you wanted to use in your model, that data would have to be disaggregated into the new cell regions that were created. While there are certainly way to do this, it definitely presents a very real challenge. 
+
+	---
+
+	<Divider/>
+
+	---
+
+
+	### 4) COVID-19 University Tracker
+	###### **Roles:** Product Design & Front-End Development  //  **Collaborators:** Samuel Coxon, Mahir Yavuz
+	<FlexImages xl>
+		<Img {...props.embeddedImages.covidUniversityCity}/>
+		<Img {...props.embeddedImages.covidUniversityNation}/>
+	</FlexImages>
+
+	<Img xl {...props.embeddedImages.covidUniversityCampus}/>
+
+	This is a prototype I made for Samsung in order to track COVID-19 cases in universities. The app has three different pages:
+
+	1. Nationwide page: Meant for tracking where students are traveling to and from around the nation. This is visualized using an arc map — each arc is colored and scaled based on both the number of students traveling and how risky the place they are traveling to/from is.
+
+	2. Citywide page: Meant for tracking where students live around the city and overlaying that with zipcode-level COVID-19 data. 
+
+	3. Campuswide page: Meant for tracking COVID-19 on campus — where the people who are infected are quarantining, where the testing sites are, where buildings that don't have proper ventilation are, where the classrooms that haven't been sanitized yet are, and more.
+
+	---
+
+	<Divider/>
+
+	---
+
+	### 5) Micro-neighborhoods of NYC
+	###### **Roles:** Data Science & Data Visualization  //  **Collaborators:** Mahir Yavuz
+
+	Breaking down NYC neighborhoods by clustering [S2 cells](https://s2geometry.io/devguide/s2cell_hierarchy.html) based on their distances to multiple points of interest. The output is a new map with much more granular NYC neighborhoods. This work was the inspiration for a lot of future work at Topos. 
+	
+	<FlexImages xl>
+		<Img {...props.embeddedImages.microNeighborhoodsNyc}/>
+		<Img {...props.embeddedImages.microNeighborhoodsZoomed}/>
+	</FlexImages>
+	<FlexImages xl>
+		<Img {...props.embeddedImages.microNeighborhoodsZoomed2}/>
+		<Img {...props.embeddedImages.microNeighborhoodsNycOutline}/>
+	</FlexImages>
+
+	---
+
+	<Divider/>
+
+	---
+
+	### 2) Explore
+	###### **Roles:** Product Design & Front-End Development  //  **Collaborators:** Eric Buth, Mahir Yavuz, Will Shapiro
+
+	This is an app I designed and built using React, D3, Mapbox, and Turf.js in order to explain and visualize hundreds of thousands of census-derived metrics in a multitude of ways. The app consisted of five pages:
+
+	1. Feature Explorer: Exploring zipcode census data in all the major cities in the US.
+	2. Neighborhood Explorer: Exploring all of the census metrics for one specific zipcode.
+	3. Address Report: Getting census, transit, traffic, and POI data about a specific address
+	4. Similarities: Finding the most similar zipcodes between cities based on a different types of metrics. I.e. showing the most similar zipcodes to Williamsburg in Austin, Texas.
+	5. Clusters: Grouping a city's zipcodes by how similar they are to each other. 
+
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.exploreSimilarities}/>
+		<Img {...props.embeddedImages.exploreClusters}/>
+	</FlexImages>
+	<FlexImages xxl>
+		<Img {...props.embeddedImages.exploreNeighborhoodPage}/>
+		<Img {...props.embeddedImages.exploreAddressReport}/>
+		
+	</FlexImages>
+	
+
+	---
+
+	<Divider/>
+
+	---
+
+	### 3) Performance
+	###### **Roles:** Product Design & Front-End Development  //  **Collaborators:** Carlo Bailey, Mahir Yavuz, Ria McIlwraith
+
+	This is an app I designed and built meant to provide businesses with address-level revenue predictions for prospective store locations. By inputting existing store revenue data, a client could get revenue predictions for a set of new addresses.
+
+	<Img xl {...props.embeddedImages.performance}/>
+
+	<Img {...props.embeddedImages.performanceAnimation}/>
+	
+	---
+
+	<Divider/>
+
+	---
+
+	<BehaveryMdx/>
+
+
+	### 7) Graphic Design Projects
+
+	---
+	##### **Hand-Drawn Surfer Animation**
+	<Img {...props.embeddedImages.surfer}/>
+
+	---
+	##### **Saturn Flag**
+	<Img {...props.embeddedImages.saturn}/>
+
+
+	---
+	##### **Street Museum of Art Posters**
+	<FlexImages xl>
+		<Img {...props.embeddedImages.museumPoster1}/>
+		<Img {...props.embeddedImages.museumPoster2}/>
+	</FlexImages>
+
