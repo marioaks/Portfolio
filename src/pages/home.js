@@ -37,7 +37,7 @@ const PostsLinkStyle = [
   // tw`font-header-sans font-bold xs:mt-lg`,
   css`
     /*word-break: break-all;*/
-    max-width: 550px;
+    max-width: 505px;
     letter-spacing: -0.05rem;
     zoom: 1.4;
   `
