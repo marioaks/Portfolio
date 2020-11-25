@@ -1,2 +1,2 @@
-export GlobalLayout from "./global"
-export RootLayout from "./root"
+export GlobalLayout from './global';
+export RootLayout from './root';

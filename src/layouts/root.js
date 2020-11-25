@@ -1,36 +1,39 @@
-import React, { useEffect } from "react"
-import ContextProvider from "Context";
-import { Global } from "@emotion/core"
-import { fontFaces, styles } from "Config"
-import { useDarkMode} from 'Context';
+import React, { useEffect } from 'react';
+import ContextProvider, { useDarkMode } from 'Context';
+import { Global } from '@emotion/core';
+import { fontFaces, styles } from 'Config';
 
-const DarkModeProvider = ({children}) => {
-  const [ isDarkMode ] = useDarkMode()
+import { SEO } from 'Components';
 
-  useEffect(() => {
-    document.documentElement.classList.add(isDarkMode ? 'dark-mode' : 'light-mode');
-    document.documentElement.classList.remove(isDarkMode ? 'light-mode' : 'dark-mode');
+const DarkModeProvider = ({ children }) => {
+	const [isDarkMode] = useDarkMode();
 
-    return function cleanup() {
-      document.documentElement.classList.remove('dark-mode');
-      document.documentElement.classList.remove('light-mode');
-    };
-  }, [isDarkMode]);
+	useEffect(() => {
+		document.documentElement.classList.add(isDarkMode ? 'dark-mode' : 'light-mode');
+		document.documentElement.classList.remove(isDarkMode ? 'light-mode' : 'dark-mode');
 
-  return <>{children}</>
-}
+		return function cleanup() {
+			document.documentElement.classList.remove('dark-mode');
+			document.documentElement.classList.remove('light-mode');
+		};
+	}, [isDarkMode]);
+
+	return <>{children}</>;
+};
 
 const RootLayout = ({ element }) => {
-
 	return (
 		<ContextProvider>
 			<DarkModeProvider>
-				{fontFaces.map(fontFace => <Global key={fontFace.src} styles={{"@font-face": fontFace}}/>)}
-				<Global styles={styles}/>
+				<SEO />
+				{fontFaces.map(fontFace => (
+					<Global key={fontFace.src} styles={{ '@font-face': fontFace }} />
+				))}
+				<Global styles={styles} />
 				{element}
 			</DarkModeProvider>
 		</ContextProvider>
-	)
-}
+	);
+};
 
-export default RootLayout
+export default RootLayout;

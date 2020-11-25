@@ -1,16 +1,12 @@
-import React from "react"
-import { Navbar, Footer, NavBlob } from "Components";
+import React from 'react';
+import { Navbar, Footer } from 'Components';
 
-const GlobalLayout = ({ element, props }) => (
-  <div>
-    {/* <SEO />  */}
-    {/* <GrainyBackground/> */}
-    {/* <NavBlob pathname={props.location.pathname}/> */}
-    <Navbar/>
-    {element}
-    <Footer/>
-  </div>
-)
+const GlobalLayout = ({ element }) => (
+	<div>
+		<Navbar />
+		{element}
+		<Footer />
+	</div>
+);
 
-
-export default GlobalLayout
+export default GlobalLayout;

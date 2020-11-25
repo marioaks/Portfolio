@@ -1,5 +1,5 @@
 lintMarkdown() {
-	remark posts/
+	remark src/posts/
 }
 
 lintCode() {

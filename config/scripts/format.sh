@@ -2,7 +2,7 @@ formatCode() {
 	node_modules/.bin/prettier \
 	--config config/lint/.prettierrc \
 	--ignore-path .gitignore \
-	--write ${@:-'**/*.{js, jsx, html, md, json}'}
+	--write ${@:-'**/*.{js, jsx, html, md, mdx, json}'}
 }
 
 formatStyles() {

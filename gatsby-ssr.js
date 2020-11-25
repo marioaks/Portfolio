@@ -1,4 +1,4 @@
-import { GlobalLayout, RootLayout } from "Layouts";
+import { GlobalLayout, RootLayout } from 'Layouts';
 
-export const wrapRootElement = RootLayout
-export const wrapPageElement = GlobalLayout
+export const wrapRootElement = RootLayout;
+export const wrapPageElement = GlobalLayout;

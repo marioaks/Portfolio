@@ -1,6 +1,6 @@
-import tw, { styled } from 'twin.macro'
+import tw, { styled } from 'twin.macro';
 
-export const H1 = styled.h1(({paragraph, primary}) => [
+export const H1 = styled.h1(({ paragraph, primary }) => [
 	tw`
 		font-header-serif 
 		text-header-1 
@@ -15,9 +15,9 @@ export const H1 = styled.h1(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-header-1xs xs:mb-header-1xs`,
 	primary && tw`text-primary`
-])
+]);
 
-export const H2 = styled.h2(({paragraph, primary}) => [
+export const H2 = styled.h2(({ paragraph, primary }) => [
 	tw`
 		font-header-serif 
 		text-header-2
@@ -32,9 +32,9 @@ export const H2 = styled.h2(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-header-2 xs:mb-header-2xs`,
 	primary && tw`text-primary`
-])
+]);
 
-export const H3 = styled.h3(({paragraph, primary}) => [
+export const H3 = styled.h3(({ paragraph, primary }) => [
 	tw`
 		font-header-sans 
 		text-header-3
@@ -46,9 +46,9 @@ export const H3 = styled.h3(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-header-3`,
 	primary && tw`text-primary`
-])
+]);
 
-export const H4 = styled.h4(({paragraph, primary}) => [
+export const H4 = styled.h4(({ paragraph, primary }) => [
 	tw`
 		font-body-serif 
 		text-header-4
@@ -60,9 +60,9 @@ export const H4 = styled.h4(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-header-4`,
 	primary && tw`text-primary`
-])
+]);
 
-export const H5 = styled.h4(({paragraph, primary}) => [
+export const H5 = styled.h4(({ paragraph, primary }) => [
 	tw`
 		font-header-sans 
 		text-header-5
@@ -74,9 +74,9 @@ export const H5 = styled.h4(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-header-5`,
 	primary && tw`text-primary`
-])
+]);
 
-export const H6 = styled.h4(({paragraph, primary}) => [
+export const H6 = styled.h4(({ paragraph, primary }) => [
 	tw`
 		font-header-sans 
 		text-header-6
@@ -88,9 +88,9 @@ export const H6 = styled.h4(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-header-6`,
 	primary && tw`text-primary`
-])
+]);
 
-export const P1 = styled.p(({paragraph, primary}) => [
+export const P1 = styled.p(({ paragraph, primary }) => [
 	tw`
 		font-body-serif 
 		text-body-1
@@ -102,9 +102,9 @@ export const P1 = styled.p(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-body-1`,
 	primary && tw`text-primary`
-])
+]);
 
-export const P2 = styled.p(({paragraph, primary}) => [
+export const P2 = styled.p(({ paragraph, primary }) => [
 	tw`
 		font-body-sans 
 		text-body-2
@@ -116,9 +116,9 @@ export const P2 = styled.p(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-body-2`,
 	primary && tw`text-primary`
-])
+]);
 
-export const Quote = styled.p(({paragraph, primary}) => [
+export const Quote = styled.p(({ paragraph, primary }) => [
 	tw`
 		font-body-serif 
 		text-body-quote
@@ -132,9 +132,9 @@ export const Quote = styled.p(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-body-quote`,
 	primary && tw`text-primary`
-])
+]);
 
-export const Caption = styled.p(({paragraph, primary}) => [
+export const Caption = styled.p(({ paragraph, primary }) => [
 	tw`
 		font-body-serif 
 		text-body-imageCaption
@@ -146,4 +146,4 @@ export const Caption = styled.p(({paragraph, primary}) => [
 	`,
 	paragraph && tw`mb-body-imageCaption`,
 	primary && tw`text-primary`
-])
+]);

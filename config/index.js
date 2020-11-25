@@ -1,6 +1,7 @@
-import Constants from "./constants";
+import Constants from './constants';
 
-export default Constants
-export styles from "./style/globalStyles"
-export fontFaces from "./style/fontFaces"
-export tailwindConfig from "./style/tailwind.config"
+export styles from './style/globalStyles';
+export fontFaces from './style/fontFaces';
+export tailwindConfig from './style/tailwind.config';
+
+export default Constants;

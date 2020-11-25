@@ -12,9 +12,24 @@
     }]
   },
   "settings": {
-    "import/core-modules": []
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["Assets", "./static/assets"],
+          ["Config", "./config"],
+          ["Posts", "./src/posts"],
+          ["Components", "./src/components"],
+          ["Pages", "./src/pages"],
+          ["Layouts", "./src/layouts"],
+          ["Utils", "./src/utils"],
+          ["Context", "./src/context"]
+        ],
+        "extensions": [".js", ".jsx", ".json", ".less", ".md", ".mdx", ".html"]
+      }
+    }
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   }
 }
