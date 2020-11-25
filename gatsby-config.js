@@ -2,8 +2,6 @@ const urljoin = require('url-join');
 const path = require('path');
 const Constants = require('./config/constants');
 
-const activeEnv = process.env.GATSBY_ACTIVE_ENV ?? process.env.NODE_ENV ?? 'development';
-
 module.exports = {
 	pathPrefix: Constants.pathPrefix === '' ? '/' : Constants.pathPrefix,
 	siteMetadata: {
@@ -95,8 +93,8 @@ module.exports = {
 		{
 			resolve: 'gatsby-plugin-heap',
 			options: {
-				appId: activeEnv === 'development' ? Constants.heapAnalyticsIdDev : Constants.heapAnalyticsId,
-				enableOnDevMode: true // if 'false', heap will be fired on NODE_ENV=production only
+				appId: process.env.NODE_ENV === 'production' ? Constants.heapAnalyticsId : Constants.heapAnalyticsIdDev,
+				enableOnDevMode: false // if 'false', heap will be fired on NODE_ENV=production only
 			}
 		},
 		{
