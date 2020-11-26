@@ -68,67 +68,64 @@ const AboutPage = ({ data }) => {
 						<ResumeItem>
 							<ResumeItemHeader isDarkMode={isDarkMode}>
 								<H5 className='header'>Lead UX/UI Developer, Topos</H5>
-								<H6 className='subheader'> New York, NY | 2017 - 2020</H6>
+								<H6 className='subheader'>New York, NY | Jun. 2017 – Sept. 2020 </H6>
 							</ResumeItemHeader>
-							<H6> As first employee, established company’s front-end development processes — tech stack, best practices, and hiring approach.</H6>
-							<H6>
-								{' '}
-								Led front-end team in development of 10+ production-level React applications; built products for leading companies in Commercial Real Estate, Retail, Technology,
-								and Public Health.
-							</H6>
-							<H6> Member of three-person product team that roadmapped and managed all new and existing products – served as team’s technical voice.</H6>
-							<H6> Built Covid-19 Compiler featured extensively on the Rachel Maddow Show. User base in the hundreds of thousands at it's peak.</H6>
-							<H6> Ideated, designed, and developed geospatial front-end prototypes from scratch, aiming to find product-market fit. </H6>
-							<H6> Created multiple algorithms for optimizing store locations — one awaiting patent.</H6>
-							<H6> Contributed to the research and writing of various articles on the Topos Blog.</H6>
+							<H6>Established as first employee company’s front-end development processes: tech stack, best practices, and hiring approach. </H6>
+							<H6>Led front-end team in development of 10+ production-level React applications; built products for leading companies in Commercial Real Estate, Retail, Technology, and Public Health. </H6>
+							<H6>Roadmapped and managed all new and existing products as member of product team – served as team’s technical voice.</H6>
+							<H6>Built Covid-19 Compiler featured extensively on the Rachel Maddow Show. User base in hundreds of thousands at its peak. </H6>
+							<H6>Ideated, designed, and developed geospatial front-end prototypes from scratch, aiming to find product-market fit.</H6>
+							<H6>Designed multiple algorithms for optimizing store locations – one awaiting patent.</H6>
+							<H6>Contributed to research and writing of various articles on Topos Blog. </H6>
+
 						</ResumeItem>
 
 						<ResumeItem>
 							<ResumeItemHeader isDarkMode={isDarkMode}>
 								<H5 className='header'>Product Designer, Behavery</H5>
-								<H6 className='subheader'>Philadelphia, PA | 2016 - 2017</H6>
+								<H6 className='subheader'>Philadelphia, PA | Sept. 2016 – Apr. 2017</H6>
 							</ResumeItemHeader>
-							<H6> Redesigned and reinvented entire front-end for Behavery App.</H6>
-							<H6> Created design prototypes that helped secure funding from Gates Foundation in Oct. 2016.</H6>
+							<H6>Redesigned and reinvented entire front-end for Behavery App.</H6>
+							<H6>Created design prototypes that helped secure funding from Gates Foundation in Oct. 2016. </H6>
+
 						</ResumeItem>
 
 						<ResumeItem>
 							<ResumeItemHeader isDarkMode={isDarkMode}>
 								<H5 className='header'>Chief Financial Officer, ILMUNC</H5>
-								<H6 className='subheader'>Philadelphia, PA | 2014 - 2017</H6>
+								<H6 className='subheader'>Philadelphia, PA | Oct. 2014 – Dec. 2017</H6>
 							</ResumeItemHeader>
-							<H6> Oversaw all matters related to business development, financial planning, and marketing. Managed $350,000 in annual revenue </H6>
-							{/* <H6> Held profit & loss responsibilities for the educational nonprofit.</H6> */}
-							<H6> Formalized legal and accounting processes by hiring bookkeepers, accountants, and lawyers </H6>
-							{/* <H6> Led contract negotiations and managed relationships with key partners including University of Pennsylvania, World Strides (backed by Carlyle Group), and travel partners from India, Brazil, and China </H6> */}
-							{/* <H6> Elected to Board of Directors after raising sponsorship revenues by 100%</H6> */}
+							<H6>Managed $350K in annual revenue and oversaw all matters related to business development, financial planning, and marketing. </H6>
+							<H6>Formalized legal and accounting processes by hiring bookkeepers, accountants, and lawyers.</H6>
+
 						</ResumeItem>
 
 						<ResumeItem>
 							<ResumeItemHeader isDarkMode={isDarkMode}>
 								<H5 className='header'>Head TA for Intro to Decision Theory, Univeristy of Pennsylvania</H5>
-								<H6 className='subheader'>Philadelphia, PA | 2017</H6>
+								<H6 className='subheader'>Philadelphia, PA | Jan. 2017 – May 2017</H6>
 							</ResumeItemHeader>
-							<H6> Aided Dr. Sumantra Sen in all course matters</H6>
-							<H6> Graded all homeworks, midterms, and finals</H6>
+							<H6> Aided Dr. Sumantra Sen in all course matters. Graded all homework, midterms, and finals.</H6>
 						</ResumeItem>
 
 						<ResumeItem>
 							<ResumeItemHeader isDarkMode={isDarkMode}>
 								<H5 className='header'>Research Assistant, University of Pennsylvania</H5>
-								<H6 className='subheader'>Philadelphia, PA | 2017</H6>
+								<H6 className='subheader'>Philadelphia, PA | Jan. 2017 – Apr. 2017</H6>
 							</ResumeItemHeader>
-							<H6> Programmed web scrapers to measure monthly traffic data for peer-to-peer companies and services in hundreds of countries. </H6>
-							<H6> Collected data went into the first global index of the Sharing Economy. </H6>
+							<H6>Worked under Dr. Alexander Funke programming web scrapers to measure traffic data for peer-to-peer companies and services.</H6>
+							<H6>Collected data helped build first global index of the Sharing Economy.</H6>
+
 						</ResumeItem>
 
 						<ResumeItem>
 							<ResumeItemHeader isDarkMode={isDarkMode}>
 								<H5 className='header'>Software Engineering Intern, ListenFirst Media</H5>
-								<H6 className='subheader'>New York, NY | May 2015 - Aug. 2015</H6>
+								<H6 className='subheader'>New York, NY | Jun. 2015 - Aug. 2015 </H6>
 							</ResumeItemHeader>
-							<H6> Refactored bloated web application into smaller components using internal Tile Framework</H6>
-							<H6> Generated D3 data visualizations from large amounts of data collected from social media</H6>
+							<H6>Refactored web app into smaller components using internal Tile Framework.</H6>
+							<H6>Generated D3 data visualizations from large amounts of data collected from social media </H6>
+
 						</ResumeItem>
 					</ResumeSection>
 					<ResumeSection>
@@ -154,6 +151,7 @@ const AboutPage = ({ data }) => {
 								<H5 className='header'>The American School Foundation</H5>
 								<H6 className='subheader'>Mexico City | Graduated in 2013</H6>
 							</ResumeItemHeader>
+							<H6>International Baccalaureate. Graduated with honors.</H6>
 						</ResumeItem>
 					</ResumeSection>
 
@@ -166,7 +164,7 @@ const AboutPage = ({ data }) => {
 								<ResumeItem>
 									<H6>
 										<b>
-											On
+											On{" "}
 											<Link to='/the-covid-19-compiler/'>The COVID-19 Compiler:</Link>
 										</b>
 									</H6>
@@ -184,7 +182,7 @@ const AboutPage = ({ data }) => {
 								<ResumeItem>
 									<H6>
 										<b>
-											On
+											On{" "}
 											<Link to='/archive/'>Visualizing COVID-19 Beyond Counties:</Link>
 										</b>
 									</H6>
@@ -202,7 +200,7 @@ const AboutPage = ({ data }) => {
 								<ResumeItem>
 									<H6>
 										<b>
-											On
+											On{" "}
 											<Link to='/the-next-wave/'>The Next Wave:</Link>
 										</b>
 									</H6>
@@ -220,7 +218,7 @@ const AboutPage = ({ data }) => {
 								<ResumeItem>
 									<H6>
 										<b>
-											On
+											On{" "}
 											<Link to='/band-on-the-run/'>Band on the Run:</Link>
 										</b>
 									</H6>
@@ -252,7 +250,7 @@ const AboutPage = ({ data }) => {
 								</H6>
 								<H6>
 									<b>
-										— Rachel Maddow on
+										— Rachel Maddow on {' '}
 										<Link to='/the-covid-19-compiler/'>“The COVID Compiler”</Link>
 									</b>
 								</H6>
@@ -266,7 +264,7 @@ const AboutPage = ({ data }) => {
 								</H6>
 								<H6>
 									<b>
-										— Tristan Handy on my article
+										— Tristan Handy on my article {' '}
 										<Link to='/the-next-wave/'>“The Next Wave”</Link>
 									</b>
 								</H6>
@@ -293,26 +291,15 @@ const AboutPage = ({ data }) => {
 								<H6>Gatsby</H6>
 								<H6>React Native</H6>
 								<H6>React Native Web</H6>
-								{/* <H6>Expo</H6> */}
 								<H6>DeckGL.js</H6>
 								<H6>GeoJson/TopoJson</H6>
 								<H6>Mapbox</H6>
-								{/* <H6>S2/H3 Cells</H6> */}
-								{/* <H6>LESS/SASS</H6> */}
+								<H6>D3</H6>
 								<H6>Webpack</H6>
 								<H6>Babel</H6>
-								{/* <H6>Auth0</H6> */}
-								{/* <H6>Firebase</H6> */}
 								<H6>Node</H6>
-								{/* <H6>Express</H6> */}
-								{/* <H6>AntDesign</H6> */}
-								{/* <H6>Tailwind</H6> */}
-								{/* <H6>Emotion</H6> */}
-								{/* <H6>ESLint</H6> */}
-								{/* <H6>Npm/Yarn</H6> */}
 								<H6>Python</H6>
 								<H6>SQL</H6>
-								<H6>and more...</H6>
 							</ResumeItem2>
 
 							<ResumeItem2>
@@ -321,9 +308,6 @@ const AboutPage = ({ data }) => {
 								<H6>Figma</H6>
 								<H6>Photoshop</H6>
 								<H6>InDesign</H6>
-								{/* <H6>Data Visualization</H6> */}
-								{/* <H6>UX Research</H6> */}
-								{/* <H6>Designing for Development</H6> */}
 							</ResumeItem2>
 
 							<ResumeItem2>
