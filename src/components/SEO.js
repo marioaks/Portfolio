@@ -105,8 +105,10 @@ class SEO extends Component {
 		return (
 			<Helmet>
 				{/* General tags */}
+        <title>{name}</title>
 				<meta name='description' content={description} />
 				<meta name='image' content={image} />
+        <meta name = "keywords" content="mario, aksiyote, benardete, marioaksiyote, maksiyote, marioaks, benardete, topos, portfolio" />
 				<link rel='icon' type='image/png' href={getImagePath(Constants.favicon)} sizes='16x16' />
 
 				{/* Schema.org tags */}

@@ -2,7 +2,7 @@ const config = {
 	siteTitle: "Mario Aksiyote's Portfolio", // Site title.
 	siteTitleShort: 'Portfolio', // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
 	siteTitleAlt: "Mario's Portfolio", // Alternative site title for SEO.
-	siteLogo: '/assets/images/favicon-1024.png', // Logo used for SEO and manifest.
+	siteLogo: '/assets/images/manifest-image.png', // Logo used for SEO and manifest.
 	favicon: '/assets/images/favicon.ico',
 	siteUrl: 'https://marioaksiyote.com', // Domain of your website without pathPrefix.
 	pathPrefix: '/', // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
